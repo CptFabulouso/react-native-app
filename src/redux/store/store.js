@@ -1,6 +1,6 @@
 // @flow
 
-import { applyMiddleware, createStore as reduxStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import {
 	persistCombineReducers,
 	persistStore,
@@ -25,9 +25,15 @@ const persistConfig = {
 	// migrate: createMigrate(migrations, { debug: false }),
 };
 
+console.log(window);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+	? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+	: compose;
+
 const combinedReducers = persistCombineReducers(persistConfig, reducers);
 
-const createStore = () => {
+const createMyStore = () => {
 	const rootReducer = (state: State | void, action: Action) => {
 		let newState = state || {};
 		//if user is not authorized, reset store to initial values
@@ -47,7 +53,10 @@ const createStore = () => {
 	const middleware = [thunkMiddleware, sagaMiddleware];
 
 	// const persistedReducer = persistReducer(persistConfig, rootReducer);
-	const store = reduxStore(rootReducer, applyMiddleware(...middleware));
+	const store = createStore(
+		rootReducer,
+		composeEnhancers(applyMiddleware(...middleware))
+	);
 	sagaMiddleware.run(mySaga);
 
 	const persistor = persistStore(store);
@@ -55,6 +64,6 @@ const createStore = () => {
 	return { store, persistor };
 };
 
-const { store, persistor } = createStore();
+const { store, persistor } = createMyStore();
 
 export { store, persistor };

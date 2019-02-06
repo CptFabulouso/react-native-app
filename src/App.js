@@ -2,7 +2,7 @@
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import React, { Component } from 'react';
 // import SplashScreen from 'react-native-splash-screen';
 
@@ -35,7 +35,7 @@ export default class App extends Component<Props> {
 						loading={null}
 						persistor={persistor}
 					>
-						{/* <NavigationRouter /> */}
+						<View style={{ flex: 1, backgroundColor: 'yellow' }} />
 					</PersistGate>
 					<StatusBar backgroundColor={Colors.statusBar} />
 				</DevMenuTrigger>

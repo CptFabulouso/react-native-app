@@ -9,4 +9,5 @@
 project is using [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension), to use this, install:
 
 - [react-native-debugger](https://github.com/jhen0409/react-native-debugger), on macOS can be installed with `brew cask install react-native-debugger`
-- Redux DevTools from [chrome store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+  - open with command `open "rndebugger://set-debugger-loc?host=localhost&port=8081"`
+- possibly can be used in chrome with [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), but I was unable to run it from there
