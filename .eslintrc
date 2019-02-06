@@ -1,0 +1,80 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "amd": true
+  },
+  "globals": {
+    "Request": false,
+    "Response": false,
+    "Headers": false,
+    "React": true,
+    "ReactElement": false,
+    "ReactClass": false,
+    "Class": false,
+    "__DEV__": true,
+    "$Diff": false,
+    "$Keys": false,
+    "$Values": false,
+    "$ObjMap": false,
+    "$ReadOnly": false,
+    "$Shape": false
+  },
+  "plugins": ["react", "import", "flowtype", "sort-imports-es6-autofix"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.4.1"
+    },
+    "import/ignore": ["node_modules"]
+  },
+  "rules": {
+    "react/prop-types": 0,
+    "no-unused-vars": 1,
+    "no-console": 0,
+    "no-debugger": 1,
+    "curly": 2,
+    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "react/jsx-indent": [2, "tab"],
+    "no-inner-declarations": 2,
+    "import/imports-first": 2,
+    "import/named": 0,
+    "import/no-amd": 2,
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "import/no-unresolved": 0,
+    "import/no-named-as-default-member": 0,
+    "import/no-commonjs": "error",
+    "flowtype/require-valid-file-annotation": [2, "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "indent": [
+      "error",
+      "tab",
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"]
+  }
+}
