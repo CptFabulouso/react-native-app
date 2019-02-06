@@ -1,0 +1,24 @@
+#!/bin/bash
+
+[ "$SKIP_GIT_HOOKS" ] && exit 0
+
+echo "-----> [pre-commit hook] eslint"
+
+# echo Running eslint
+
+# echo skipped
+# exit 0
+
+
+jsfiles=$(git diff --cached --name-only --diff-filter=ACM | grep '.js$')
+# [ -z "$jsfiles" ] && exit 0
+
+# exit 0
+# node_modules/.bin/eslint --max-warnings 0  $jsfiles
+node_modules/.bin/eslint --max-warnings 0  src/
+if [ $? != 0 ]; then
+	# echo -e ""
+	exec < /dev/tty
+	echo canceled; 
+	exit 1;
+fi
