@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "eslint": "./node_modules/.bin/eslint src/",
-    "flow": "./node_modules/.bin/flow"
+    "flow": "./node_modules/.bin/flow",
+    "postinstall": "utils/postinstall"
   },
   "dependencies": {
     "i18n-js": "^3.2.1",
