@@ -39,12 +39,6 @@ export const loadLanguage = (): ActionCreator => (dispatch, getState) => {
 	}
 };
 
-export const setVocabularyAtBeginnings = (value: boolean): Action =>
-	changeLocalSetting('vocabularyAtMessageBeginning', value);
-
-export const setAutomaticLowData = (value: boolean): Action =>
-	changeLocalSetting('automaticLowData', value);
-
 export const changeLocalSetting = (
 	key: SettingsKey,
 	value: SettingsData

@@ -6,14 +6,10 @@ import type { Action, Exact, SupportedLanguage } from 'flow-types';
 
 export type SettingsState = Exact<{
 	language: SupportedLanguage,
-	automaticLowData: boolean,
-	vocabularyAtMessageBeginning: boolean,
 }>;
 
 const INITIAL_STATE = {
 	language: RNLanguages.language, //FIXME: does not handle fallbacks
-	automaticLowData: true,
-	vocabularyAtMessageBeginning: true,
 };
 
 const settings = (

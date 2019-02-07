@@ -21,12 +21,19 @@
     "$ReadOnly": false,
     "$Shape": false
   },
-  "plugins": ["react", "import", "flowtype", "sort-imports-es6-autofix"],
+  "plugins": [
+    "react",
+    "import",
+    "flowtype",
+    "sort-imports-es6-autofix",
+    "jest"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:jest/recommended"
   ],
   "settings": {
     "react": {
@@ -75,6 +82,7 @@
     ],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "jest/valid-expect": 0
   }
 }

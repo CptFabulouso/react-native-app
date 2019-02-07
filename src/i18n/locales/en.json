@@ -1,6 +1,37 @@
 {
+  "navigation": {
+    "main": "Main",
+    "settings": "Settings"
+  },
   "dynamic": "dynamic {{name}} in translation",
   "leveled": {
     "up": "such level, very high"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Log in",
+    "createAccount": "Create Account",
+    "forgottenPassword": "I forgot my password",
+    "sendResetCode": "Send reset code",
+    "changePassword": "Change Password",
+    "instructionOnEmail": "Instructions to reset password were send to the email",
+    "logOut": "Log Out",
+    "loggingOut": "Logging Out"
+  },
+  "common": {
+    "submit": "Submit",
+    "continue": "Continue"
+  },
+  "alerts": {
+    "cancel": "Cancel",
+    "leave": "Leave",
+    "stay": "Stay",
+    "change": "Change",
+    "ok": "OK",
+    "commonAlertTitle": "Unexpected Error",
+    "commonAlertDesc": "Something unexpected happened, try repeating the action",
+    "logOutTitle": "Log out?",
+    "logOutDesc": ""
   }
 }

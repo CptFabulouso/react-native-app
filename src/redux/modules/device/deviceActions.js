@@ -12,10 +12,6 @@ export type DeviceActions =
 			type: 'HIDE_OVERALL_MODAL',
 	  |};
 
-export const startOrientationListener = (): Action => ({
-	type: 'START_DEVICE_ORIENTATION_LISTENER',
-});
-
 export const showOverallModal = (Component: React.Node): Action => ({
 	type: 'SHOW_OVERALL_MODAL',
 	payload: { Component },

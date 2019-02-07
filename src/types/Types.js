@@ -1,7 +1,14 @@
 // @flow
-import type { Action } from '../redux/modules/types';
+
+/* Imports and exports */
+// dependency imports
 import type { ComponentType, Element, Node } from 'react';
+
+// project imports
+import type { Action } from '../redux/modules/types';
 import type { Reducers } from '../redux/reducers';
+
+// dependency exports
 export type {
 	ImageStyleProp,
 	TextStyleProp,
@@ -16,11 +23,15 @@ export type {
 	NavigationScreenProp,
 } from 'react-navigation';
 
+// project exports
+export * from './FormikHelperTypes';
+export * from 'utils/api/apiTypes';
+export type { SupportedLanguage, TranslateProps } from '../i18n/I18n';
+
+/* React */
 type ReactNode = Node;
 type ReactElement<T> = Element<T>;
 export type { ReactNode, ReactElement, ComponentType };
-export type { SupportedLanguage, TranslateProps } from '../i18n/I18n';
-// export * from 'tools/api/apiTypes';
 export type Style = any;
 
 /* Redux */

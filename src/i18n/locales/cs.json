@@ -1,6 +1,37 @@
 {
+  "navigation": {
+    "main": "Hlavní",
+    "settings": "Nastavení"
+  },
   "dynamic": "dynamické {{name}} v překladu",
   "leveled": {
     "up": "velice level, vysoko moc budeš"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Heslo",
+    "login": "Přihlásit se",
+    "createAccount": "Vytvořit Účet",
+    "forgottenPassword": "Zapomněl jsem heslo",
+    "sendResetCode": "Zaslat kód pro reset",
+    "changePassword": "Změnit Heslo",
+    "instructionOnEmail": "Instrukce pro resetování hesla byly poslány na email",
+    "logOut": "Odhlásit se",
+    "loggingOut": "Odhlašování"
+  },
+  "common": {
+    "submit": "Poslat",
+    "continue": "Pokračovat"
+  },
+  "alerts": {
+    "cancel": "Zrušit",
+    "leave": "Odejít",
+    "stay": "Zůstat",
+    "change": "Změnit",
+    "ok": "OK",
+    "commonAlertTitle": "Neočekávaná chyba",
+    "commonAlertDesc": "Stalo se něco neočekávaného, zkuste akci opakovat",
+    "logOutTitle": "Opravdu odhlásit?",
+    "logOutDesc": ""
   }
 }

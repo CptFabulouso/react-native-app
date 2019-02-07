@@ -7,11 +7,11 @@ import React, { Component } from 'react';
 // import SplashScreen from 'react-native-splash-screen';
 
 import { Colors } from 'themes';
-// import { OverallModal } from 'containers';
+import { OverallModal } from 'containers';
 import { persistor, store } from 'my-redux/store';
 import { runStartupActions } from 'my-redux/actions';
 import DevMenuTrigger from 'lib/DevMenuTrigger';
-// import NavigationRouter from 'navigation/NavigationRouter';
+import NavigationRouter from 'navigation/NavigationRouter';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -29,13 +29,13 @@ export default class App extends Component<Props> {
 		return (
 			<Provider store={store}>
 				<DevMenuTrigger style={{ flex: 1 }} persistor={persistor}>
-					{/* <OverallModal /> */}
+					<OverallModal />
 					<PersistGate
 						onBeforeLift={this.loadAppAsync}
 						loading={null}
 						persistor={persistor}
 					>
-						<View style={{ flex: 1, backgroundColor: 'yellow' }} />
+						<NavigationRouter />
 					</PersistGate>
 					<StatusBar backgroundColor={Colors.statusBar} />
 				</DevMenuTrigger>

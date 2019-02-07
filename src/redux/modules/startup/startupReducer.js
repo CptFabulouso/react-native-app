@@ -14,22 +14,11 @@ const INITIAL_STATE = {
 
 const startup = (state: State = INITIAL_STATE, action: Action): State => {
 	switch (action.type) {
-		case 'RUN_STARTUP_SAGAS_REQUESTED':
+		case 'RUN_STARTUP_ACTIONS':
 			return {
 				...state,
 				done: false,
 				error: '',
-			};
-		case 'RUN_STARTUP_SAGAS_SUCCEEDED':
-			return {
-				...state,
-				done: true,
-			};
-		case 'RUN_STARTUP_SAGAS_FAILED':
-			return {
-				...state,
-				done: false,
-				error: action.payload,
 			};
 		default:
 			return state;
