@@ -1,7 +1,10 @@
 {
   "navigation": {
     "main": "Hlavní",
-    "settings": "Nastavení"
+    "settings": "Nastavení",
+    "logIn": "Přihlášení",
+    "resetPassword": "Reset hesla",
+    "changePassword": "Změna hesla"
   },
   "dynamic": "dynamické {{name}} v překladu",
   "leveled": {

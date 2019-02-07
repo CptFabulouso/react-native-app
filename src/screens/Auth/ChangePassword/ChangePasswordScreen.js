@@ -1,7 +1,7 @@
 // @flow
 
 import { Field, Formik } from 'formik';
-import { KeyboardAwareScrollView as KASV } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView, View } from 'react-native';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
@@ -11,9 +11,7 @@ import { Button, FormWrapper, InputFieldFormik, Text } from 'components';
 import { changePassword } from 'my-redux/actions';
 import i18n from 'i18n';
 import styles from './styles';
-import type { ComponentType, FormikActions } from 'flow-types';
-
-const KeyboardAwareScrollView: ComponentType<*> = KASV;
+import type { FormikActions } from 'flow-types';
 
 type DispatchProps = {|
 	changePassword: (

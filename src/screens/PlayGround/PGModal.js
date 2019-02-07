@@ -66,6 +66,7 @@ class PGModal extends React.Component<Props, State> {
 						NavigationActions.push('overallModal');
 					}}
 				/>
+
 				<Modal
 					onSwipe={() => this.setState({ visible: false })}
 					isVisible={this.state.visible}
@@ -136,7 +137,8 @@ class PGModal extends React.Component<Props, State> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		showOverallModal: (Component: React.Node) => dispatch(showOverallModal(Component)),
+		showOverallModal: (Component: React.Node) =>
+			dispatch(showOverallModal(Component)),
 		hideOverallModal: () => dispatch(hideOverallModal()),
 	};
 };

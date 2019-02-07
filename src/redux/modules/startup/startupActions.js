@@ -1,7 +1,7 @@
 // @flow
 
 import { loadLanguage } from '../settings/settingsActions';
-// import { startOrientationListener } from '../device/deviceActions';
+import { reLogin } from '../account/accountActions';
 
 import type { ActionCreator } from 'flow-types';
 
@@ -10,5 +10,6 @@ export type StartupActions = {|
 |};
 
 export const runStartupActions = (): ActionCreator => async dispatch => {
+	dispatch(reLogin());
 	dispatch(loadLanguage());
 };

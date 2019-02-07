@@ -54,7 +54,7 @@ class LoginScreen extends Component<Props> {
 
 	render() {
 		return (
-			<SafeAreaView>
+			<SafeAreaView style={{flex:1}}>
 				<KeyboardDismissView style={styles.page}>
 					<FormWrapper>
 						<Formik

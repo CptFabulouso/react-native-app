@@ -39,7 +39,7 @@ const verticalModalRoutes = [];
 
 const AppNavigator = createStackNavigator(
 	{
-		main: {
+		mainApp: {
 			screen: AppSwitcher,
 			path: '',
 		},
@@ -48,7 +48,7 @@ const AppNavigator = createStackNavigator(
 		},
 	},
 	{
-		initialRouteName: 'main',
+		initialRouteName: 'mainApp',
 		mode: 'modal',
 		defaultNavigationOptions: {
 			gesturesEnabled: false,

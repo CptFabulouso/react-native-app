@@ -1,7 +1,10 @@
 {
   "navigation": {
     "main": "Main",
-    "settings": "Settings"
+    "settings": "Settings",
+    "logIn": "Log In",
+    "resetPassword": "Reset Password",
+    "changePassword": "Change Password"
   },
   "dynamic": "dynamic {{name}} in translation",
   "leveled": {
