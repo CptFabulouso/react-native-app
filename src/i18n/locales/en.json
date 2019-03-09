@@ -15,12 +15,21 @@
     "password": "Password",
     "login": "Log in",
     "createAccount": "Create Account",
+    "createNewAccount": "Create new Account",
     "forgottenPassword": "I forgot my password",
     "sendResetCode": "Send reset code",
     "changePassword": "Change Password",
     "instructionOnEmail": "Instructions to reset password were send to the email",
     "logOut": "Log Out",
-    "loggingOut": "Logging Out"
+    "loggingOut": "Logging Out",
+    "enterEmail": "Enter your email address"
+  },
+  "forms": {
+    "fieldRequired": "Field is required",
+    "passwordShortLength": "Password has to be {{length}} characters long",
+    "passwordRequired": "Password is required",
+    "emailNotValid": "Email is not valid",
+    "emailRequired": "Email is required"
   },
   "common": {
     "submit": "Submit",

@@ -15,12 +15,21 @@
     "password": "Heslo",
     "login": "Přihlásit se",
     "createAccount": "Vytvořit Účet",
+    "createNewAccount": "Vytvořit nový účet",
     "forgottenPassword": "Zapomněl jsem heslo",
     "sendResetCode": "Zaslat kód pro reset",
     "changePassword": "Změnit Heslo",
     "instructionOnEmail": "Instrukce pro resetování hesla byly poslány na email",
     "logOut": "Odhlásit se",
-    "loggingOut": "Odhlašování"
+    "loggingOut": "Odhlašování",
+    "enterEmail": "Napište váš email"
+  },
+  "forms": {
+    "fieldRequired": "Pole je vyžadované",
+    "passwordShortLength": "Heslo musí mít minimálně {{length}} znaků",
+    "passwordRequired": "Heslo je vyžadované",
+    "emailNotValid": "Email není správný",
+    "emailRequired": "Email je vyžadovaný"
   },
   "common": {
     "submit": "Poslat",

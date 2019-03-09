@@ -38,15 +38,15 @@ class LoginScreen extends Component<Props> {
 	render() {
 		const { isKeyboardVisible, visibleHeight } = this.props;
 
-		const contentStyle = [styles.content];
+		const pageStyle = [styles.page];
 		if (isKeyboardVisible) {
-			contentStyle.push(...[{ flex: 0, height: visibleHeight }]);
+			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
 		}
 		return (
-			<KeyboardDismissView style={styles.page}>
+			<KeyboardDismissView style={pageStyle}>
 				<Logo />
-				<View style={contentStyle}>
-					<FormWrapper wrapperStyle={styles.loginFormContainer}>
+				<View style={styles.content}>
+					<FormWrapper wrapperStyle={styles.formContainer}>
 						<LoginForm />
 					</FormWrapper>
 					<Button

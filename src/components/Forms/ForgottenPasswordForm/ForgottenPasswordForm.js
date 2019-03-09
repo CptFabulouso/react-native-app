@@ -39,7 +39,7 @@ class ForgottenPasswordForm extends Component<Props> {
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
 					onPress={handleSubmit}
-					label={i18n.t('auth.createAccount')}
+					label={i18n.t('auth.sendResetCode')}
 					block
 					shadow
 					style={styles.button}

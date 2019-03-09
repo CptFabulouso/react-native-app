@@ -26,15 +26,10 @@ type Props = {|
 
 class CreateAccount extends Component<Props> {
 	renderContent() {
-		const { isKeyboardVisible, visibleHeight } = this.props;
-
-		const contentStyle = [styles.content];
-		if (isKeyboardVisible) {
-			contentStyle.push(...[{ flex: 0, height: visibleHeight }]);
-		}
+		const { isKeyboardVisible } = this.props;
 
 		return (
-			<View style={contentStyle}>
+			<View style={styles.content}>
 				<FormWrapper>
 					<Title>{i18n.t('auth.createNewAccount')}</Title>
 					<CreateAccountForm />
@@ -53,8 +48,15 @@ class CreateAccount extends Component<Props> {
 	}
 
 	render() {
+		const { isKeyboardVisible, visibleHeight } = this.props;
+
+		const pageStyle = [styles.page];
+		if (isKeyboardVisible) {
+			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
+		}
+
 		return (
-			<KeyboardDismissView style={styles.page}>
+			<KeyboardDismissView style={pageStyle}>
 				<Logo />
 				{this.renderContent()}
 			</KeyboardDismissView>

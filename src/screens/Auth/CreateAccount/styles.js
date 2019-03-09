@@ -12,11 +12,11 @@ export default StyleSheet.create({
 
 	content: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center',
 	},
 
-	loginFormContainer: {
+	formContainer: {
 		marginBottom: 30,
 		justifyContent: 'center',
 		width: '100%',

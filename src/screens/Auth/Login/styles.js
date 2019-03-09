@@ -16,7 +16,7 @@ export default StyleSheet.create({
 		alignItems: 'center',
 	},
 
-	loginFormContainer: {
+	formContainer: {
 		marginBottom: 30,
 		justifyContent: 'center',
 		width: '100%',

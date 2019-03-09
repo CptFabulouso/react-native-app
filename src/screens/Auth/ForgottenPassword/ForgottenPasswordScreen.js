@@ -9,7 +9,6 @@ import {
 	FormWrapper,
 	KeyboardDismissView,
 	Logo,
-	SafeAreaView,
 	Text,
 	Title,
 } from 'components';
@@ -45,32 +44,30 @@ class ForgottenPassword extends Component<Props> {
 	}
 
 	renderContent() {
-		const { isKeyboardVisible, visibleHeight } = this.props;
-
-		const contentStyle = [styles.content];
-		if (isKeyboardVisible) {
-			contentStyle.push(...[{ flex: 0, height: visibleHeight }]);
-		}
-
 		return (
-			<View style={contentStyle}>
+			<View style={styles.content}>
 				<FormWrapper>
 					<Title>{i18n.t('auth.enterEmail')}</Title>
 					<ForgottenPasswordForm />
+					{this.props.sent && <Text>{i18n.t('auth.instructionOnEmail')}</Text>}
 				</FormWrapper>
-				{this.props.sent && <Text>{i18n.t('auth.instructionOnEmail')}</Text>}
 			</View>
 		);
 	}
 
 	render() {
+		const { isKeyboardVisible, visibleHeight } = this.props;
+
+		const pageStyle = [styles.page];
+		if (isKeyboardVisible) {
+			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
+		}
+
 		return (
-			<SafeAreaView>
-				<KeyboardDismissView style={styles.page}>
-					<Logo />
-					{this.renderContent()}
-				</KeyboardDismissView>
-			</SafeAreaView>
+			<KeyboardDismissView style={pageStyle}>
+				<Logo />
+				{this.renderContent()}
+			</KeyboardDismissView>
 		);
 	}
 }

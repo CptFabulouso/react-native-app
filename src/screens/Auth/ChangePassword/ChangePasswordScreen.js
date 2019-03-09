@@ -27,17 +27,11 @@ type Props = {
 
 class ChangePassword extends Component<Props> {
 	renderContent() {
-		const { isKeyboardVisible, visibleHeight } = this.props;
-
-		const contentStyle = [styles.content];
-		if (isKeyboardVisible) {
-			contentStyle.push(...[{ flex: 0, height: visibleHeight }]);
-		}
 		const token = this.props.navigation.getParam('token', undefined);
 		const email = this.props.navigation.getParam('email') || 'fixme@mail.com';
 
 		return (
-			<View style={contentStyle}>
+			<View style={styles.content}>
 				<FormWrapper>
 					<Title>{i18n.t('auth.enterNewPassword')}</Title>
 					<ChangePasswordForm token={token} email={email} />
@@ -47,9 +41,16 @@ class ChangePassword extends Component<Props> {
 	}
 
 	render() {
+		const { isKeyboardVisible, visibleHeight } = this.props;
+
+		const pageStyle = [styles.page];
+		if (isKeyboardVisible) {
+			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
+		}
+
 		return (
 			<SafeAreaView>
-				<KeyboardDismissView style={styles.page}>
+				<KeyboardDismissView style={pageStyle}>
 					<Logo />
 					{this.renderContent()}
 				</KeyboardDismissView>
