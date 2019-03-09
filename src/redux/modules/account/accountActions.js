@@ -19,9 +19,9 @@ import type {
 } from 'flow-types';
 import type {
 	ChangePasswordFormValues,
-		CreateAccountFormValues,
-		ForgottenPasswordFormValues,
-		LoginFormValues,
+	CreateAccountFormValues,
+	ForgottenPasswordFormValues,
+	LoginFormValues,
 } from 'components/Forms';
 
 export type AccountActions =

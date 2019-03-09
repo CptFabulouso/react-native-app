@@ -21,3 +21,7 @@ run eslint check
 `npm run flow`
 
 run flow check
+
+## git hooks
+
+if git hooks are not installed, run `./node_modules/git-hooks/bin/git-hooks install`

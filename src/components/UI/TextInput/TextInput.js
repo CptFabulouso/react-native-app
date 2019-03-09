@@ -32,9 +32,11 @@ class TextInputComponent extends Component<Props & ForwardedRef> {
 	}
 }
 
+/* eslint-disable */
 // $FlowFixMe
 const TextInput = React.forwardRef((props: Props, ref) => {
 	return <TextInputComponent {...props} forwardedRef={ref} />;
 });
+/* eslint-enable */
 
 export { TextInput };
