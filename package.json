@@ -50,7 +50,6 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-sort-imports-es6-autofix": "^0.4.0",
-    "flow-bin": "0.92.0",
     "git-hooks": "^1.1.10",
     "jest": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.1",
