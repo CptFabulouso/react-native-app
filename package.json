@@ -41,6 +41,8 @@
     "@react-native-community/eslint-config": "^0.0.3",
     "@types/react": "^16.8.7",
     "@types/react-native": "^0.57.38",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
+    "@typescript-eslint/parser": "^1.4.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "eslint": "^5.15.3",
