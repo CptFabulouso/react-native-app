@@ -1,102 +1,63 @@
 // @flow
 
-import { Field, Formik } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SafeAreaView, View } from 'react-native';
-import { connect } from 'react-redux';
+import { View } from 'react-native';
 import React, { Component } from 'react';
 import type { NavigationScreenProp, NavigationState } from 'react-navigation';
 
-import { Button, FormWrapper, InputFieldFormik, Text } from 'components';
-import { changePassword } from 'my-redux/actions';
+import { ChangePasswordForm } from 'containers';
+import {
+	FormWrapper,
+	KeyboardDismissView,
+	Logo,
+	SafeAreaView,
+	Title,
+} from 'components';
+import {
+	type KeyboardListenerProps,
+	withKeyboardListener,
+} from 'lib/KeyboardAccessoryView';
 import i18n from 'i18n';
 import styles from './styles';
-import type { FormikActions } from 'flow-types';
-
-type DispatchProps = {|
-	changePassword: (
-		email: string,
-		token: string,
-		formActions: FormikActions
-	) => void,
-|};
+import type { ComponentType } from 'flow-types';
 
 type Props = {
+	...KeyboardListenerProps,
 	navigation: NavigationScreenProp<NavigationState>,
-	...DispatchProps,
 };
 
-type FormInputs = {|
-	password: string,
-|};
-
 class ChangePassword extends Component<Props> {
-	onSubmit: any => void;
+	renderContent() {
+		const { isKeyboardVisible, visibleHeight } = this.props;
 
-	constructor(props: Props) {
-		super(props);
-
-		this.onSubmit = this.onSubmit.bind(this);
-	}
-
-	onSubmit({ password }: FormInputs, formActions: FormikActions) {
-		const token = this.props.navigation.getParam('token', undefined);
-		if (token) {
-			this.props.changePassword(password, token, formActions);
-		} else {
-			//TODO: handle missing token
+		const contentStyle = [styles.content];
+		if (isKeyboardVisible) {
+			contentStyle.push(...[{ flex: 0, height: visibleHeight }]);
 		}
+		const token = this.props.navigation.getParam('token', undefined);
+		const email = this.props.navigation.getParam('email') || 'fixme@mail.com';
+
+		return (
+			<View style={contentStyle}>
+				<FormWrapper>
+					<Title>{i18n.t('auth.enterNewPassword')}</Title>
+					<ChangePasswordForm token={token} email={email} />
+				</FormWrapper>
+			</View>
+		);
 	}
 
 	render() {
 		return (
 			<SafeAreaView>
-				<KeyboardAwareScrollView
-					contentContainerStyle={styles.contentContainer}
-				>
-					<View style={[styles.container]}>
-						<Text>Enter new password</Text>
-						<FormWrapper>
-							<Formik
-								validate={validate}
-								onSubmit={this.onSubmit}
-								render={({ handleSubmit, isValid, isSubmitting }) => {
-									return (
-										<View>
-											<Field
-												disabled={isSubmitting}
-												component={InputFieldFormik}
-												name="password"
-												label={i18n.t('auth.password')}
-												secureTextEntry={true}
-											/>
-											<Button
-												loading={isSubmitting}
-												disabled={!isValid || isSubmitting}
-												onPress={handleSubmit}
-												label={i18n.t('auth.changePassword')}
-											/>
-										</View>
-									);
-								}}
-							/>
-						</FormWrapper>
-					</View>
-				</KeyboardAwareScrollView>
+				<KeyboardDismissView style={styles.page}>
+					<Logo />
+					{this.renderContent()}
+				</KeyboardDismissView>
 			</SafeAreaView>
 		);
 	}
 }
 
-const validate = ({ password }: FormInputs) => {
-	const errors = {};
-	if (password === undefined || password.trim() === '') {
-		errors.password = 'Required';
-	}
-	return errors;
-};
+const withListener: ComponentType<*> = withKeyboardListener(ChangePassword);
 
-export default connect(
-	null,
-	{ changePassword }
-)(ChangePassword);
+export default withListener;

@@ -19,7 +19,8 @@
     "$Values": false,
     "$ObjMap": false,
     "$ReadOnly": false,
-    "$Shape": false
+    "$Shape": false,
+    "SyntheticEvent": false
   },
   "plugins": [
     "react",

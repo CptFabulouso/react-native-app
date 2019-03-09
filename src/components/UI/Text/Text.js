@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { Text as RNText } from 'react-native';
+import { Text as RNText, StyleSheet } from 'react-native';
 
-import type { Style } from 'flow-types';
-
+import { getFontStyleForWeight } from './getFontStyleForWeight';
 import styles from './styles';
+import type { Style } from 'flow-types';
 
 type Props = {|
 	style?: Style,
@@ -12,8 +12,17 @@ type Props = {|
 |};
 
 const Text = (props: Props) => {
+	const flatStyle = StyleSheet.flatten(props.style);
+	let fontStyle = null;
+	if (flatStyle) {
+		fontStyle = getFontStyleForWeight(
+			flatStyle.fontFamily,
+			flatStyle.fontWeight
+		);
+	}
+
 	return (
-		<RNText {...props} style={[styles.text, props.style]}>
+		<RNText {...props} style={[styles.text, props.style, fontStyle]}>
 			{props.children}
 		</RNText>
 	);

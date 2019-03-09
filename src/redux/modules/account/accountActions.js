@@ -17,6 +17,12 @@ import type {
 	LoadData,
 	User,
 } from 'flow-types';
+import type {
+	ChangePasswordFormValues,
+		CreateAccountFormValues,
+		ForgottenPasswordFormValues,
+		LoginFormValues,
+} from 'components/Forms';
 
 export type AccountActions =
 	| LoadData<'LOGIN_EMAIL_PASSWORD', User>
@@ -42,7 +48,7 @@ export type AccountActions =
 export const loginWithEmailAndPassword = (
 	email: string,
 	password: string,
-	formActions: FormikActions
+	formActions: FormikActions<LoginFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
 	dispatch(loginWithEmailAndPasswordRequested());
@@ -81,7 +87,7 @@ export const loginWithEmailAndPasswordFailed = (message: string): Action => ({
 
 export const sendResetPasswordCode = (
 	email: string,
-	formActions: FormikActions
+	formActions: FormikActions<ForgottenPasswordFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
 	dispatch(sendResetPasswordCodeRequested());
@@ -118,14 +124,15 @@ export const resetResetPasswordState = (): Action => ({
 });
 
 export const changePassword = (
+	email: string,
 	password: string,
 	token: string,
-	formActions: FormikActions
+	formActions: FormikActions<ChangePasswordFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
 	dispatch(changePasswordRequested());
 	try {
-		await API.auth.changePassword(password, token);
+		await API.auth.changePassword(email, password, token);
 		dispatch(changePasswordSucceeded());
 		formActions.resetForm();
 	} catch (er) {
@@ -247,7 +254,7 @@ export const logOutFail = (message: string): Action => ({
 export const createAccountWithEmailAndPassword = (
 	email: string,
 	password: string,
-	formActions: FormikActions
+	formActions: FormikActions<CreateAccountFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
 	dispatch(createEmailAccountRequested());

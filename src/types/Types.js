@@ -26,6 +26,7 @@ export type {
 // project exports
 export * from './FormikHelperTypes';
 export * from 'utils/api/apiTypes';
+export type { FormConfig } from 'components/Form/helpers/formHelpers';
 export type { SupportedLanguage, TranslateProps } from '../i18n/I18n';
 
 /* React */

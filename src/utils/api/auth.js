@@ -46,6 +46,7 @@ export const sendResetPasswordCode = async (
 };
 
 export const changePassword = async (
+	email: string, //eslint-disable-line
 	password: string, //eslint-disable-line
 	token: string //eslint-disable-line
 ): Promise<null> => {

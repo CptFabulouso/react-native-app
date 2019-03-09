@@ -2,14 +2,23 @@
 
 import { StyleSheet } from 'react-native';
 
+import { Metrics } from 'themes';
+
 export default StyleSheet.create({
-	container: {
+	page: {
 		flex: 1,
-		justifyContent: 'space-around',
+		paddingHorizontal: Metrics.pagePadding,
+	},
+
+	content: {
+		flex: 1,
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
 
-	contentContainer: {
-		flexGrow: 1,
+	loginFormContainer: {
+		marginBottom: 30,
+		justifyContent: 'center',
+		width: '100%',
 	},
 });

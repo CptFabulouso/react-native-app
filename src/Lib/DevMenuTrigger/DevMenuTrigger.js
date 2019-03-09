@@ -163,7 +163,7 @@ class DevMenuTrigger extends Component<Props, State> {
 				if (gestureState.numberActiveTouches === 3) {
 					this.toggleVisible();
 				}
-				return true;
+				return false;
 			},
 		});
 		return (

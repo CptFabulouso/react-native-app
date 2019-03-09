@@ -1,6 +1,10 @@
 // @flow
 
 const colors = {
+	white: '#fff',
+	black: '#3D443C',
+	red: '#ff5964',
+	border: '#D8D8D8',
 	primary: '#7f8a9b',
 	primaryDark: '#5c6470',
 	secondary: '#57adc1',

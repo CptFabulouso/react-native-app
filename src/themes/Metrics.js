@@ -37,6 +37,7 @@ const metrics = {
 	footerHeight: 70,
 	maxInputWidth: 400,
 	navBarHeight: Platform.OS === 'ios' ? 64 : 84,
+	pagePadding: 20,
 
 	icons,
 	scaledIcons: Scales.fontScaleAll(icons),
