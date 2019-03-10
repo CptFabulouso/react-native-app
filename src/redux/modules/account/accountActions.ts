@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 
 import { LoadingCard } from 'components';
@@ -10,14 +8,14 @@ import { hideOverallModal, showOverallModal } from '../device/deviceActions';
 import { sleep } from 'utils/common';
 import NavigationActions from 'navigation/NavigationActions';
 import i18n from 'i18n';
-import type {
+import {
 	Action,
 	ActionCreator,
 	FormikActions,
 	LoadData,
 	User,
 } from 'flow-types';
-import type {
+import {
 	ChangePasswordFormValues,
 	CreateAccountFormValues,
 	ForgottenPasswordFormValues,

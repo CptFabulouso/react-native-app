@@ -2,17 +2,17 @@
 
 import { connect } from 'react-redux';
 
+import { Dispatch, FormikActions } from 'flow-types';
 import { ForgottenPasswordFormFormik } from 'components/Forms';
+import { ForgottenPasswordFormValues } from 'components/Forms';
 import { sendResetPasswordCode } from 'my-redux/actions';
-import type { Dispatch, FormikActions } from 'flow-types';
-import type { ForgottenPasswordFormValues } from 'components/Forms';
 
-type DispatchProps = {|
+type DispatchProps = {
 	onSubmit: (
 		email: string,
 		formActions: FormikActions<ForgottenPasswordFormValues>
-	) => void,
-|};
+	) => void;
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
 	return {

@@ -19,8 +19,7 @@ const fontScale = (value: number) => {
 	return value * ratioX;
 };
 
-type ExtractFunctionReturn = <V>(v: number) => V; // eslint-disable-line
-
+// FIXME: get return values
 function fontScaleAll(o: { [key: string]: number }) {
 	return Object.keys(o).reduce(
 		(acc, k) => Object.assign(acc, { [k]: fontScale(o[k]) }),

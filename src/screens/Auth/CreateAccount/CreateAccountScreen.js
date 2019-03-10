@@ -18,7 +18,7 @@ import {
 import NavigationActions from 'navigation/NavigationActions';
 import i18n from 'i18n';
 import styles from './styles';
-import type { ComponentType } from 'flow-types';
+import { ComponentType } from 'flow-types';
 
 type Props = {|
 	...KeyboardListenerProps,

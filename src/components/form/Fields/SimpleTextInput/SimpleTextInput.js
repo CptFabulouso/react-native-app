@@ -6,7 +6,7 @@ import React from 'react';
 import { TextInput } from '../../../UI/TextInput/TextInput';
 import formikToTextInput from '../../helpers/formikToTextInput';
 import styles from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {|
 	//text input

@@ -7,7 +7,7 @@ import { Field, withFormik } from 'formik';
 import React from 'react';
 
 import { FloatingLabelTextInputFormik } from '../Fields/FloatingLabelTextInput/FloatingLabelTextInput';
-import type {
+import {
 	// ComponentType,
 	FormikProps,
 	Style,

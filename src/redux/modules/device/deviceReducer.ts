@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Metrics } from 'themes';
-import type { Action, Exact } from 'flow-types';
+import { Action, Exact } from 'flow-types';
 
 type State = Exact<{
 	screenWidth: number,

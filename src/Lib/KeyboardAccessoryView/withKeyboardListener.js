@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { ComponentType, ElementConfig } from 'react';
+import { ComponentType, ElementConfig } from 'react';
 
 import { Dimensions, Keyboard, LayoutAnimation, Platform } from 'react-native';
 

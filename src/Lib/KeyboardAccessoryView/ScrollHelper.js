@@ -3,7 +3,7 @@
 import { Platform } from 'react-native';
 import React, { Component } from 'react';
 
-import type { ComponentType, ReactNode } from 'flow-types';
+import { ComponentType, ReactNode } from 'flow-types';
 
 type Props = {
 	stick: boolean,

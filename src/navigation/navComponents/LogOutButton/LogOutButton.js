@@ -8,7 +8,7 @@ import { Alert } from 'components';
 import { logOut } from 'my-redux/actions';
 import i18n from 'i18n';
 import styles from './styles';
-import type { Dispatch } from 'flow-types';
+import { Dispatch } from 'flow-types';
 
 type DispatchProps = {|
 	logOut: () => void,

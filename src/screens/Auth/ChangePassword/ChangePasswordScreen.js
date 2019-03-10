@@ -2,7 +2,7 @@
 
 import { View } from 'react-native';
 import React, { Component } from 'react';
-import type { NavigationScreenProp, NavigationState } from 'react-navigation';
+import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
 import { ChangePasswordForm } from 'containers';
 import {
@@ -18,7 +18,7 @@ import {
 } from 'lib/KeyboardAccessoryView';
 import i18n from 'i18n';
 import styles from './styles';
-import type { ComponentType } from 'flow-types';
+import { ComponentType } from 'flow-types';
 
 type Props = {
 	...KeyboardListenerProps,

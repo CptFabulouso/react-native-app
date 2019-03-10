@@ -20,7 +20,7 @@ import { getResetCodeState } from 'my-redux/selectors';
 import { resetResetPasswordState } from 'my-redux/actions';
 import i18n from 'i18n';
 import styles from './styles';
-import type { ComponentType, State } from 'flow-types';
+import { ComponentType, State } from 'flow-types';
 
 type DispatchProps = {|
 	resetResetPasswordState: () => void,

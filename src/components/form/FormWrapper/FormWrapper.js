@@ -3,7 +3,7 @@
 import { View } from 'react-native';
 import React from 'react';
 
-import type { ReactNode, Style } from 'flow-types';
+import { ReactNode, Style } from 'flow-types';
 
 import styles from './styles';
 

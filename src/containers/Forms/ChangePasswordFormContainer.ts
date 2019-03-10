@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { ChangePasswordFormFormik } from 'components/Forms';
 import { changePassword } from 'my-redux/actions';
-import type { ChangePasswordFormValues } from 'components/Forms';
-import type { Dispatch, FormikActions } from 'flow-types';
+import { ChangePasswordFormValues } from 'components/Forms';
+import { Dispatch, FormikActions } from 'flow-types';
 
 type DispatchProps = {|
 	onSubmit: (

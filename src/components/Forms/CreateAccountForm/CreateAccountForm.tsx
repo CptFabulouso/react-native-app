@@ -1,31 +1,30 @@
-// @flow
-
+import { FormikActions, FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import { Form } from '../../Form/Form';
+import { FormConfig } from 'flow-types';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'i18n';
 import styles from './styles';
-import type { FormConfig, FormikActions, FormikProps } from 'flow-types';
 
 // needs to be defined here, otherwise flow shows problems..
 type FormikBag<P, V> = { props: P } & FormikActions<V>;
 
-export type CreateAccountFormValues = {|
-	email: string,
-	password: string,
-|};
+export type CreateAccountFormValues = {
+	email: string;
+	password: string;
+};
 
 type Props = FormikProps<CreateAccountFormValues>;
 
-type SubmitProps = {|
+type SubmitProps = {
 	onSubmit: (
 		email: string,
 		password: string,
 		formActions: FormikActions<CreateAccountFormValues>
-	) => void,
-|};
+	) => void;
+};
 
 const formConfig: FormConfig = {
 	fields: [Form.Presets.email, Form.Presets.password],

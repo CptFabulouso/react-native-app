@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { BackHandler, View } from 'react-native';
 import { connect } from 'react-redux';
-import type { ComponentType } from 'react';
+import { ComponentType } from 'react';
 
 import { Modal } from 'components';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'my-redux/selectors';
 import { hideOverallModal } from 'my-redux/actions';
 import styles from './styles';
-import type { Dispatch, State } from 'flow-types';
+import { Dispatch, State } from 'flow-types';
 
 type DispatchProps = {|
 	showOverallModal: () => void,

@@ -1,7 +1,7 @@
 // @flow
 
 import { NavigationActions, StackActions } from 'react-navigation';
-import type {
+import {
 	NavigationNavigateAction,
 	NavigationParams,
 	NavigationRoute,

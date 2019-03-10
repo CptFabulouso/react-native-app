@@ -7,7 +7,7 @@ import { Form } from '../../Form/Form';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'i18n';
 import styles from './styles';
-import type { FormConfig, FormikActions, FormikProps } from 'flow-types';
+import { FormConfig, FormikActions, FormikProps } from 'flow-types';
 
 // needs to be defined here, otherwise flow shows problems..
 type FormikBag<P, V> = { props: P } & FormikActions<V>;

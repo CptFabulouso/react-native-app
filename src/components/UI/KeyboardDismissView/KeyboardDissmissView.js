@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 export type KeyboardDismissViewProps = {|
 	...State,

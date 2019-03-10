@@ -8,12 +8,12 @@ import {
 	View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import type { ComponentType } from 'react';
+import { ComponentType } from 'react';
 
 import { Alert, Button, LoadingCard, Modal } from 'components';
 import { hideOverallModal, showOverallModal } from 'my-redux/actions';
 import NavigationActions from 'navigation/NavigationActions';
-import type { Dispatch } from 'flow-types';
+import { Dispatch } from 'flow-types';
 
 type DispatchProps = {|
 	showOverallModal: (Component: React.Node) => void,

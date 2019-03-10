@@ -4,7 +4,7 @@ import { TextInput as RNTextInput, View } from 'react-native';
 import React, { Component } from 'react';
 
 import styles from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {
 	style?: Style,

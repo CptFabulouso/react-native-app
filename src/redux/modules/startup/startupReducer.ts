@@ -1,10 +1,8 @@
-// @flow
-
-import type { Action, Exact } from 'flow-types';
+import { Action, Exact } from 'flow-types';
 
 type State = Exact<{
-	done: boolean,
-	error: string,
+	done: boolean;
+	error: string;
 }>;
 
 const INITIAL_STATE = {

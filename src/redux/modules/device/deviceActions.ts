@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import type { Action } from 'flow-types';
+import { Action } from 'flow-types';
 
 export type DeviceActions =
 	| {|

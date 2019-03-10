@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Text } from '../Text/Text';
 
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 import styles from './styles';
 

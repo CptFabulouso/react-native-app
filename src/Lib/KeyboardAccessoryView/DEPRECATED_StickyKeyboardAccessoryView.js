@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import { ComponentType, Node } from 'react';
 
 import { Platform, StyleSheet, View } from 'react-native';
 import withKeyboardListener, {

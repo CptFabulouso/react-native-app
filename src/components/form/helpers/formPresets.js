@@ -1,6 +1,6 @@
 // @flow
 import * as yup from 'yup';
-import type { ConfigField } from './formHelpers';
+import { ConfigField } from './formHelpers';
 
 import i18n from 'i18n';
 

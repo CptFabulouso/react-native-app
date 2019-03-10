@@ -7,7 +7,7 @@ import { Text } from '../../../UI/Text/Text';
 import { TextInput } from '../../../UI/TextInput/TextInput';
 import formikToTextInput from '../../helpers/formikToTextInput';
 import styles, { TITLE_WIDTH } from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {|
 	//text input

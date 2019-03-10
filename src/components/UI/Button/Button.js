@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 import { Text } from '../Text/Text';
 import styles, { otherStyles } from './styles';
-import type { ReactElement, Style } from 'flow-types';
+import { ReactElement, Style } from 'flow-types';
 
 const containerStyles = styles.container;
 const labelStyles = styles.label;
@@ -172,7 +172,8 @@ class Button extends Component<Props> {
 				{loading && (
 					<View style={[otherStyles.fill, otherStyles.center]}>
 						<ActivityIndicator
-							// style={{ position: 'absolute', opacity: loading ? 1 : 0 }}
+							// style={{ position: 'ab
+							solute', opacity: loading ? 1 : 0 }}
 							color="white"
 						/>
 					</View>

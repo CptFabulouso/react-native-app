@@ -3,10 +3,10 @@
 import { connect } from 'react-redux';
 
 import { LoginFormFormik } from 'components/Forms';
-import type { LoginFormValues } from 'components/Forms';
+import { LoginFormValues } from 'components/Forms';
 
 import { loginWithEmailAndPassword } from 'my-redux/actions';
-import type { Dispatch, FormikActions } from 'flow-types';
+import { Dispatch, FormikActions } from 'flow-types';
 
 type DispatchProps = {|
 	onSubmit: (

@@ -2,7 +2,7 @@
 
 import { createSelector } from 'reselect';
 
-import type { State } from 'flow-types';
+import { State } from 'flow-types';
 
 const getStartup = (state: State) => state.startup;
 

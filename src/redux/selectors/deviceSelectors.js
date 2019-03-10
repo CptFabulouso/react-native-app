@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
 
-import type { ReactNode, State } from 'flow-types';
+import { ReactNode, State } from 'flow-types';
 
 const getDeviceOrientation = (state: State) => state.device.orientation;
 const getDeviceDimensions = (state: State) => ({

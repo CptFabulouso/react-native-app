@@ -6,7 +6,7 @@ import React from 'react';
 import { Text } from '../../UI/Text/Text';
 import { formikToTextInput } from 'wrappers';
 import styles from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {|
 	//text input

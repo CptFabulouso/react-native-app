@@ -3,8 +3,8 @@
 import { getDeviceLanguage } from '../../selectors';
 import RNLanguages from 'react-native-languages';
 import i18n from 'i18n';
-import type { Action, ActionCreator, SupportedLanguage } from 'flow-types';
-import type { SettingsState } from './settingsReducer';
+import { Action, ActionCreator, SupportedLanguage } from 'flow-types';
+import { SettingsState } from './settingsReducer';
 
 type SettingsKey = $Keys<SettingsState>;
 type SettingsData = $Values<SettingsState>;

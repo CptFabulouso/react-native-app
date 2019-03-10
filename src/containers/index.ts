@@ -1,5 +1,3 @@
-// @flow
-
 import ChangePasswordForm from './Forms/ChangePasswordFormContainer';
 import CreateAccountForm from './Forms/CreateAccountFormContainer';
 import ForgottenPasswordForm from './Forms/ForgottenPasswordFormContainer';

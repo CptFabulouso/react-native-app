@@ -13,7 +13,7 @@ import thunkMiddleware from 'redux-thunk'; // defaults to localStorage for web a
 // import myTransform from './PersistTransforms';
 import mySaga from '../sagas';
 import reducers from '../reducers';
-import type { Action, State } from 'flow-types';
+import { Action, State } from 'flow-types';
 
 const unAuthWhiteList: Array<$Keys<State>> = ['settings'];
 const persistConfig = {

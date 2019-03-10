@@ -5,7 +5,7 @@ import React from 'react';
 import { Button } from '../Button';
 import { Icons } from 'themes';
 import styles from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {|
 	style?: Style,

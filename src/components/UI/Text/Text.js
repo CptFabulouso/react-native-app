@@ -4,7 +4,7 @@ import { Text as RNText, StyleSheet } from 'react-native';
 
 import { getFontStyleForWeight } from './getFontStyleForWeight';
 import styles from './styles';
-import type { Style } from 'flow-types';
+import { Style } from 'flow-types';
 
 type Props = {|
 	style?: Style,

@@ -1,6 +1,6 @@
 // @flow
 
-import type { State, User } from 'flow-types';
+import { State, User } from 'flow-types';
 
 export type AuthState = {|
 	authorizing: boolean,

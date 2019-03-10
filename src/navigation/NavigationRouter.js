@@ -18,7 +18,7 @@ import UnAuthStack from './navigators/UnAuthStack';
 
 import LoadingScreen from 'screens/Loading/LoadingScreen';
 import OverallModal from 'containers/OverallModal/OverallModal';
-import type { SupportedLanguage } from 'flow-types';
+import { SupportedLanguage } from 'flow-types';
 
 const AppSwitcher = createSwitchNavigator(
 	{

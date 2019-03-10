@@ -1,19 +1,17 @@
-// @flow
-
 /* Imports and exports */
 // dependency imports
-import { ComponentType, Element, Node } from 'react';
+import { ComponentType, ReactNode } from 'react';
 
 // project imports
 import { Action } from '../redux/modules/types';
 import { Reducers } from '../redux/reducers';
 
 // dependency exports
-export {
-	ImageStyleProp,
-	TextStyleProp,
-	ViewStyleProp,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+// export {
+// 	ImageStyleProp,
+// 	TextStyleProp,
+// 	ViewStyleProp,
+// } from 'react-native/Libraries/StyleSheet/StyleSheet';
 export {
 	NavigationAction,
 	NavigationState,
@@ -25,13 +23,11 @@ export {
 
 // project exports
 export * from 'utils/api/apiTypes';
-export { FormConfig } from 'components/Form/helpers/formHelpers';
-export { SupportedLanguage, TranslateProps } from '../i18n/I18n';
+// export { FormConfig } from 'components/Form/helpers/formHelpers';
+export { SupportedLanguage } from '../i18n/I18n';
 
 /* React */
-type ReactNode = Node;
-type ReactElement<T> = Element<T>;
-export { ReactNode, ReactElement, ComponentType };
+export { ReactNode, ComponentType };
 export type Style = any;
 
 /* Redux */
@@ -45,72 +41,72 @@ export type ActionCreator = (
 	getState: GetState
 ) => VoidOrPromise;
 
-export type State = $ObjMap<Reducers, $ExtractFunctionReturn>; // eslint-disable-line
+export type State = Reducers;
 
 export type Store = {
-	dispatch: Dispatch,
-	subscribe: (listener: () => void) => () => void,
-	getState: () => State,
-	getReducer: () => Reducers,
+	dispatch: Dispatch;
+	subscribe: (listener: () => void) => () => void;
+	getState: () => State;
+	getReducer: () => Reducers;
 };
 
 /* misc */
-export type Exact<T> = T & $Shape<T>; // eslint-disable-line
+export type Exact<T> = T & Partial<T>; // eslint-disable-line
 export type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V; // eslint-disable-line
 type VoidOrPromise = void | Promise<void>;
 export type ImageSource = number | { uri: string };
 export type Layout = {
-	x: number,
-	y: number,
-	width: number,
-	height: number,
+	x: number;
+	y: number;
+	width: number;
+	height: number;
 };
 
 /* Loading API */
 export type FetchingState = {
-	loading: boolean,
-	loaded: boolean,
-	error: ?string,
+	loading: boolean;
+	loaded: boolean;
+	error?: string;
 };
 
 export type LoadDataState = 'start' | 'success' | 'error';
 
 type LoadDataStart<TYPE> = {
-	type: TYPE,
-	phase: 'start',
+	type: TYPE;
+	phase: 'start';
 };
 
 type LoadDataStartOptimistic<TYPE, DATA> = {
-	type: TYPE,
-	phase: 'start',
-	newData: DATA,
+	type: TYPE;
+	phase: 'start';
+	newData: DATA;
 };
 
 type LoadDataSuccess<TYPE, DATA> = {
-	type: TYPE,
-	phase: 'success',
-	newData: DATA,
+	type: TYPE;
+	phase: 'success';
+	newData: DATA;
 };
 
 type LoadDataErrorOptimistic<TYPE, DATA> = {
-	type: TYPE,
-	phase: 'error',
-	oldData: DATA,
-	error: string,
+	type: TYPE;
+	phase: 'error';
+	oldData: DATA;
+	error: string;
 };
 
 type LoadDataError<TYPE> = {
-	type: TYPE,
-	phase: 'error',
-	error: string,
+	type: TYPE;
+	phase: 'error';
+	error: string;
 };
 
-export type LoadData<TYPE: string, DATA> =
+export type LoadData<TYPE, DATA> =
 	| LoadDataStart<TYPE>
 	| LoadDataSuccess<TYPE, DATA>
 	| LoadDataError<TYPE>;
 
-export type LoadDataOptimistic<TYPE: string, DATA> =
+export type LoadDataOptimistic<TYPE, DATA> =
 	| LoadDataStartOptimistic<TYPE, DATA>
 	| LoadDataSuccess<TYPE, DATA>
 	| LoadDataErrorOptimistic<TYPE, DATA>;

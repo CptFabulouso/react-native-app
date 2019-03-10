@@ -1,8 +1,8 @@
 // @flow
 
-import type { Action, Exact, User } from 'flow-types';
+import { Action, User } from 'flow-types';
 
-type State = Exact<{
+export interface AccounState {
 	authorizing: boolean,
 	authorized: boolean,
 	error: string,
@@ -10,9 +10,9 @@ type State = Exact<{
 	resetCodeSending: boolean,
 	resetCodeSent: boolean,
 	resetCodeError: string,
-}>;
+};
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: AccounState = {
 	authorizing: false,
 	authorized: false,
 	error: '',
@@ -22,7 +22,7 @@ const INITIAL_STATE: State = {
 	resetCodeError: '',
 };
 
-const settings = (state: State = INITIAL_STATE, action: Action): State => {
+const settings = (state: AccounState = INITIAL_STATE, action: Action): State => {
 	switch (action.type) {
 		case 'RE_LOGIN_USER': {
 			if (action.phase === 'success') {
