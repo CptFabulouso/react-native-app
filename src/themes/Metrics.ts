@@ -1,5 +1,3 @@
-// @flow
-
 import { Dimensions, Platform } from 'react-native';
 
 import Scales from './Scales';

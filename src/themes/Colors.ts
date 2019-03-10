@@ -1,5 +1,3 @@
-// @flow
-
 const colors = {
 	white: '#fff',
 	black: '#3D443C',

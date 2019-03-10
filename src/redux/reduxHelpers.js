@@ -1,5 +1,3 @@
-// @flow
-
 export const updateFetchingState = {
 	start: () => ({
 		loading: true,

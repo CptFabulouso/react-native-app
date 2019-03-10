@@ -1,5 +1,3 @@
-// @flow
-
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
@@ -23,9 +21,7 @@ const fontScale = (value: number) => {
 
 type ExtractFunctionReturn = <V>(v: number) => V; // eslint-disable-line
 
-function fontScaleAll<O: { [key: string]: number }>(
-	o: O
-): $ObjMap<O, ExtractFunctionReturn> {
+function fontScaleAll(o: { [key: string]: number }) {
 	return Object.keys(o).reduce(
 		(acc, k) => Object.assign(acc, { [k]: fontScale(o[k]) }),
 		{}

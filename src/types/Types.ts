@@ -2,19 +2,19 @@
 
 /* Imports and exports */
 // dependency imports
-import type { ComponentType, Element, Node } from 'react';
+import { ComponentType, Element, Node } from 'react';
 
 // project imports
-import type { Action } from '../redux/modules/types';
-import type { Reducers } from '../redux/reducers';
+import { Action } from '../redux/modules/types';
+import { Reducers } from '../redux/reducers';
 
 // dependency exports
-export type {
+export {
 	ImageStyleProp,
 	TextStyleProp,
 	ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet';
-export type {
+export {
 	NavigationAction,
 	NavigationState,
 	NavigationStateRoute,
@@ -24,22 +24,21 @@ export type {
 } from 'react-navigation';
 
 // project exports
-export * from './FormikHelperTypes';
 export * from 'utils/api/apiTypes';
-export type { FormConfig } from 'components/Form/helpers/formHelpers';
-export type { SupportedLanguage, TranslateProps } from '../i18n/I18n';
+export { FormConfig } from 'components/Form/helpers/formHelpers';
+export { SupportedLanguage, TranslateProps } from '../i18n/I18n';
 
 /* React */
 type ReactNode = Node;
 type ReactElement<T> = Element<T>;
-export type { ReactNode, ReactElement, ComponentType };
+export { ReactNode, ReactElement, ComponentType };
 export type Style = any;
 
 /* Redux */
 export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 export type PromiseAction = Promise<Action>;
 export type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
-export type { Action };
+export { Action };
 export type GetState = () => State;
 export type ActionCreator = (
 	dispatch: Dispatch,
@@ -59,7 +58,7 @@ export type Store = {
 export type Exact<T> = T & $Shape<T>; // eslint-disable-line
 export type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V; // eslint-disable-line
 type VoidOrPromise = void | Promise<void>;
-export type ImageSource = number | {| uri: string |};
+export type ImageSource = number | { uri: string };
 export type Layout = {
 	x: number,
 	y: number,
@@ -68,43 +67,43 @@ export type Layout = {
 };
 
 /* Loading API */
-export type FetchingState = {|
+export type FetchingState = {
 	loading: boolean,
 	loaded: boolean,
 	error: ?string,
-|};
+};
 
 export type LoadDataState = 'start' | 'success' | 'error';
 
-type LoadDataStart<TYPE> = {|
+type LoadDataStart<TYPE> = {
 	type: TYPE,
 	phase: 'start',
-|};
+};
 
-type LoadDataStartOptimistic<TYPE, DATA> = {|
+type LoadDataStartOptimistic<TYPE, DATA> = {
 	type: TYPE,
 	phase: 'start',
 	newData: DATA,
-|};
+};
 
-type LoadDataSuccess<TYPE, DATA> = {|
+type LoadDataSuccess<TYPE, DATA> = {
 	type: TYPE,
 	phase: 'success',
 	newData: DATA,
-|};
+};
 
-type LoadDataErrorOptimistic<TYPE, DATA> = {|
+type LoadDataErrorOptimistic<TYPE, DATA> = {
 	type: TYPE,
 	phase: 'error',
 	oldData: DATA,
 	error: string,
-|};
+};
 
-type LoadDataError<TYPE> = {|
+type LoadDataError<TYPE> = {
 	type: TYPE,
 	phase: 'error',
 	error: string,
-|};
+};
 
 export type LoadData<TYPE: string, DATA> =
 	| LoadDataStart<TYPE>

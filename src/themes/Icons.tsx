@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -15,13 +14,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // import Zocial from 'react-native-vector-icons/Zocial';
 // import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
-import type { Style } from 'flow-types';
+import { Style } from '../types';
 
-type IconProps = {
-	size?: number,
-	color?: string,
-	style?: Style,
-};
+interface IconProps {
+	size?: number;
+	color?: string;
+	style?: Style;
+}
 
 const basicProps: IconProps = {
 	size: 30,

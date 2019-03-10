@@ -1,7 +1,5 @@
-// @flow
-
+import { User } from '../apiTypes';
 import { generateRandomId } from './helpers';
-import type { User } from '../apiTypes';
 
 const user = (email: string): User => ({
 	id: generateRandomId(),

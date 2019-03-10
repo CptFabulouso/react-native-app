@@ -1,9 +1,7 @@
-// @flow
-
+import { User } from './apiTypes';
 import { user } from './mocks/user';
-import type { User } from './apiTypes';
 
-import { sleep } from 'utils/common';
+import { sleep } from '../common';
 
 export const createAccountWithEmailAndPassword = async (
 	email: string,

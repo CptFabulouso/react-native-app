@@ -1,5 +1,3 @@
-// @flow
-
 import account from './modules/account/accountReducer';
 import device from './modules/device/deviceReducer';
 import settings from './modules/settings/settingsReducer';

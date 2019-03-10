@@ -1,5 +1,3 @@
-// @flow
-
 import Scales from './Scales';
 
 const size = {
