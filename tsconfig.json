@@ -53,7 +53,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
-      "@actions": ["redux/actions"]
+      "@actions": ["src/redux/actions"]
     }
   },
   "include": ["./src/App.tsx"]

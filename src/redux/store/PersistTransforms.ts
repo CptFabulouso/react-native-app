@@ -1,4 +1,3 @@
-// @flow
 /*
 import { createTransform } from 'redux-persist';
 

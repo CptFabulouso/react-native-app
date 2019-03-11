@@ -1,4 +1,4 @@
 {
-  "name": "my-redux",
-  "version": "1.0.0"
+  "name": "@actions",
+  "main": "actions.ts"
 }

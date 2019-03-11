@@ -7,15 +7,15 @@ import React, { Component } from 'react';
 import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
 import { persistor, store } from 'src/redux/store';
-import { runStartupActions } from '@actions';
-import DevMenuTrigger from 'src/lib/DevMenuTrigger';
+// import { runStartupActions } from '@actions';
+// import DevMenuTrigger from 'src/lib/DevMenuTrigger';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 
 type Props = {};
 export default class App extends Component<Props> {
 	loadAppAsync() {
 		// SplashScreen.hide();
-		store.dispatch(runStartupActions());
+		// store.dispatch(runStartupActions());
 	}
 
 	shouldComponentUpdate() {
@@ -26,18 +26,32 @@ export default class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={store}>
-				<DevMenuTrigger style={{ flex: 1 }} persistor={persistor}>
-					<OverallModal />
-					<PersistGate
-						onBeforeLift={this.loadAppAsync}
-						loading={null}
-						persistor={persistor}
-					>
-						<NavigationRouter />
-					</PersistGate>
-					<StatusBar backgroundColor={Colors.statusBar} />
-				</DevMenuTrigger>
+				<OverallModal />
+				<PersistGate
+					onBeforeLift={this.loadAppAsync}
+					loading={null}
+					persistor={persistor}
+				>
+					<NavigationRouter />
+				</PersistGate>
+				<StatusBar backgroundColor={Colors.statusBar} />
 			</Provider>
 		);
+
+		// return (
+		// 	<Provider store={store}>
+		// 		<DevMenuTrigger style={{ flex: 1 }} persistor={persistor}>
+		// 			<OverallModal />
+		// 			<PersistGate
+		// 				onBeforeLift={this.loadAppAsync}
+		// 				loading={null}
+		// 				persistor={persistor}
+		// 			>
+		// 				<NavigationRouter />
+		// 			</PersistGate>
+		// 			<StatusBar backgroundColor={Colors.statusBar} />
+		// 		</DevMenuTrigger>
+		// 	</Provider>
+		// );
 	}
 }

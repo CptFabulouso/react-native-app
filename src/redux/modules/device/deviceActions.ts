@@ -1,22 +1,20 @@
 // @flow
 
-import * as React from 'react';
-import { Action } from 'flow-types';
+import { ReactNode } from 'react';
+import { Action, ActionCreator } from 'src/types';
+import { SHOW_OVERALL_MODAL, HIDE_OVERALL_MODAL } from './deviceActionTypes';
 
-export type DeviceActions =
-	| {|
-			type: 'SHOW_OVERALL_MODAL',
-			payload: { Component: React.Node },
-	  |}
-	| {|
-			type: 'HIDE_OVERALL_MODAL',
-	  |};
-
-export const showOverallModal = (Component: React.Node): Action => ({
-	type: 'SHOW_OVERALL_MODAL',
-	payload: { Component },
+export const showOverallModal = (Component: ReactNode): Action => ({
+  type: SHOW_OVERALL_MODAL,
+  payload: {
+    Component,
+  },
 });
 
 export const hideOverallModal = (): Action => ({
-	type: 'HIDE_OVERALL_MODAL',
+  type: HIDE_OVERALL_MODAL,
 });
+
+export const hideOverallModalAsync = (): ActionCreator => async dispatch => {
+  dispatch(hideOverallModal());
+};

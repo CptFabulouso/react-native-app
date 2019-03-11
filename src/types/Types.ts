@@ -48,7 +48,6 @@ export type ActionCreator = ThunkAction;
 /* misc */
 export type Exact<T> = T & Partial<T>; // eslint-disable-line
 export type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V; // eslint-disable-line
-type VoidOrPromise = void | Promise<void>;
 export type ImageSource = number | { uri: string };
 export type Layout = {
 	x: number;

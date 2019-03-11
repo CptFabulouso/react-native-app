@@ -1,39 +1,37 @@
-// @flow
+import { Metrics } from 'src/themes';
+import { Action, Exact } from 'src/types';
+import { ReactNode } from 'react';
 
-import * as React from 'react';
-import { Metrics } from 'themes';
-import { Action, Exact } from 'flow-types';
-
-type State = Exact<{
-	screenWidth: number,
-	screenHeight: number,
-	overallModalVisible: boolean,
-	overallModalComponent: React.Node,
-}>;
-
-const INITIAL_STATE = {
-	screenWidth: Metrics.screenWidth,
-	screenHeight: Metrics.screenHeight,
-	overallModalVisible: false,
-	overallModalComponent: null,
+type DeviceState = {
+  screenWidth: number;
+  screenHeight: number;
+  overallModalVisible: boolean;
+  overallModalComponent: ReactNode;
 };
 
-const settings = (state: State = INITIAL_STATE, action: Action): State => {
-	switch (action.type) {
-		case 'SHOW_OVERALL_MODAL':
-			return {
-				...state,
-				overallModalVisible: true,
-				overallModalComponent: action.payload.Component,
-			};
-		case 'HIDE_OVERALL_MODAL':
-			return {
-				...state,
-				overallModalVisible: false,
-			};
-		default:
-			return state;
-	}
+const INITIAL_STATE: DeviceState = {
+  screenWidth: Metrics.screenWidth,
+  screenHeight: Metrics.screenHeight,
+  overallModalVisible: false,
+  overallModalComponent: null,
+};
+
+const settings = (state = INITIAL_STATE, action: Action): DeviceState => {
+  switch (action.type) {
+    case 'SHOW_OVERALL_MODAL':
+      return {
+        ...state,
+        overallModalVisible: true,
+        overallModalComponent: action.payload.Component,
+      };
+    case 'HIDE_OVERALL_MODAL':
+      return {
+        ...state,
+        overallModalVisible: false,
+      };
+    default:
+      return state;
+  }
 };
 
 export default settings;
