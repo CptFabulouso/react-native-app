@@ -12,6 +12,7 @@ import { persistor, store } from 'src/redux/store';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 
 type Props = {};
+
 export default class App extends Component<Props> {
 	loadAppAsync() {
 		// SplashScreen.hide();

@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import { LoadData, User } from 'src/types';
 
 export const LOGIN_EMAIL_PASSWORD = 'LOGIN_EMAIL_PASSWORD';

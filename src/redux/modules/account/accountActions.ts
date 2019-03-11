@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Action, User } from 'src/types';
 
 export const loginWithEmailAndPasswordRequested = (): Action => ({

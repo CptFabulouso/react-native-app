@@ -1,5 +1,3 @@
-// @flow
-
 import { Action, User } from 'src/types';
 
 export interface AccountState {
