@@ -4,12 +4,12 @@ import { StatusBar } from 'react-native';
 import React, { Component } from 'react';
 // import SplashScreen from 'react-native-splash-screen';
 
-import { Colors } from 'themes';
-import { OverallModal } from 'containers';
-import { persistor, store } from 'my-redux/store';
-import { runStartupActions } from 'my-redux/actions';
-import DevMenuTrigger from 'lib/DevMenuTrigger';
-import NavigationRouter from 'navigation/NavigationRouter';
+import { Colors } from 'src/themes';
+import { OverallModal } from 'src/containers';
+import { persistor, store } from 'src/redux/store';
+import { runStartupActions } from '@actions';
+import DevMenuTrigger from 'src/lib/DevMenuTrigger';
+import NavigationRouter from 'src/navigation/NavigationRouter';
 
 type Props = {};
 export default class App extends Component<Props> {

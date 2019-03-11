@@ -1,10 +1,13 @@
 /* Imports and exports */
 // dependency imports
 import { ComponentType, ReactNode } from 'react';
+import { ThunkAction as ReduxThunkAction } from 'redux-thunk';
+import { Action as ReduxAction, Dispatch as ReduxDispatch } from 'redux';
 
 // project imports
-import { Action } from '../redux/modules/types';
-import { Reducers } from '../redux/reducers';
+import { Action } from 'src/redux/modules/ActionTypes';
+import { AppState } from 'src/redux/reducers';
+export { Action, AppState };
 
 // dependency exports
 // export {
@@ -22,7 +25,7 @@ export {
 } from 'react-navigation';
 
 // project exports
-export * from 'utils/api/apiTypes';
+export * from 'src/utils/api/apiTypes';
 // export { FormConfig } from 'components/Form/helpers/formHelpers';
 export { SupportedLanguage } from '../i18n/I18n';
 
@@ -31,24 +34,16 @@ export { ReactNode, ComponentType };
 export type Style = any;
 
 /* Redux */
-export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+export type ThunkAction = ReduxThunkAction<
+  void,
+  AppState,
+  null,
+  ReduxAction<string>
+>;
 export type PromiseAction = Promise<Action>;
-export type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
-export { Action };
-export type GetState = () => State;
-export type ActionCreator = (
-	dispatch: Dispatch,
-	getState: GetState
-) => VoidOrPromise;
-
-export type State = Reducers;
-
-export type Store = {
-	dispatch: Dispatch;
-	subscribe: (listener: () => void) => () => void;
-	getState: () => State;
-	getReducer: () => Reducers;
-};
+export type Dispatch = ReduxDispatch<Action>
+export type GetState = () => AppState;
+export type ActionCreator = ThunkAction;
 
 /* misc */
 export type Exact<T> = T & Partial<T>; // eslint-disable-line
