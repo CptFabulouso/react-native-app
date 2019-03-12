@@ -1,31 +1,18 @@
-// @flow
-
+import { Action, ActionCreator, SupportedLanguage } from 'src/types';
+import {
+	CHANGE_APP_LANGUAGE,
+	CHANGE_LOCAL_SETTING,
+	SettingsData,
+	SettingsKey,
+} from './settingsActionTypes';
 import { getDeviceLanguage } from '../../selectors';
 import RNLanguages from 'react-native-languages';
-import i18n from 'i18n';
-import { Action, ActionCreator, SupportedLanguage } from 'flow-types';
-import { SettingsState } from './settingsReducer';
-
-type SettingsKey = $Keys<SettingsState>;
-type SettingsData = $Values<SettingsState>;
-
-export type SettingsActions =
-	| {|
-			type: 'CHANGE_APP_LANGUAGE',
-			payload: SupportedLanguage,
-	  |}
-	| {|
-			type: 'CHANGE_LOCAL_SETTING',
-			payload: {|
-				key: SettingsKey,
-				value: SettingsData,
-			|},
-	  |};
+import i18n from 'src/i18n';
 
 export const changeAppLanguage = (language: SupportedLanguage): Action => {
 	i18n.locale = language;
 	return {
-		type: 'CHANGE_APP_LANGUAGE',
+		type: CHANGE_APP_LANGUAGE,
 		payload: language,
 	};
 };
@@ -43,7 +30,7 @@ export const changeLocalSetting = (
 	key: SettingsKey,
 	value: SettingsData
 ): Action => ({
-	type: 'CHANGE_LOCAL_SETTING',
+	type: CHANGE_LOCAL_SETTING,
 	payload: {
 		key,
 		value,

@@ -1,9 +1,10 @@
 import { AccountActionTypes } from './account/accountActionTypes';
 import { DeviceActionTypes } from './device/deviceActionTypes';
-// import { SettingsActions } from './settings/settingsActions';
+import { SettingsActionTypes } from './settings/settingsActionTypes';
 // import { StartupActions } from './startup/startupActions';
 
 export type Action =
-	// SettingsActions |
+	| SettingsActionTypes
 	// StartupActions |
-	DeviceActionTypes | AccountActionTypes;
+	| DeviceActionTypes
+	| AccountActionTypes;

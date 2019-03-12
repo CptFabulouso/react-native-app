@@ -1,13 +1,7 @@
-// @flow
-
 import { loadLanguage } from '../settings/settingsActions';
-import { reLogin } from '../account/accountActions';
+import { reLogin } from '../account/accountThunks';
 
-import { ActionCreator } from 'flow-types';
-
-export type StartupActions = {|
-	type: 'RUN_STARTUP_ACTIONS',
-|};
+import { ActionCreator } from 'src/types';
 
 export const runStartupActions = (): ActionCreator => async dispatch => {
 	dispatch(reLogin());

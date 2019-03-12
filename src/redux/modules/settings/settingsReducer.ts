@@ -2,20 +2,17 @@
 
 import RNLanguages from 'react-native-languages';
 
-import { Action, Exact, SupportedLanguage } from 'flow-types';
+import { Action, Exact, SupportedLanguage } from 'src/types';
 
 export type SettingsState = Exact<{
-	language: SupportedLanguage,
+	language: SupportedLanguage;
 }>;
 
-const INITIAL_STATE = {
-	language: RNLanguages.language, //FIXME: does not handle fallbacks
+const INITIAL_STATE: SettingsState = {
+	language: RNLanguages.language,
 };
 
-const settings = (
-	state: SettingsState = INITIAL_STATE,
-	action: Action
-): SettingsState => {
+const settings = (state = INITIAL_STATE, action: Action): SettingsState => {
 	switch (action.type) {
 		case 'CHANGE_APP_LANGUAGE':
 			return {

@@ -1,23 +1,17 @@
-import { Action, Exact } from 'flow-types';
+import { Action } from 'src/types';
 
-type State = Exact<{
+type StartupState = {
 	done: boolean;
 	error: string;
-}>;
+};
 
 const INITIAL_STATE = {
 	done: false,
 	error: '',
 };
 
-const startup = (state: State = INITIAL_STATE, action: Action): State => {
+const startup = (state = INITIAL_STATE, action: Action): StartupState => {
 	switch (action.type) {
-		case 'RUN_STARTUP_ACTIONS':
-			return {
-				...state,
-				done: false,
-				error: '',
-			};
 		default:
 			return state;
 	}
