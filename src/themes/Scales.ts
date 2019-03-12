@@ -19,12 +19,16 @@ const fontScale = (value: number) => {
 	return value * ratioX;
 };
 
-// FIXME: get return values
-function fontScaleAll(o: { [key: string]: number }) {
-	return Object.keys(o).reduce(
-		(acc, k) => Object.assign(acc, { [k]: fontScale(o[k]) }),
-		{}
-	);
+function fontScaleAll<V>(
+	o: { [K in keyof V]: number }
+): { [K in keyof V]: number } {
+	const newObj = {} as { [K in keyof V]: number };
+	for (const k in o) {
+		if (o.hasOwnProperty(k)) {
+			newObj[k] = fontScale(o[k]);
+		}
+	}
+	return newObj;
 }
 
 export default {

@@ -1,5 +1,3 @@
-// @flow
-
 import { createStackNavigator } from 'react-navigation';
 
 import PGMenu from 'screens/PlayGround/Menu';

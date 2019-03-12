@@ -1,18 +1,16 @@
-// @flow
-
 import React from 'react';
 
 import { Button } from '../Button';
-import { Icons } from 'themes';
+import { Icons } from 'src/themes';
+import { Style } from 'src/types';
 import styles from './styles';
-import { Style } from 'flow-types';
 
-type Props = {|
-	style?: Style,
-	onPress: () => void,
-	loading?: boolean,
-	disabled?: boolean,
-|};
+type Props = {
+	style?: Style;
+	onPress: () => void;
+	loading?: boolean;
+	disabled?: boolean;
+};
 
 const Facebook = (props: Props) => {
 	return (

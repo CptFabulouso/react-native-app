@@ -1,5 +1,3 @@
-// @flow
-
 import { Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import React, { Component, type ComponentType } from 'react';

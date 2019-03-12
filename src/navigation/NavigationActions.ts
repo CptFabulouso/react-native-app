@@ -1,5 +1,3 @@
-// @flow
-
 import { NavigationActions, StackActions } from 'react-navigation';
 import {
 	NavigationNavigateAction,

@@ -1,4 +1,3 @@
-// @flow
 import { Fragment } from 'react';
 
 import Alert from 'lib/ModalContainer/Alert';

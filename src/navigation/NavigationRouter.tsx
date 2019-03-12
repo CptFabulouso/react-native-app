@@ -7,16 +7,17 @@ import {
 import React, { Component } from 'react';
 import StackViewStyleInterpolator from 'react-navigation-stack/dist/views/StackView/StackViewStyleInterpolator';
 
-import { callbackPathPrefix } from 'utils/constants';
+import { callbackPathPrefix } from 'src/utils/constants';
 import NavigationActions from './NavigationActions';
 
 import AuthStack from './navigators/AuthStack';
 import PlaygroundStack from './navigators/PlaygroundStack';
 import UnAuthStack from './navigators/UnAuthStack';
 
-import LoadingScreen from 'screens/Loading/LoadingScreen';
-import OverallModal from 'containers/OverallModal/OverallModal';
-import { SupportedLanguage } from 'flow-types';
+import { AppState, SupportedLanguage } from 'src/types';
+import { getDeviceLanguage } from 'src/redux/selectors';
+import LoadingScreen from 'src/screens/Loading/LoadingScreen';
+import OverallModal from 'src/containers/OverallModal/OverallModal';
 
 const AppSwitcher = createSwitchNavigator(
 	{
@@ -33,7 +34,7 @@ const AppSwitcher = createSwitchNavigator(
 	}
 );
 
-const verticalModalRoutes = [];
+const verticalModalRoutes: Array<string> = [];
 
 const AppNavigator = createStackNavigator(
 	{
@@ -70,9 +71,12 @@ const AppNavigator = createStackNavigator(
 
 const AppRouter = createAppContainer(AppNavigator);
 
-type Props = {
-	language: SupportedLanguage,
+type StateProps = {
+	language: SupportedLanguage;
 };
+
+type Props = StateProps;
+
 class App extends Component<Props> {
 	render() {
 		return (
@@ -87,10 +91,10 @@ class App extends Component<Props> {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState): StateProps => {
 	return {
-		language: state.settings.language,
+		language: getDeviceLanguage(state),
 	};
 };
 
-export default connect(mapStateToProps)(App);
+export default connect<StateProps, {}, {}, AppState>(mapStateToProps)(App);

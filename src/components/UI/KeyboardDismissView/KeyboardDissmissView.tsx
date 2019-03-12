@@ -1,33 +1,33 @@
 // @flow
 
-import * as React from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import {
+	Keyboard,
+	KeyboardEvent,
+	LayoutChangeEvent,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native';
+import React, { ReactNode } from 'react';
 
-import { Style } from 'flow-types';
+import { Style } from 'src/types';
 
-export type KeyboardDismissViewProps = {|
-	...State,
-	...Props,
-|};
+export type KeyboardDismissViewProps = State & Props;
 
-type Props = {|
-	style?: Style,
-	children: React.Node | (KeyboardDismissViewProps => React.Element<any>),
-|};
+type Props = {
+	style?: Style;
+	children: ReactNode; // | (props: KeyboardDismissViewProps => ReactNode),
+};
 
-type State = {|
-	keyboardShown: boolean,
-	keyboardHeight: number,
-	visibleHeight: number,
-	visibleWidth: number,
-	pageHeight: number,
-	pageWidth: number,
-|};
+type State = {
+	keyboardShown: boolean;
+	keyboardHeight: number;
+	visibleHeight: number;
+	visibleWidth: number;
+	pageHeight: number;
+	pageWidth: number;
+};
 
 class KeyboardDismissView extends React.Component<Props, State> {
-	_keyboardDidShow: any => void;
-	_keyboardDidHide: () => void;
-	_setPageLayout: any => void;
 	keyboardDidShowListener: any;
 	keyboardDidHideListener: any;
 
@@ -64,7 +64,7 @@ class KeyboardDismissView extends React.Component<Props, State> {
 		this.keyboardDidHideListener.remove();
 	}
 
-	_keyboardDidShow(data) {
+	_keyboardDidShow(data: KeyboardEvent) {
 		this.setStateIfWithProps({
 			keyboardShown: true,
 			visibleHeight: this.state.pageHeight - data.endCoordinates.height,
@@ -79,7 +79,7 @@ class KeyboardDismissView extends React.Component<Props, State> {
 		});
 	}
 
-	_setPageLayout(e) {
+	_setPageLayout(e: LayoutChangeEvent) {
 		const { width, height } = e.nativeEvent.layout;
 		if (!this.state.pageHeight) {
 			this.setStateIfWithProps({
@@ -104,11 +104,11 @@ class KeyboardDismissView extends React.Component<Props, State> {
 		});
 	}
 
-	setStateIfWithProps(newState: $Shape<State>) {
+	setStateIfWithProps(newState: Partial<State>) {
 		if (typeof this.props.children !== 'function') {
 			return;
 		}
-		this.setState(newState);
+		this.setState({ ...newState } as Pick<State, keyof State>);
 	}
 
 	render() {

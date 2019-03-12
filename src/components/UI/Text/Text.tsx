@@ -1,15 +1,14 @@
-// @flow
-import * as React from 'react';
 import { Text as RNText, StyleSheet } from 'react-native';
+import React, { ReactNode } from 'react';
 
+import { Style } from 'src/types';
 import { getFontStyleForWeight } from './getFontStyleForWeight';
 import styles from './styles';
-import { Style } from 'flow-types';
 
-type Props = {|
-	style?: Style,
-	children?: React.Node,
-|};
+type Props = {
+	style?: Style;
+	children?: ReactNode;
+};
 
 const Text = (props: Props) => {
 	const flatStyle = StyleSheet.flatten(props.style);

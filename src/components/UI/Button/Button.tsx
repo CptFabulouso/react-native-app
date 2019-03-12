@@ -1,33 +1,31 @@
-// @flow
-
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
-import React, { Component } from 'react';
+import React, { Component, ReactNode, SyntheticEvent } from 'react';
 
+import { Style } from 'src/types';
 import { Text } from '../Text/Text';
 import styles, { otherStyles } from './styles';
-import { ReactElement, Style } from 'flow-types';
 
 const containerStyles = styles.container;
 const labelStyles = styles.label;
 
-export type Props = {|
-	style?: Style,
-	children?: ReactElement<any>,
-	labelStyle?: Style,
-	onPress: (e: any) => void,
-	label?: string,
-	disabled?: boolean,
-	loading?: boolean,
-	transparent?: boolean,
-	bordered?: boolean,
-	rounded: boolean,
-	block?: boolean,
-	shadow?: boolean,
+export type Props = {
+	style?: Style;
+	children?: ReactNode;
+	labelStyle?: Style;
+	onPress: (e: SyntheticEvent<any>) => void;
+	label?: string;
+	disabled?: boolean;
+	loading?: boolean;
+	transparent?: boolean;
+	bordered?: boolean;
+	rounded: boolean;
+	block?: boolean;
+	shadow?: boolean;
 	// full?: boolean,
-	small?: boolean,
+	small?: boolean;
 	// large?: boolean,
-	iconRight?: boolean,
-	iconLeft?: boolean,
+	iconRight?: boolean;
+	iconLeft?: boolean;
 	// light?: boolean,
 	// primary?: boolean,
 	// success?: boolean,
@@ -35,11 +33,11 @@ export type Props = {|
 	// warning?: boolean,
 	// danger?: boolean,
 	// dark?: boolean,
-	hidden?: boolean,
+	hidden?: boolean;
 	// App specific
-	noisyBG: boolean,
-	color: string,
-|};
+	noisyBG: boolean;
+	color: string;
+};
 
 class Button extends Component<Props> {
 	static defaultProps = {
@@ -61,6 +59,7 @@ class Button extends Component<Props> {
 		if (bordered) {
 			return containerStyles.bordered;
 		}
+		return;
 	}
 
 	getContainerSize() {
@@ -85,6 +84,7 @@ class Button extends Component<Props> {
 		if (disabled) {
 			return containerStyles.disabled;
 		}
+		return;
 	}
 
 	getContainerRoundness() {
@@ -92,6 +92,7 @@ class Button extends Component<Props> {
 		if (rounded) {
 			return containerStyles.rounded;
 		}
+		return;
 	}
 
 	getContainerPadding() {
@@ -99,6 +100,7 @@ class Button extends Component<Props> {
 		if (transparent && !bordered) {
 			return containerStyles.noPadding;
 		}
+		return;
 	}
 
 	getContainerShadow() {
@@ -118,6 +120,7 @@ class Button extends Component<Props> {
 		if (iconRight) {
 			return labelStyles.iconRight;
 		}
+		return;
 	}
 
 	getLabelOpacity() {
@@ -126,6 +129,7 @@ class Button extends Component<Props> {
 		if (loading) {
 			return labelStyles.loading;
 		}
+		return;
 	}
 
 	getLabelColor() {
@@ -134,6 +138,7 @@ class Button extends Component<Props> {
 		if (transparent) {
 			return labelStyles.transparent;
 		}
+		return;
 	}
 
 	getLabelSize() {
@@ -142,6 +147,7 @@ class Button extends Component<Props> {
 		if (small) {
 			return labelStyles.small;
 		}
+		return;
 	}
 
 	renderLeftIcon() {
@@ -161,7 +167,7 @@ class Button extends Component<Props> {
 	renderLabelOrLoading() {
 		const { loading } = this.props;
 
-		const labelStyle = [labelStyles.default];
+		const labelStyle: Array<Style | undefined> = [labelStyles.default];
 		labelStyle.push(this.getLabelPadding());
 		labelStyle.push(this.getLabelOpacity());
 		labelStyle.push(this.getLabelColor());
@@ -172,8 +178,7 @@ class Button extends Component<Props> {
 				{loading && (
 					<View style={[otherStyles.fill, otherStyles.center]}>
 						<ActivityIndicator
-							// style={{ position: 'ab
-							solute', opacity: loading ? 1 : 0 }}
+							// style={{ position: 'absolute', opacity: loading ? 1 : 0 }}
 							color="white"
 						/>
 					</View>
@@ -186,7 +191,7 @@ class Button extends Component<Props> {
 	}
 
 	render() {
-		const containerStyle = [containerStyles.default];
+		const containerStyle: Array<Style | undefined> = [containerStyles.default];
 		containerStyle.push(this.getContainerColor());
 		containerStyle.push(this.getContainerBorder());
 		containerStyle.push(...this.getContainerSize());

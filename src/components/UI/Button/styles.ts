@@ -1,8 +1,6 @@
-// @flow
-
 import { StyleSheet } from 'react-native';
 
-import { Colors, Fonts } from 'themes';
+import { Colors, Fonts } from 'src/themes';
 
 export default {
 	container: StyleSheet.create({
@@ -87,7 +85,7 @@ export default {
 export const otherStyles = StyleSheet.create({
 	fill: {
 		overflow: 'hidden',
-		...StyleSheet.absoluteFill,
+		...StyleSheet.flatten(StyleSheet.absoluteFill),
 	},
 
 	center: {

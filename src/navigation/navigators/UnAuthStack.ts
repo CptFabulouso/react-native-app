@@ -1,5 +1,3 @@
-// @flow
-
 import { createStackNavigator } from 'react-navigation';
 
 import ChangePasswordScreen from 'screens/Auth/ChangePassword/ChangePasswordScreen';
