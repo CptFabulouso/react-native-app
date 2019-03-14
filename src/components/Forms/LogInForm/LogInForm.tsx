@@ -3,31 +3,34 @@ import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import { Form } from '../../Form/Form';
-import { FormConfig } from 'src/types';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'src/i18n';
 import styles from './styles';
+import { FormConfig } from 'src/types';
 
-export type CreateAccountFormValues = {
-	email: string;
-	password: string;
+export type LoginFormValues = {
+	email: string,
+	password: string,
 };
 
-type Props = FormikProps<CreateAccountFormValues>;
+type Props = FormikProps<LoginFormValues>;
 
 type SubmitProps = {
 	onSubmit: (
 		email: string,
 		password: string,
-		formActions: FormikActions<CreateAccountFormValues>
-	) => void;
+		formActions: FormikActions<LoginFormValues>
+	) => void,
 };
 
 const formConfig: FormConfig = {
-	fields: [Form.Presets.email, Form.Presets.password],
+	fields: [
+		{ ...Form.Presets.email /* , defaultValue: 'pavelgric@gmail.com'  */ },
+		{ ...Form.Presets.password /* , defaultValue: 'password' */ },
+	],
 };
 
-class CreateAccountForm extends Component<Props> {
+class LogInForm extends Component<Props> {
 	render() {
 		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
@@ -37,7 +40,7 @@ class CreateAccountForm extends Component<Props> {
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
 					onPress={handleSubmit}
-					label={i18n.t('auth.createAccount')}
+					label={i18n.t('auth.login')}
 					block
 					shadow
 					style={styles.button}
@@ -47,13 +50,14 @@ class CreateAccountForm extends Component<Props> {
 	}
 }
 
-export default CreateAccountForm;
+export default LogInForm;
 
-export const CreateAccountFormFormik = withFormikFromConfig(formConfig, {
+export const LoginFormFormik = withFormikFromConfig(formConfig, {
 	handleSubmit: (
-		values: CreateAccountFormValues,
-		{ props, ...formActions }: FormikBag<SubmitProps, CreateAccountFormValues>
+		values: LoginFormValues,
+		{ props, ...formActions }: FormikBag<SubmitProps, LoginFormValues>
 	) => {
 		props.onSubmit(values.email, values.password, formActions);
 	},
-})(CreateAccountForm);
+	// isInitialValid: true,
+})(LogInForm);

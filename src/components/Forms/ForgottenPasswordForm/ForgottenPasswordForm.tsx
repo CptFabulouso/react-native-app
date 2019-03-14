@@ -3,31 +3,29 @@ import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import { Form } from '../../Form/Form';
-import { FormConfig } from 'src/types';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'src/i18n';
 import styles from './styles';
+import { FormConfig } from 'src/types';
 
-export type CreateAccountFormValues = {
-	email: string;
-	password: string;
+export type ForgottenPasswordFormValues = {
+	email: string,
 };
 
-type Props = FormikProps<CreateAccountFormValues>;
+type Props = FormikProps<ForgottenPasswordFormValues>;
 
 type SubmitProps = {
 	onSubmit: (
 		email: string,
-		password: string,
-		formActions: FormikActions<CreateAccountFormValues>
-	) => void;
+		formActions: FormikActions<ForgottenPasswordFormValues>
+	) => void,
 };
 
 const formConfig: FormConfig = {
-	fields: [Form.Presets.email, Form.Presets.password],
+	fields: [Form.Presets.email],
 };
 
-class CreateAccountForm extends Component<Props> {
+class ForgottenPasswordForm extends Component<Props> {
 	render() {
 		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
@@ -37,7 +35,7 @@ class CreateAccountForm extends Component<Props> {
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
 					onPress={handleSubmit}
-					label={i18n.t('auth.createAccount')}
+					label={i18n.t('auth.sendResetCode')}
 					block
 					shadow
 					style={styles.button}
@@ -47,13 +45,16 @@ class CreateAccountForm extends Component<Props> {
 	}
 }
 
-export default CreateAccountForm;
+export default ForgottenPasswordForm;
 
-export const CreateAccountFormFormik = withFormikFromConfig(formConfig, {
+export const ForgottenPasswordFormFormik = withFormikFromConfig(formConfig, {
 	handleSubmit: (
-		values: CreateAccountFormValues,
-		{ props, ...formActions }: FormikBag<SubmitProps, CreateAccountFormValues>
+		values: ForgottenPasswordFormValues,
+		{
+			props,
+			...formActions
+		}: FormikBag<SubmitProps, ForgottenPasswordFormValues>
 	) => {
-		props.onSubmit(values.email, values.password, formActions);
+		props.onSubmit(values.email, formActions);
 	},
-})(CreateAccountForm);
+})(ForgottenPasswordForm);
