@@ -1,9 +1,7 @@
-// @flow
-
 import 'react-native';
 import React from 'react';
 
-import { Text } from 'components';
+import { Text } from 'src/components';
 
 import renderer from 'react-test-renderer';
 

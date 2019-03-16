@@ -1,9 +1,3 @@
-// @flow
-/**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import 'react-native';
 import App from '../src/App';
 import React from 'react';

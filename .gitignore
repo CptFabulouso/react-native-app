@@ -41,6 +41,11 @@ buck-out/
 \.buckd/
 *.keystore
 
+# Jest
+#
+.jest/
+coverage/
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the

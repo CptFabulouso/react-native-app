@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Text = (props: Props) => {
-	const flatStyle = StyleSheet.flatten(props.style);
+	const flatStyle: Style = StyleSheet.flatten(props.style);
 	let fontStyle = null;
 	if (flatStyle) {
 		fontStyle = getFontStyleForWeight(
