@@ -1,35 +1,29 @@
-// @flow
-
-import * as React from 'react';
 import { BackHandler, View } from 'react-native';
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ComponentType } from 'react';
+import React, { Component, ReactNode } from 'react';
 
-import { Modal } from 'components';
+import { AppState } from 'src/types';
+import { Modal } from 'src/components';
 import {
 	getOverallModalComponent,
 	isOverallModalVisible,
-} from 'my-redux/selectors';
-import { hideOverallModal } from 'my-redux/actions';
+} from 'src/redux/selectors';
+import { hideOverallModal } from '@actions';
 import styles from './styles';
-import { Dispatch, State } from 'flow-types';
 
-type DispatchProps = {|
-	showOverallModal: () => void,
-	hideOverallModal: () => void,
-|};
+interface StateProps {
+	overallModalContent: ReactNode;
+	visible: boolean;
+}
 
-type StateProps = {|
-	overallModalContent: React.Node,
-	visible: boolean,
-|};
+interface DispatchProps {
+	hideOverallModal: typeof hideOverallModal;
+}
 
-type Props = {|
-	...DispatchProps,
-	...StateProps,
-|};
+type Props = DispatchProps & StateProps;
 
-class OverallModal extends React.Component<Props> {
+class OverallModal extends Component<Props> {
 	componentDidMount() {
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
 	}
@@ -55,22 +49,17 @@ class OverallModal extends React.Component<Props> {
 	}
 }
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: AppState): StateProps => {
 	return {
 		visible: isOverallModalVisible(state),
 		overallModalContent: getOverallModalComponent(state),
 	};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-	return {
-		hideOverallModal: () => dispatch(hideOverallModal()),
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators({ hideOverallModal: hideOverallModal }, dispatch);
 
-const connected: ComponentType<{}> = connect(
+export default connect<StateProps, DispatchProps, {}, AppState>(
 	mapStateToProps,
 	mapDispatchToProps
 )(OverallModal);
-
-export default connected;

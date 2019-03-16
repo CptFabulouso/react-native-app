@@ -21,6 +21,7 @@
     "changePassword": "Change Password",
     "instructionOnEmail": "Instructions to reset password were send to the email",
     "logOut": "Log Out",
+    "loggingIn": "Logging In",
     "loggingOut": "Logging Out",
     "enterEmail": "Enter your email address"
   },

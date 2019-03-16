@@ -1,11 +1,12 @@
-// @flow
-
+import { FormikActions } from 'formik';
 import { connect } from 'react-redux';
 
-import { Dispatch, FormikActions } from 'flow-types';
-import { ForgottenPasswordFormFormik } from 'components/Forms';
-import { ForgottenPasswordFormValues } from 'components/Forms';
-import { sendResetPasswordCode } from 'my-redux/actions';
+import { Dispatch } from 'src/types';
+import {
+	ForgottenPasswordFormFormik,
+	ForgottenPasswordFormValues,
+} from 'src/components/Forms';
+import { sendResetPasswordCode } from '@actions';
 
 type DispatchProps = {
 	onSubmit: (

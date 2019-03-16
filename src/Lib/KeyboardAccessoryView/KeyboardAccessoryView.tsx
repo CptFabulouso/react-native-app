@@ -1,15 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
-import { ComponentType, Node } from 'react';
+import { ComponentType, ReactNode } from 'react';
 
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import withKeyboardListener, {
-	type KeyboardListenerProps,
+	KeyboardListenerProps,
 } from './withKeyboardListener';
 
-type Props = {|
-	...KeyboardListenerProps,
+type Props = KeyboardListenerProps & {
 	bumperHeight: number,
 	visibleOpacity: number,
 	hiddenOpacity: number,
@@ -18,40 +17,23 @@ type Props = {|
 	inSafeAreaView: boolean,
 	avoidKeyboard: boolean,
 	style?: any,
-	children: Node,
+	children?: (props: KAVRenderProps) => ReactNode,
+	renderKAV: () => ReactNode,
 	keyboardHeight: number,
 	isKeyboardVisible: boolean,
 	isSafeAreaSupported: boolean,
-	renderRest?: RestProps => Node,
-	renderSticky?: StickyProps => Node,
-|};
+};
 
-type RenderInjectedProps = {|
-	stick: boolean,
-	enableStick: () => void,
-	disableStick: () => void,
-|};
+export type KAVRenderProps = Props & State;
 
-export type StickyProps = {|
-	...Props,
-	...State,
-	...RenderInjectedProps,
-|};
-
-export type RestProps = {|
-	...Props,
-	...State,
-	...RenderInjectedProps,
-|};
-
-type State = {|
+type State = {
 	visibleAccessoryHeight: number,
 	accessoryBottom: number,
 	accessoryHeight: number,
 	visibleBottom: number,
-|};
+};
 
-class StickyKeyboardAccessoryView extends Component<Props, State> {
+class KeyboardAccessoryView extends Component<Props, State> {
 	static defaultProps = {
 		bumperHeight: 15,
 		visibleOpacity: 1,
@@ -84,6 +66,8 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 			alwaysVisible,
 			inSafeAreaView,
 			isSafeAreaSupported,
+			visibleOpacity,
+			hiddenOpacity,
 		} = nextProps;
 
 		const applySafeArea = isSafeAreaSupported && inSafeAreaView;
@@ -93,6 +77,8 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 				? nexState.visibleAccessoryHeight
 				: 0;
 
+		const opacity =
+			isKeyboardVisible || alwaysVisible ? visibleOpacity : hiddenOpacity;
 		const bottom = keyboardHeight - bumperHeight - (applySafeArea ? 20 : 0);
 		const height =
 			accessoryHeight +
@@ -102,6 +88,7 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 		return {
 			accessoryBottom: bottom,
 			accessoryHeight: height,
+			accessoryOpacity: opacity,
 			visibleBottom: bottom + height,
 		};
 	}
@@ -112,67 +99,10 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 		});
 	};
 
-	renderRest() {
-		if(!this.props.renderRest){
-			return null;
-		}
-		return this.props.renderRest({
-			...this.props,
-			...this.state,
-			stick: this.stick,
-			enableStick: () => {
-				this.stick = true;
-			},
-			disableStick: () => {
-				this.stick = false;
-			},
-		});
-	}
-
-	renderSticky() {
-		if (!this.props.renderSticky) {
-			return null;
-		}
-		const { visibleBottom } = this.state;
-		const { isKeyboardVisible, keyboardHeightAndroid } = this.props;
-
-		let stickyBottom;
-		if (Platform.OS === 'ios') {
-			if (isKeyboardVisible && this.stick) {
-				stickyBottom = visibleBottom;
-			} else {
-				stickyBottom = 0;
-			}
-		} else {
-			if (isKeyboardVisible) {
-				if (this.stick) {
-					stickyBottom = visibleBottom;
-				} else {
-					stickyBottom = -keyboardHeightAndroid;
-				}
-			} else {
-				stickyBottom = 0;
-			}
-		}
-
-		return (
-			<View style={{ bottom: stickyBottom }}>
-				{this.props.renderSticky({
-					...this.props,
-					...this.state,
-					stick: this.stick,
-					enableStick: () => {
-						this.stick = true;
-					},
-					disableStick: () => {
-						this.stick = false;
-					},
-				})}
-			</View>
-		);
-	}
-
 	renderKAV() {
+		if (!this.props.renderKAV) {
+			return null;
+		}
 		const { accessoryBottom, accessoryHeight } = this.state;
 
 		const {
@@ -202,7 +132,7 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 					},
 				]}
 			>
-				<View onLayout={this.handleKAVLayout}>{this.props.children}</View>
+				<View onLayout={this.handleKAVLayout}>{this.props.renderKAV()}</View>
 			</View>
 		);
 	}
@@ -210,10 +140,11 @@ class StickyKeyboardAccessoryView extends Component<Props, State> {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<View style={{ flex: 1 }}>
-					{this.renderRest()}
-					{this.renderSticky()}
-				</View>
+				{this.props.children &&
+					this.props.children({
+						...this.props,
+						...this.state,
+					})}
 				{this.renderKAV()}
 			</View>
 		);
@@ -234,7 +165,7 @@ const styles = StyleSheet.create({
 });
 
 const withListener: ComponentType<*> = withKeyboardListener(
-	StickyKeyboardAccessoryView
+	KeyboardAccessoryView
 );
 
 export default withListener;

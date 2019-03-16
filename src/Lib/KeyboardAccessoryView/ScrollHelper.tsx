@@ -1,19 +1,15 @@
-// @flow
-
 import { Platform } from 'react-native';
-import React, { Component } from 'react';
-
-import { ComponentType, ReactNode } from 'flow-types';
+import React, { Component, ComponentType, ReactNode } from 'react';
 
 type Props = {
-	stick: boolean,
-	isKeyboardVisible: boolean,
-	visibleBottom: number,
-	keyboardHeightAndroid: number,
-	children: ReactNode,
-	ScrollComponent: ComponentType<*>,
-	onHandleShouldScroll: (ref: any, position: number) => void,
-	scrollEventThrottle: number,
+	stick: boolean;
+	isKeyboardVisible: boolean;
+	visibleBottom: number;
+	keyboardHeightAndroid: number;
+	children: ReactNode;
+	ScrollComponent: ComponentType;
+	onHandleShouldScroll: (ref: any, position: number) => void;
+	scrollEventThrottle: number;
 };
 
 class ScrollHelper extends Component<Props> {
@@ -47,7 +43,7 @@ class ScrollHelper extends Component<Props> {
 			<ScrollComponent
 				{...this.props}
 				ref={this.scroll}
-				onScroll={event => {
+				onScroll={(event: any) => {
 					this.currentScrollPosition = event.nativeEvent.contentOffset.y;
 				}}
 				scrollEventThrottle={this.props.scrollEventThrottle}

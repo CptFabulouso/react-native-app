@@ -1,7 +1,6 @@
 /* Imports and exports */
 // dependency imports
 import { ComponentType, ReactNode } from 'react';
-import { Action as ReduxAction, Dispatch as ReduxDispatch } from 'redux';
 import { ThunkAction as ReduxThunkAction } from 'redux-thunk';
 
 // project imports
@@ -10,11 +9,7 @@ import { AppState } from 'src/redux/reducers';
 export { Action, AppState };
 
 // dependency exports
-// export {
-// 	ImageStyleProp,
-// 	TextStyleProp,
-// 	ViewStyleProp,
-// } from 'react-native/Libraries/StyleSheet/StyleSheet';
+export { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 export {
 	NavigationAction,
 	NavigationState,
@@ -38,10 +33,12 @@ export type ThunkAction = ReduxThunkAction<
 	void,
 	AppState,
 	null,
-	ReduxAction<string>
+	Action
+	// ReduxAction<string>
 >;
 export type PromiseAction = Promise<Action>;
-export type Dispatch = ReduxDispatch<Action>;
+// export type Dispatch = ReduxDispatch<Action>;
+export type Dispatch = (action: Action | ActionCreator) => void;
 export type GetState = () => AppState;
 export type ActionCreator = ThunkAction;
 

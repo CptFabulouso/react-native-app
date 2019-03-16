@@ -1,35 +1,35 @@
-import { View } from 'react-native';
+import { FormikActions } from 'formik';
+import { LoadingCard } from 'src/components';
 import React from 'react';
 
-// import { LoadingCard } from 'components';
-
 import * as API from 'src/utils/api';
-import { getRefreshToken } from '../../selectors';
-import { sleep } from 'src/utils/common';
-// import NavigationActions from 'navigation/NavigationActions';
 import * as accountActions from './accountActions';
 import * as deviceActions from '../device/deviceActions';
-import {
-	Action,
-	ActionCreator,
-	// FormikActions,
-	LoadData,
-	User,
-} from 'src/types';
+import { ActionCreator, User } from 'src/types';
+import { getRefreshToken } from '../../selectors';
+import { sleep } from 'src/utils/common';
+import NavigationActions from 'src/navigation/NavigationActions';
 
-// import {
-//   ChangePasswordFormValues,
-//   CreateAccountFormValues,
-//   ForgottenPasswordFormValues,
-//   LoginFormValues,
-// } from 'components/Forms';
+import {
+	ChangePasswordFormValues,
+	CreateAccountFormValues,
+	ForgottenPasswordFormValues,
+	LoginFormValues,
+} from 'src/components/Forms';
+import i18n from 'src/i18n';
 
 export const loginWithEmailAndPassword = (
 	email: string,
-	password: string
-	// formActions: FormikActions<LoginFormValues>,
+	password: string,
+	formActions: FormikActions<LoginFormValues>
 ): ActionCreator => async dispatch => {
-	// formActions.setSubmitting(true);
+	dispatch(
+		deviceActions.showOverallModal(() => (
+			<LoadingCard title={i18n.t('auth.loggingIn')} />
+		))
+	);
+
+	formActions.setSubmitting(true);
 	dispatch(accountActions.loginWithEmailAndPasswordRequested());
 
 	try {
@@ -39,19 +39,18 @@ export const loginWithEmailAndPassword = (
 		);
 		dispatch(accountActions.loginWithEmailAndPasswordSucceeded(user));
 		dispatch(runOnLoginActions(user));
-		// formActions.resetForm();
 	} catch (er) {
 		dispatch(accountActions.loginWithEmailAndPasswordFailed(er.message));
 	} finally {
-		// formActions.setSubmitting(false);
+		formActions.setSubmitting(false);
 	}
 };
 
 export const sendResetPasswordCode = (
-	email: string
-	// formActions: FormikActions<ForgottenPasswordFormValues>,
+	email: string,
+	formActions: FormikActions<ForgottenPasswordFormValues>
 ): ActionCreator => async dispatch => {
-	// formActions.setSubmitting(true);
+	formActions.setSubmitting(true);
 	dispatch(accountActions.sendResetPasswordCodeRequested());
 
 	try {
@@ -60,26 +59,26 @@ export const sendResetPasswordCode = (
 	} catch (er) {
 		dispatch(accountActions.sendResetPasswordCodeFailed(er.message));
 	} finally {
-		// formActions.setSubmitting(false);
+		formActions.setSubmitting(false);
 	}
 };
 
 export const changePassword = (
 	email: string,
 	password: string,
-	token: string
-	// formActions: FormikActions<ChangePasswordFormValues>,
+	token: string,
+	formActions: FormikActions<ChangePasswordFormValues>
 ): ActionCreator => async dispatch => {
-	// formActions.setSubmitting(true);
+	formActions.setSubmitting(true);
 	dispatch(accountActions.changePasswordRequested());
 	try {
 		await API.auth.changePassword(email, password, token);
 		dispatch(accountActions.changePasswordSucceeded());
-		// formActions.resetForm();
+		formActions.resetForm();
 	} catch (er) {
 		dispatch(accountActions.changePasswordFailed(er.message));
 	} finally {
-		// formActions.setSubmitting(false);
+		formActions.setSubmitting(false);
 	}
 };
 
@@ -87,12 +86,12 @@ export const runOnLoginActions = (
 	user: User
 ): ActionCreator => async dispatch => {
 	dispatch(accountActions.userAuthorized(user));
-	// NavigationActions.push('Auth');
+	NavigationActions.push('Auth');
 };
 
 export const runOnLogoutActions = (): ActionCreator => async dispatch => {
 	dispatch(accountActions.userUnauthorized());
-	// NavigationActions.push('UnAuth');
+	NavigationActions.push('UnAuth');
 };
 
 export const reLogin = (): ActionCreator => async (dispatch, getState) => {
@@ -118,7 +117,11 @@ export const reLogin = (): ActionCreator => async (dispatch, getState) => {
 };
 
 export const logOut = (): ActionCreator => async dispatch => {
-	dispatch(deviceActions.showOverallModal(View));
+	dispatch(
+		deviceActions.showOverallModal(() => (
+			<LoadingCard title={i18n.t('auth.loggingOut')} />
+		))
+	);
 	dispatch(accountActions.logOutRequested());
 
 	try {
@@ -134,10 +137,10 @@ export const logOut = (): ActionCreator => async dispatch => {
 
 export const createAccountWithEmailAndPassword = (
 	email: string,
-	password: string
-	// formActions: FormikActions<CreateAccountFormValues>,
+	password: string,
+	formActions: FormikActions<CreateAccountFormValues>
 ): ActionCreator => async dispatch => {
-	// formActions.setSubmitting(true);
+	formActions.setSubmitting(true);
 	dispatch(accountActions.createEmailAccountRequested());
 
 	try {
@@ -146,10 +149,10 @@ export const createAccountWithEmailAndPassword = (
 			password
 		);
 		dispatch(accountActions.createEmailAccountSucceeded(user));
-		// formActions.resetForm();
+		formActions.resetForm();
 	} catch (er) {
 		dispatch(accountActions.createEmailAccountFailed(er.message));
 	} finally {
-		// formActions.setSubmitting(false);
+		formActions.setSubmitting(false);
 	}
 };

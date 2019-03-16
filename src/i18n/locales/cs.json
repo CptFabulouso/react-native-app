@@ -21,6 +21,7 @@
     "changePassword": "Změnit Heslo",
     "instructionOnEmail": "Instrukce pro resetování hesla byly poslány na email",
     "logOut": "Odhlásit se",
+    "loggingIn": "Přihlašování",
     "loggingOut": "Odhlašování",
     "enterEmail": "Napište váš email"
   },

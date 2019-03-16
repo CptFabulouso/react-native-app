@@ -1,20 +1,21 @@
-// @flow
-
+import { FormikActions } from 'formik';
 import { connect } from 'react-redux';
 
-import { ChangePasswordFormFormik } from 'components/Forms';
-import { changePassword } from 'my-redux/actions';
-import { ChangePasswordFormValues } from 'components/Forms';
-import { Dispatch, FormikActions } from 'flow-types';
+import {
+	ChangePasswordFormFormik,
+	ChangePasswordFormValues,
+} from 'src/components/Forms';
+import { Dispatch } from 'src/types';
+import { changePassword } from '@actions';
 
-type DispatchProps = {|
+type DispatchProps = {
 	onSubmit: (
 		email: string,
 		password: string,
 		token: string,
 		formActions: FormikActions<ChangePasswordFormValues>
-	) => void,
-|};
+	) => void;
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
 	return {

@@ -1,12 +1,10 @@
-// @flow
-
 import RNLanguages from 'react-native-languages';
 
-import { Action, Exact, SupportedLanguage } from 'src/types';
+import { Action, SupportedLanguage } from 'src/types';
 
-export type SettingsState = Exact<{
+export type SettingsState = {
 	language: SupportedLanguage;
-}>;
+};
 
 const INITIAL_STATE: SettingsState = {
 	language: RNLanguages.language,

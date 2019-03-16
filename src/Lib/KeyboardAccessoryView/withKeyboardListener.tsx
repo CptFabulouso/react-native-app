@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 import { ComponentType, ElementConfig } from 'react';
 
@@ -16,26 +14,25 @@ type AnimationConfig =
 	| Object
 	| ((duration: number, easing: EasingOption) => void);
 
-type OwnProps = {|
+type OwnProps = {
 	animateOn: 'ios' | 'android' | 'all' | 'none',
 	androidAdjustResize: boolean,
 	onKeyboardShowDelay?: number | boolean,
 	animationConfig?: AnimationConfig,
-|};
+};
 
-type OwnState = {|
+type OwnState = {
 	visibleHeight: number,
 	keyboardHeight: number,
 	keyboardHeightAndroid: number,
 	isKeyboardVisible: boolean,
-|};
+};
 
-type InjectedProps = {|
-	...OwnState,
+type InjectedProps = OwnState & {
 	isSafeAreaSupported: boolean,
-|};
+};
 
-export type KeyboardListenerProps = {| ...OwnProps, ...InjectedProps |};
+export type KeyboardListenerProps = OwnProps & InjectedProps
 
 const accessoryAnimation = (
 	duration: number,

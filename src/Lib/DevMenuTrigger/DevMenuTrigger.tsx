@@ -1,5 +1,3 @@
-// @flow
-
 import {
 	NativeModules,
 	PanResponder,
@@ -12,22 +10,22 @@ import React, { Component } from 'react';
 
 import styles from './styles';
 
-type Props = {|
-	style: any,
-	children: Array<any>,
-	visibleTime: number,
+type Props = {
+	style: any;
+	children: Array<any>;
+	visibleTime: number;
 	persistor?: {
-		purge: () => Promise<any>,
-	},
-	visibleOnStartup: boolean,
-|};
+		purge: () => Promise<any>;
+	};
+	visibleOnStartup: boolean;
+};
 
-type State = {|
-	visible: boolean,
-|};
+type State = {
+	visible: boolean;
+};
 
 class DevMenuTrigger extends Component<Props, State> {
-	timeout: ?any;
+	timeout: any;
 
 	static defaultProps = {
 		visibleTime: 3000,
@@ -44,7 +42,7 @@ class DevMenuTrigger extends Component<Props, State> {
 		};
 	}
 
-	shouldComponentUpdate(nextProps: Props, nextState: State) {
+	shouldComponentUpdate(_: Props, nextState: State) {
 		if (this.state.visible !== nextState.visible) {
 			return true;
 		}
@@ -85,6 +83,7 @@ class DevMenuTrigger extends Component<Props, State> {
 
 	renderIOSButtons() {
 		const { DevSettings } = NativeModules;
+		// @ts-ignore
 		const devEnabled = typeof atob !== 'undefined';
 		const debugColor = devEnabled ? 'red' : 'green';
 		const { persistor } = this.props;
@@ -159,7 +158,7 @@ class DevMenuTrigger extends Component<Props, State> {
 
 	render() {
 		const panResponder = PanResponder.create({
-			onStartShouldSetPanResponder: (evt, gestureState) => {
+			onStartShouldSetPanResponder: (_, gestureState) => {
 				if (gestureState.numberActiveTouches === 3) {
 					this.toggleVisible();
 				}
