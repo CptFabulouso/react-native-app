@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation';
 
-import ChangePasswordScreen from 'screens/Auth/ChangePassword/ChangePasswordScreen';
-import CreateAccountScreen from 'screens/Auth/CreateAccount/CreateAccountScreen';
-import ForgottenPasswordScreen from 'screens/Auth/ForgottenPassword/ForgottenPasswordScreen';
-import LoginScreen from 'screens/Auth/Login/LoginScreen';
-import i18n from 'i18n';
+import ChangePasswordScreen from 'src/screens/Auth/ChangePassword/ChangePasswordScreen';
+import CreateAccountScreen from 'src/screens/Auth/CreateAccount/CreateAccountScreen';
+import ForgottenPasswordScreen from 'src/screens/Auth/ForgottenPassword/ForgottenPasswordScreen';
+import LoginScreen from 'src/screens/Auth/Login/LoginScreen';
+import i18n from 'src/i18n';
 
 const UnAuthStack = createStackNavigator({
 	login: {

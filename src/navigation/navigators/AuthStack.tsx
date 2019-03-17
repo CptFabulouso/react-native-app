@@ -4,13 +4,12 @@ import {
 } from 'react-navigation';
 import React from 'react';
 
-import { Colors, Icons } from 'themes/';
+import { Colors, Icons } from 'src/themes';
 import LogOutButton from '../navComponents/LogOutButton/LogOutButton';
+import MainScreen from 'src/screens/Main/MainScreen';
+import SettingsScreen from 'src/screens/Settings/SettingsScreen';
 import TabIcon from '../navComponents/TabIcon/TabIcon';
-
-import MainScreen from 'screens/Main/MainScreen';
-import SettingsScreen from 'screens/Settings/SettingsScreen';
-import i18n from 'i18n';
+import i18n from 'src/i18n';
 import styles from '../styles/NavigationRouterStyle';
 
 const MainStack = createStackNavigator({
@@ -40,22 +39,26 @@ const TabNavigator = createBottomTabNavigator(
 			screen: MainStack,
 			navigationOptions: () => ({
 				tabBarLabel: i18n.t('navigation.main'),
+				// FIXME: any type
 				// eslint-disable-next-line
-				tabBarIcon: props => <TabIcon {...props} Icon={Icons.Main} />,
+				tabBarIcon: (props: any) => <TabIcon {...props} Icon={Icons.Main} />,
 			}),
 		},
 		settings: {
 			screen: SettingsStack,
 			navigationOptions: () => ({
 				tabBarLabel: i18n.t('navigation.settings'),
+				// FIXME: any type
 				// eslint-disable-next-line
-				tabBarIcon: props => <TabIcon {...props} Icon={Icons.Settings} />,
+				tabBarIcon: (props: any) => (
+					<TabIcon {...props} Icon={Icons.Settings} />
+				),
 			}),
 		},
 	},
 	{
 		defaultNavigationOptions: {
-			gesturesEnabled: false,
+			// gesturesEnabled: false,
 		},
 		tabBarOptions: {
 			activeTintColor: Colors.secondary,

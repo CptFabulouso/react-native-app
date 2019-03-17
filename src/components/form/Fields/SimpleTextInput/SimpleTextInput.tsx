@@ -8,28 +8,26 @@ import styles from './styles';
 
 type Props = TextInputProps & {
 	style?: Style;
-	name?: string;
-	placeholder?: string;
-	label?: string;
+	// name?: string;
+	// label?: string;
 	getRef?: (ref: RNTextInput | null) => void;
-	error?: string;
-	touched?: boolean;
+	// error?: string;
+	// touched?: boolean;
 };
 
 const SimpleTextInput = (props: Props) => {
 	const {
 		style,
-		name,
-		placeholder,
-		label,
+		// name,
+		// label,
 		getRef,
-		error,
-		touched,
+		// error,
+		// touched,
 		...textInputProps
 	} = props;
 
 	return (
-		<View style={[styles.container, props.style]}>
+		<View style={[styles.container, style]}>
 			<View style={styles.background} />
 			<TextInput
 				{...textInputProps}

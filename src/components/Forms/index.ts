@@ -1,5 +1,3 @@
-// @flow
-
 // import * as LogInForm from './LogInForm/LogInForm';
 import ChangePasswordForm, {
 	ChangePasswordFormFormik,

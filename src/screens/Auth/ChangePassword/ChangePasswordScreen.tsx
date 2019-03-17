@@ -1,28 +1,25 @@
-// @flow
-
+import { NavigationScreenProp, NavigationState } from 'react-navigation';
 import { View } from 'react-native';
 import React, { Component } from 'react';
-import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
-import { ChangePasswordForm } from 'containers';
+import { ChangePasswordForm } from 'src/containers';
 import {
 	FormWrapper,
 	KeyboardDismissView,
 	Logo,
 	SafeAreaView,
 	Title,
-} from 'components';
+} from 'src/components';
 import {
-	type KeyboardListenerProps,
+	InjectedKeyboardListenerProps,
 	withKeyboardListener,
-} from 'lib/KeyboardAccessoryView';
-import i18n from 'i18n';
+} from 'src/Lib/KeyboardAccessoryView';
+import { ViewStyle } from 'src/types';
+import i18n from 'src/i18n';
 import styles from './styles';
-import { ComponentType } from 'flow-types';
 
-type Props = {
-	...KeyboardListenerProps,
-	navigation: NavigationScreenProp<NavigationState>,
+type Props = InjectedKeyboardListenerProps & {
+	navigation: NavigationScreenProp<NavigationState>;
 };
 
 class ChangePassword extends Component<Props> {
@@ -43,7 +40,7 @@ class ChangePassword extends Component<Props> {
 	render() {
 		const { isKeyboardVisible, visibleHeight } = this.props;
 
-		const pageStyle = [styles.page];
+		const pageStyle: Array<ViewStyle> = [styles.page];
 		if (isKeyboardVisible) {
 			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
 		}
@@ -59,6 +56,4 @@ class ChangePassword extends Component<Props> {
 	}
 }
 
-const withListener: ComponentType<*> = withKeyboardListener(ChangePassword);
-
-export default withListener;
+export default withKeyboardListener(ChangePassword);

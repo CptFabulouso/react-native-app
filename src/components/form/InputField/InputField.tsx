@@ -8,8 +8,7 @@ import styles from './styles';
 
 type Props = TextInputProps & {
 	style?: Style;
-	name?: string;
-	placeholder?: string;
+	// name?: string;
 	label?: string;
 	getRef?: (ref: TextInput | null) => void;
 	error?: string;
@@ -19,8 +18,7 @@ type Props = TextInputProps & {
 const InputField = (props: Props) => {
 	const {
 		style,
-		name,
-		placeholder,
+		// name,
 		label,
 		getRef,
 		error,
@@ -30,18 +28,16 @@ const InputField = (props: Props) => {
 
 	return (
 		<View>
-			<Text>{props.label}</Text>
-			<View style={[styles.container, props.style]}>
+			<Text>{label}</Text>
+			<View style={[styles.container, style]}>
 				<TextInput
 					{...textInputProps}
 					ref={ref => {
-						props.getRef && props.getRef(ref);
+						getRef && getRef(ref);
 					}}
 				/>
 			</View>
-			{props.error && props.touched && (
-				<Text style={styles.error}>{props.error}</Text>
-			)}
+			{error && touched && <Text style={styles.error}>{error}</Text>}
 		</View>
 	);
 };

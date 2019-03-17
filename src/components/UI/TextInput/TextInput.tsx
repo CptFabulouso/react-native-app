@@ -1,5 +1,3 @@
-// @flow
-
 import { TextInput as RNTextInput, TextInputProps, View } from 'react-native';
 import React from 'react';
 
@@ -12,6 +10,7 @@ type Props = TextInputProps & {
 
 type Ref = RNTextInput;
 
+// eslint-disable-next-line
 const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
 	const { containerStyle, ...textInputProps } = props;
 

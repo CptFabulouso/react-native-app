@@ -1,20 +1,18 @@
-// @flow
-
-import { ReactNode } from 'react';
 import { Action, ActionCreator } from 'src/types';
-import { SHOW_OVERALL_MODAL, HIDE_OVERALL_MODAL } from './deviceActionTypes';
+import { HIDE_OVERALL_MODAL, SHOW_OVERALL_MODAL } from './deviceActionTypes';
+import { ReactNode } from 'react';
 
 export const showOverallModal = (Component: ReactNode): Action => ({
-  type: SHOW_OVERALL_MODAL,
-  payload: {
-    Component,
-  },
+	type: SHOW_OVERALL_MODAL,
+	payload: {
+		Component,
+	},
 });
 
 export const hideOverallModal = (): Action => ({
-  type: HIDE_OVERALL_MODAL,
+	type: HIDE_OVERALL_MODAL,
 });
 
 export const hideOverallModalAsync = (): ActionCreator => async dispatch => {
-  dispatch(hideOverallModal());
+	dispatch(hideOverallModal());
 };

@@ -1,8 +1,6 @@
-// @flow
-
 import { StyleSheet } from 'react-native';
 
-import { Metrics } from 'themes';
+import { Metrics } from 'src/themes';
 
 export default StyleSheet.create({
 	page: {
@@ -12,7 +10,7 @@ export default StyleSheet.create({
 
 	content: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center',
 	},
 

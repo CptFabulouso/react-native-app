@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 
 import { StyleSheet, View } from 'react-native';
 import withKeyboardListener, {

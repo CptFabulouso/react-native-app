@@ -1,4 +1,3 @@
-// @flow
 import { Platform, StyleSheet } from 'react-native';
 
 import { Fonts } from 'src/themes';

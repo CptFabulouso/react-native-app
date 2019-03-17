@@ -2,7 +2,6 @@
 
 import * as yup from 'yup';
 import { Field, FormikProps, WithFormikConfig, withFormik } from 'formik';
-import { StringSchema } from 'yup';
 import { TextInput } from 'react-native';
 import React from 'react';
 
@@ -14,7 +13,7 @@ import {
 
 export type ConfigField = {
 	name: string;
-	validate: StringSchema; //
+	validate: yup.StringSchema; //
 	disabled?: boolean;
 	hidden?: boolean;
 	component?: any; //
@@ -106,7 +105,7 @@ export function getInputsFromConfig(
 }
 
 export function getValidationSchema(config: FormConfig) {
-	const shape = {} as { [key: string]: StringSchema };
+	const shape = {} as { [key: string]: yup.StringSchema };
 	for (const k in config.fields) {
 		if (config.fields.hasOwnProperty(k)) {
 			shape[k] = config.fields[k].validate;

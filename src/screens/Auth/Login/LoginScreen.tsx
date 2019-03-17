@@ -1,22 +1,18 @@
-// @flow
-
 import { View } from 'react-native';
 import React, { Component } from 'react';
 
-import { Button, FormWrapper, KeyboardDismissView, Logo } from 'components';
+import { Button, FormWrapper, KeyboardDismissView, Logo } from 'src/components';
 import {
-	type KeyboardListenerProps,
+	InjectedKeyboardListenerProps,
 	withKeyboardListener,
-} from 'lib/KeyboardAccessoryView';
-import { LoginForm } from 'containers';
-import NavigationActions from 'navigation/NavigationActions';
-import i18n from 'i18n';
+} from 'src/Lib/KeyboardAccessoryView';
+import { LoginForm } from 'src/containers';
+import { ViewStyle } from 'src/types';
+import NavigationActions from 'src/navigation/NavigationActions';
+import i18n from 'src/i18n';
 import styles from './styles';
-import { ComponentType } from 'flow-types';
 
-type Props = {|
-	...KeyboardListenerProps,
-|};
+type Props = InjectedKeyboardListenerProps;
 
 class LoginScreen extends Component<Props> {
 	renderPlaygroundBtn() {
@@ -38,7 +34,7 @@ class LoginScreen extends Component<Props> {
 	render() {
 		const { isKeyboardVisible, visibleHeight } = this.props;
 
-		const pageStyle = [styles.page];
+		const pageStyle: Array<ViewStyle> = [styles.page];
 		if (isKeyboardVisible) {
 			pageStyle.push(...[{ flex: 0, height: visibleHeight }]);
 		}
@@ -69,6 +65,4 @@ class LoginScreen extends Component<Props> {
 	}
 }
 
-const withListener: ComponentType<*> = withKeyboardListener(LoginScreen);
-
-export default withListener;
+export default withKeyboardListener(LoginScreen);

@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import { Form } from '../../Form/Form';
+import { FormConfig } from 'src/types';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'src/i18n';
 import styles from './styles';
-import { FormConfig } from 'src/types';
 
 export type LoginFormValues = {
-	email: string,
-	password: string,
+	email: string;
+	password: string;
 };
 
 type Props = FormikProps<LoginFormValues>;
@@ -20,7 +20,7 @@ type SubmitProps = {
 		email: string,
 		password: string,
 		formActions: FormikActions<LoginFormValues>
-	) => void,
+	) => void;
 };
 
 const formConfig: FormConfig = {

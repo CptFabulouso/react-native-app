@@ -5,7 +5,7 @@ import { sleep } from '../common';
 
 export const createAccountWithEmailAndPassword = async (
 	email: string,
-	password: string //eslint-disable-line
+	password: string
 ): Promise<User> => {
 	await sleep(1000);
 
@@ -18,7 +18,7 @@ export const createAccountWithEmailAndPassword = async (
 
 export const loginWithEmailAndPassword = async (
 	email: string,
-	password: string //eslint-disable-line
+	password: string
 ): Promise<User> => {
 	await sleep(1000);
 
@@ -35,20 +35,23 @@ export const logOut = async (): Promise<void> => {
 	return;
 };
 
-export const sendResetPasswordCode = async (
-	email: string //eslint-disable-line
-): Promise<null> => {
+export const sendResetPasswordCode = async (email: string): Promise<null> => {
 	await sleep(1000);
-
+	if (email) {
+		//
+	}
 	return null;
 };
 
 export const changePassword = async (
-	email: string, //eslint-disable-line
-	password: string, //eslint-disable-line
-	token: string //eslint-disable-line
+	email: string,
+	password: string,
+	token: string
 ): Promise<null> => {
 	await sleep(1000);
+	if (email && password && token) {
+		//
+	}
 
 	return null;
 };

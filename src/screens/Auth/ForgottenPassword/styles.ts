@@ -1,8 +1,6 @@
-// @flow
-
 import { StyleSheet } from 'react-native';
 
-import { Metrics } from 'themes';
+import { Metrics } from 'src/themes';
 
 export default StyleSheet.create({
 	page: {

@@ -1,12 +1,10 @@
-// @flow
-
 import { ScrollView, StyleSheet, View } from 'react-native';
 import React, { Component } from 'react';
 
-import { Button } from 'components';
-import NavigationActions from 'navigation/NavigationActions';
+import { Button } from 'src/components';
+import NavigationActions from 'src/navigation/NavigationActions';
 
-type Props = {||};
+type Props = {};
 
 const PGPaths = ['PGModal'];
 

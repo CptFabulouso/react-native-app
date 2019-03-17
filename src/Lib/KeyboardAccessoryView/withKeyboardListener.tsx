@@ -1,4 +1,3 @@
-import { ComponentType } from 'react';
 import {
 	Dimensions,
 	Keyboard,
@@ -7,7 +6,7 @@ import {
 	Platform,
 } from 'react-native';
 import { Subtract } from 'utility-types';
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 
 type EasingOption =
 	| 'easeIn'
@@ -208,6 +207,10 @@ P extends InjectedKeyboardListenerProps
 				<WrappedComponent
 					{...props as P}
 					{...this.state}
+					animateOn={animateOn}
+					androidAdjustResize={androidAdjustResize}
+					onKeyboardShowDelay={onKeyboardShowDelay}
+					animationConfig={animationConfig}
 					isSafeAreaSupported={isSafeAreaSupported}
 				/>
 			);

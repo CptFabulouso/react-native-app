@@ -1,34 +1,24 @@
-// @flow
-
-import * as React from 'react';
-import {
-	//Alert,
-	StyleSheet,
-	Text,
-	View,
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { ComponentType } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 
-import { Alert, Button, LoadingCard, Modal } from 'components';
-import { hideOverallModal, showOverallModal } from 'my-redux/actions';
-import NavigationActions from 'navigation/NavigationActions';
-import { Dispatch } from 'flow-types';
+import { Alert, Button, LoadingCard, Modal } from 'src/components';
+import { Dispatch } from 'src/types';
+import { hideOverallModal, showOverallModal } from '@actions';
+import NavigationActions from 'src/navigation/NavigationActions';
 
-type DispatchProps = {|
-	showOverallModal: (Component: React.Node) => void,
-	hideOverallModal: () => void,
-|};
+type DispatchProps = {
+	showOverallModal: (Component: ReactNode) => void;
+	hideOverallModal: () => void;
+};
 
-type Props = {|
-	...DispatchProps,
-|};
+type Props = DispatchProps;
 
-type State = {|
-	visible: boolean,
-|};
+type State = {
+	visible: boolean;
+};
 
-const showAlert = onOk => {
+const showAlert = (onOk?: () => void) => {
 	Alert.alert(
 		'title',
 		'message',
@@ -137,7 +127,7 @@ class PGModal extends React.Component<Props, State> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		showOverallModal: (Component: React.Node) =>
+		showOverallModal: (Component: ReactNode) =>
 			dispatch(showOverallModal(Component)),
 		hideOverallModal: () => dispatch(hideOverallModal()),
 	};

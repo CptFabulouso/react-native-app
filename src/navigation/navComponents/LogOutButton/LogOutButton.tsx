@@ -1,20 +1,18 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import React, { Component, type ComponentType } from 'react';
+import React, { Component, ComponentType } from 'react';
 
-import { Alert } from 'components';
-import { logOut } from 'my-redux/actions';
-import i18n from 'i18n';
+import { Alert } from 'src/components';
+import { Dispatch } from 'src/types';
+import { logOut } from '@actions';
+import i18n from 'src/i18n';
 import styles from './styles';
-import { Dispatch } from 'flow-types';
 
-type DispatchProps = {|
-	logOut: () => void,
-|};
+type DispatchProps = {
+	logOut: () => void;
+};
 
-type Props = {|
-	...DispatchProps,
-|};
+type Props = DispatchProps;
 
 class LogOutButton extends Component<Props> {
 	showLogOutAlert() {

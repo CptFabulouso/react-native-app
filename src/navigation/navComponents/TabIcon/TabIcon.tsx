@@ -1,15 +1,15 @@
-import * as React from 'react';
+import React, { Component, ComponentType } from 'react';
 
 import styles from './styles';
 
-type Props = {|
-	Icon: () => React.Element<any>,
-	focused: boolean,
-	horizontal: boolean,
-	tintColor: string,
-|};
+type Props = {
+	Icon: ComponentType<any>;
+	focused: boolean;
+	horizontal: boolean;
+	tintColor: string;
+};
 
-class TabIcon extends React.Component<Props> {
+class TabIcon extends Component<Props> {
 	render() {
 		const { Icon, tintColor } = this.props;
 		return (

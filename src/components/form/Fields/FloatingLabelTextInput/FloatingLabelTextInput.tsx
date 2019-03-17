@@ -15,7 +15,7 @@ import styles, { TITLE_WIDTH } from './styles';
 
 type Props = TextInputProps & {
 	style?: Style;
-	name?: string;
+	// name?: string;
 	placeholder?: string;
 	label?: string;
 	getRef?: (ref: RNTextInput | null) => void;
@@ -73,8 +73,7 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	render() {
 		const {
 			style,
-			name,
-			placeholder,
+			// name,
 			label,
 			getRef,
 			error,

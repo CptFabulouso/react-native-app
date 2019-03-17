@@ -1,19 +1,18 @@
-import { FormikActions, FormikBag, FormikProps } from 'formik';
 import * as yup from 'yup';
+import { FormikActions, FormikBag, FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import { Form } from '../../Form/Form';
+import { FormConfig } from 'src/types';
 import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
 import i18n from 'src/i18n';
 import styles from './styles';
-import { FormConfig } from 'src/types';
-
 
 export type ChangePasswordFormValues = {
-	email: string,
-	token: string,
-	password: string,
+	email: string;
+	token: string;
+	password: string;
 };
 
 type Props = FormikProps<ChangePasswordFormValues>;
@@ -24,7 +23,7 @@ type SubmitProps = {
 		password: string,
 		token: string,
 		formActions: FormikActions<ChangePasswordFormValues>
-	) => void,
+	) => void;
 };
 
 const formConfig: FormConfig = {

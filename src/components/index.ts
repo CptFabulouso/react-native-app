@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
-import Alert from 'lib/ModalContainer/Alert';
-import Modal from 'lib/ModalContainer/ModalContainer';
+import Alert from 'src/Lib/ModalContainer/Alert';
+import Modal from 'src/Lib/ModalContainer/ModalContainer';
 
 export { Alert, Modal, Fragment };
 

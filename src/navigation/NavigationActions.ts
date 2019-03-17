@@ -1,8 +1,9 @@
-import { NavigationActions, StackActions } from 'react-navigation';
 import {
+	NavigationActions,
 	NavigationNavigateAction,
 	NavigationParams,
 	NavigationRoute,
+	StackActions,
 } from 'react-navigation';
 
 let _navigator: any;
@@ -79,7 +80,6 @@ function replace(routeName: string, params?: NavigationParams) {
 function getCurrentRouteName(): string {
 	function findFinalRoute(route: NavigationRoute): string {
 		if (route.hasOwnProperty('index') && route.hasOwnProperty('routes')) {
-			//$FlowFixMe nedaří se mi flow přesvědčit, že sem NavigationLeafRoute neprojde
 			const currentNavigation: NavigationRoute = route.routes[route.index];
 			return findFinalRoute(currentNavigation);
 		}
