@@ -7,7 +7,7 @@ type Props = {
 	visibleBottom: number;
 	keyboardHeightAndroid: number;
 	children: ReactNode;
-	ScrollComponent: ComponentType;
+	ScrollComponent: ComponentType<any>;
 	onHandleShouldScroll: (ref: any, position: number) => void;
 	scrollEventThrottle: number;
 };

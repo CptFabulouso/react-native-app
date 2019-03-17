@@ -3,7 +3,7 @@ import ScrollHelper from './ScrollHelper';
 import withKeyboardListener from './withKeyboardListener';
 
 export { KAVRenderProps } from './KeyboardAccessoryView';
-export { KeyboardListenerProps } from './withKeyboardListener';
+export { InjectedKeyboardListenerProps } from './withKeyboardListener';
 
 export { ScrollHelper, withKeyboardListener };
 

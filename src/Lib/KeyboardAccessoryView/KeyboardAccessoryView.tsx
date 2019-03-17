@@ -1,36 +1,34 @@
-// @flow
-
+import { ReactNode } from 'react';
 import React, { Component } from 'react';
-import { ComponentType, ReactNode } from 'react';
 
 import { StyleSheet, View } from 'react-native';
 import withKeyboardListener, {
-	KeyboardListenerProps,
+	InjectedKeyboardListenerProps,
 } from './withKeyboardListener';
 
-type Props = KeyboardListenerProps & {
-	bumperHeight: number,
-	visibleOpacity: number,
-	hiddenOpacity: number,
-	alwaysVisible: boolean,
-	hideBorder: boolean,
-	inSafeAreaView: boolean,
-	avoidKeyboard: boolean,
-	style?: any,
-	children?: (props: KAVRenderProps) => ReactNode,
-	renderKAV: () => ReactNode,
-	keyboardHeight: number,
-	isKeyboardVisible: boolean,
-	isSafeAreaSupported: boolean,
-};
+interface Props extends InjectedKeyboardListenerProps {
+	bumperHeight: number;
+	visibleOpacity: number;
+	hiddenOpacity: number;
+	alwaysVisible: boolean;
+	hideBorder: boolean;
+	inSafeAreaView: boolean;
+	avoidKeyboard: boolean;
+	style?: any;
+	children?: (props: KAVRenderProps) => ReactNode;
+	renderKAV: () => ReactNode;
+	keyboardHeight: number;
+	isKeyboardVisible: boolean;
+	isSafeAreaSupported: boolean;
+}
 
 export type KAVRenderProps = Props & State;
 
 type State = {
-	visibleAccessoryHeight: number,
-	accessoryBottom: number,
-	accessoryHeight: number,
-	visibleBottom: number,
+	visibleAccessoryHeight: number;
+	accessoryBottom: number;
+	accessoryHeight: number;
+	visibleBottom: number;
 };
 
 class KeyboardAccessoryView extends Component<Props, State> {
@@ -164,8 +162,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-const withListener: ComponentType<*> = withKeyboardListener(
-	KeyboardAccessoryView
-);
-
-export default withListener;
+export default withKeyboardListener(KeyboardAccessoryView);

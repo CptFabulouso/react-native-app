@@ -1,6 +1,3 @@
-// @flow
-
-import * as React from 'react';
 import {
 	Animated,
 	DeviceEventEmitter,
@@ -17,6 +14,7 @@ import {
 	initializeRegistryWithDefinitions,
 	registerAnimation,
 } from 'react-native-animatable';
+import React, { ReactNode } from 'react';
 
 import * as ANIMATION_DEFINITIONS from './animations';
 import { AlertController, ModalController } from './controllers';
@@ -26,11 +24,12 @@ import styles from './styles';
 initializeRegistryWithDefinitions(ANIMATION_DEFINITIONS);
 
 // Utility for creating custom animations
-const makeAnimation = (name, obj) => {
+const makeAnimation = (name: string, obj: AnimationDirections | Object) => {
+	// @ts-ignore //FIXME: obj
 	registerAnimation(name, createAnimation(obj));
 };
 
-const isObject = obj => {
+const isObject = (obj: any) => {
 	return obj !== null && typeof obj === 'object';
 };
 
@@ -47,50 +46,50 @@ type AnimationDirections =
 	| 'slideOutRight';
 
 type Props = {
-	disableAnimation: boolean,
-	animationIn: AnimationDirections | Object,
-	animationInTiming: number,
-	animationOut: AnimationDirections | Object,
-	animationOutTiming: number,
-	avoidKeyboard: boolean,
-	backdropColor: string,
-	backdropOpacity: number,
-	backdropTransitionInTiming: number,
-	backdropTransitionOutTiming: number,
-	children: React.Element<any>,
-	isVisible: boolean,
-	hideModalContentWhileAnimating: boolean,
-	onModalShow: () => void,
-	onModalHide: () => void,
-	onBackButtonPress: () => void,
-	onBackdropPress: () => void,
-	onSwipe?: () => void,
-	swipeThreshold: number,
-	swipeDirection?: 'up' | 'down' | 'left' | 'right',
-	useNativeDriver: boolean,
-	style?: any,
-	scrollTo: ({ y: number, animated: boolean }) => void,
-	scrollOffset: number,
-	scrollOffsetMax: number,
+	disableAnimation: boolean;
+	animationIn: AnimationDirections | Object;
+	animationInTiming: number;
+	animationOut: AnimationDirections | Object;
+	animationOutTiming: number;
+	avoidKeyboard: boolean;
+	backdropColor: string;
+	backdropOpacity: number;
+	backdropTransitionInTiming: number;
+	backdropTransitionOutTiming: number;
+	children: ReactNode;
+	isVisible: boolean;
+	hideModalContentWhileAnimating: boolean;
+	onModalShow: () => void;
+	onModalHide: () => void;
+	onBackButtonPress: () => void;
+	onBackdropPress: () => void;
+	onSwipe?: () => void;
+	swipeThreshold: number;
+	swipeDirection?: 'up' | 'down' | 'left' | 'right';
+	useNativeDriver: boolean;
+	style?: any;
+	scrollTo: ({ y, animated }: { y: number; animated: boolean }) => void;
+	scrollOffset: number;
+	scrollOffsetMax: number;
 	supportedOrientations: Array<
 		| 'portrait'
 		| 'portrait-upside-down'
 		| 'landscape'
 		| 'landscape-left'
 		| 'landscape-right'
-	>,
-	useRNModal: boolean,
+	>;
+	useRNModal: boolean;
 };
 
 type State = {
-	showContent: boolean,
-	isVisible: boolean,
-	deviceWidth: number,
-	deviceHeight: number,
-	isSwipeable: boolean,
+	showContent: boolean;
+	isVisible: boolean;
+	deviceWidth: number;
+	deviceHeight: number;
+	isSwipeable: boolean;
 };
 
-type GestureState = { dx: number, dy: number };
+type GestureState = { dx: number; dy: number };
 
 class Modal extends React.Component<Props, State> {
 	backdropRef: any;
@@ -138,7 +137,7 @@ class Modal extends React.Component<Props, State> {
 		isSwipeable: this.props.swipeDirection ? true : false,
 	};
 
-	transitionLock = null;
+	transitionLock: boolean | null = null;
 	inSwipeClosingState = false;
 
 	constructor(props: Props) {
@@ -213,7 +212,7 @@ class Modal extends React.Component<Props, State> {
 	}
 
 	buildPanResponder = () => {
-		let animEvt = null;
+		let animEvt: any = null;
 
 		if (
 			this.props.swipeDirection === 'right' ||
@@ -225,7 +224,7 @@ class Modal extends React.Component<Props, State> {
 		}
 
 		this.panResponder = PanResponder.create({
-			onMoveShouldSetPanResponder: (evt, gestureState: GestureState) => {
+			onMoveShouldSetPanResponder: (_, gestureState: GestureState) => {
 				return !(gestureState.dx === 0 && gestureState.dy === 0);
 			},
 			onStartShouldSetPanResponder: () => {
@@ -256,7 +255,7 @@ class Modal extends React.Component<Props, State> {
 					}
 				}
 			},
-			onPanResponderRelease: (evt, gestureState) => {
+			onPanResponderRelease: (_, gestureState) => {
 				// Call the onSwipe prop if the threshold has been exceeded
 				const accDistance = this.getAccDistancePerDirection(gestureState);
 				if (accDistance > this.props.swipeThreshold) {
@@ -490,7 +489,7 @@ class Modal extends React.Component<Props, State> {
 			</View>
 		);
 
-		let Wrapper;
+		let Wrapper: any;
 		let wrapperProps;
 		if (this.props.useRNModal) {
 			Wrapper = RNModal;
@@ -530,7 +529,7 @@ class Modal extends React.Component<Props, State> {
 
 				{avoidKeyboard && (
 					<KeyboardAvoidingView
-						behavior={Platform.OS === 'ios' ? 'padding' : null}
+						behavior={Platform.OS === 'ios' ? 'padding' : undefined}
 						pointerEvents="box-none"
 						style={computedStyle.concat([{ margin: 0 }])}
 					>

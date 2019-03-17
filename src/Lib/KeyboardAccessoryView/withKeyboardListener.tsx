@@ -1,7 +1,13 @@
+import { ComponentType } from 'react';
+import {
+	Dimensions,
+	Keyboard,
+	KeyboardEvent,
+	LayoutAnimation,
+	Platform,
+} from 'react-native';
+import { Subtract } from 'utility-types';
 import React, { Component } from 'react';
-import { ComponentType, ElementConfig } from 'react';
-
-import { Dimensions, Keyboard, LayoutAnimation, Platform } from 'react-native';
 
 type EasingOption =
 	| 'easeIn'
@@ -14,30 +20,28 @@ type AnimationConfig =
 	| Object
 	| ((duration: number, easing: EasingOption) => void);
 
-type OwnProps = {
-	animateOn: 'ios' | 'android' | 'all' | 'none',
-	androidAdjustResize: boolean,
-	onKeyboardShowDelay?: number | boolean,
-	animationConfig?: AnimationConfig,
-};
+interface OwnProps {
+	animateOn?: 'ios' | 'android' | 'all' | 'none';
+	androidAdjustResize?: boolean;
+	onKeyboardShowDelay?: number | boolean;
+	animationConfig?: AnimationConfig;
+}
 
-type OwnState = {
-	visibleHeight: number,
-	keyboardHeight: number,
-	keyboardHeightAndroid: number,
-	isKeyboardVisible: boolean,
-};
+interface OwnState {
+	visibleHeight: number;
+	keyboardHeight: number;
+	keyboardHeightAndroid: number;
+	isKeyboardVisible: boolean;
+}
 
-type InjectedProps = OwnState & {
-	isSafeAreaSupported: boolean,
-};
-
-export type KeyboardListenerProps = OwnProps & InjectedProps
+export interface InjectedKeyboardListenerProps extends OwnState {
+	isSafeAreaSupported: boolean;
+}
 
 const accessoryAnimation = (
 	duration: number,
 	easing: EasingOption,
-	animationConfig: ?AnimationConfig = null
+	animationConfig: AnimationConfig | null = null
 ): any => {
 	if (animationConfig) {
 		if (typeof animationConfig === 'function') {
@@ -74,35 +78,27 @@ const screenHeight = width < height ? height : width;
 const isSafeAreaSupported =
 	Platform.OS === 'ios' && (screenWidth > 800 || screenHeight > 800);
 
-export default function withKeyboardListener<PassedProps: any>(
-	WrappedComponent: ComponentType<PassedProps>
-): ComponentType<
-	ElementConfig<ComponentType<$Diff<PassedProps, KeyboardListenerProps>>>
-> {
+export default function withKeyboardListener<
+P extends InjectedKeyboardListenerProps
+>(WrappedComponent: ComponentType<P>) {
 	return class Wrapper extends Component<
-		$Diff<PassedProps, OwnProps>,
+		Subtract<P, InjectedKeyboardListenerProps> & OwnProps,
 		OwnState
-	> {
+		> {
 		static defaultProps = {
 			animateOn: 'ios',
 			androidAdjustResize: true,
 		};
 
-		handleKeyboardShow: any;
-		handleKeyboardHide: any;
+		state = {
+			visibleHeight: screenHeight,
+			keyboardHeight: 0,
+			keyboardHeightAndroid: 0,
+			isKeyboardVisible: false,
+		};
+
 		keyboardShowEventListener: any;
 		keyboardHideEventListener: any;
-
-		constructor(props: PassedProps) {
-			super(props);
-
-			this.state = {
-				visibleHeight: screenHeight,
-				keyboardHeight: 0,
-				keyboardHeightAndroid: 0,
-				isKeyboardVisible: false,
-			};
-		}
 
 		componentDidMount() {
 			const keyboardShowEvent =
@@ -125,7 +121,7 @@ export default function withKeyboardListener<PassedProps: any>(
 			this.keyboardHideEventListener.remove();
 		}
 
-		handleKeyboardShow = (keyboardEvent: any) => {
+		handleKeyboardShow = (keyboardEvent: KeyboardEvent) => {
 			if (!keyboardEvent.endCoordinates) {
 				return;
 			}
@@ -179,7 +175,7 @@ export default function withKeyboardListener<PassedProps: any>(
 			});
 		};
 
-		handleKeyboardHide = (keyboardEvent: any) => {
+		handleKeyboardHide = (keyboardEvent: KeyboardEvent) => {
 			const { animateOn, animationConfig } = this.props;
 
 			if (animateOn === 'all' || Platform.OS === animateOn) {
@@ -200,9 +196,17 @@ export default function withKeyboardListener<PassedProps: any>(
 		};
 
 		render() {
+			const {
+				animateOn,
+				androidAdjustResize,
+				onKeyboardShowDelay,
+				animationConfig,
+				...props
+			} = this.props;
+
 			return (
 				<WrappedComponent
-					{...this.props}
+					{...props as P}
 					{...this.state}
 					isSafeAreaSupported={isSafeAreaSupported}
 				/>

@@ -1,7 +1,6 @@
-// @flow
 const setupModalController = () => {
-	let lastlyClosed = null;
-	let isOpened = false;
+	let lastlyClosed: number | null = null;
+	let isOpened: boolean = false;
 
 	return {
 		setClosedTime(time: number) {
@@ -20,7 +19,7 @@ const setupModalController = () => {
 };
 
 const setupAlertController = () => {
-	let shown = false;
+	let shown: boolean = false;
 
 	return {
 		setShown(val: boolean) {

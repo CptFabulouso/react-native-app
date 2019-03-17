@@ -1,10 +1,14 @@
-// @flow
-
 import { Dimensions } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
-const makeSlideTranslation = (translationType, fromValue, toValue) => {
+type TranslationType = 'translateX' | 'translateY';
+
+const makeSlideTranslation = (
+	translationType: TranslationType,
+	fromValue: number,
+	toValue: number
+) => {
 	return {
 		from: {
 			[translationType]: fromValue,
