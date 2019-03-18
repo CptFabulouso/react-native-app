@@ -13,17 +13,16 @@ export type LoginFormValues = {
 	password: string;
 };
 
-type Props = FormikProps<LoginFormValues>;
-
-type SubmitProps = {
+interface SubmitProps {
 	onSubmit: (
-		email: string,
-		password: string,
+		values: LoginFormValues,
 		formActions: FormikActions<LoginFormValues>
 	) => void;
-};
+}
 
-const formConfig: FormConfig = {
+type Props = FormikProps<LoginFormValues> & SubmitProps;
+
+const formConfig: FormConfig<LoginFormValues> = {
 	fields: [
 		{ ...Form.Presets.email /* , defaultValue: 'pavelgric@gmail.com'  */ },
 		{ ...Form.Presets.password /* , defaultValue: 'password' */ },
@@ -57,7 +56,7 @@ export const LoginFormFormik = withFormikFromConfig(formConfig, {
 		values: LoginFormValues,
 		{ props, ...formActions }: FormikBag<SubmitProps, LoginFormValues>
 	) => {
-		props.onSubmit(values.email, values.password, formActions);
+		props.onSubmit(values, formActions);
 	},
 	// isInitialValid: true,
 })(LogInForm);

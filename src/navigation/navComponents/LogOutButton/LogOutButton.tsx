@@ -1,9 +1,9 @@
+import { Dispatch, bindActionCreators } from 'redux';
 import { Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import React, { Component, ComponentType } from 'react';
 
 import { Alert } from 'src/components';
-import { Dispatch } from 'src/types';
 import { logOut } from '@actions';
 import i18n from 'src/i18n';
 import styles from './styles';
@@ -52,11 +52,8 @@ class LogOutButton extends Component<Props> {
 	}
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-	return {
-		logOut: () => dispatch(logOut()),
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators({ logOut }, dispatch);
 
 const connected: ComponentType<{}> = connect(
 	null,

@@ -1,30 +1,16 @@
-import { FormikActions } from 'formik';
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { LoginFormFormik, LoginFormValues } from 'src/components/Forms';
+import { LoginFormFormik } from 'src/components/Forms';
 
-import { Dispatch } from 'src/types';
 import { loginWithEmailAndPassword } from '@actions';
 
 type DispatchProps = {
-	onSubmit: (
-		email: string,
-		password: string,
-		formActions: FormikActions<LoginFormValues>
-	) => void;
+	onSubmit: typeof loginWithEmailAndPassword;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-	return {
-		onSubmit: (
-			email: string,
-			password: string,
-			formActions: FormikActions<LoginFormValues>
-		) => {
-			dispatch(loginWithEmailAndPassword(email, password, formActions));
-		},
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators({ onSubmit: loginWithEmailAndPassword }, dispatch);
 
 export default connect(
 	null,

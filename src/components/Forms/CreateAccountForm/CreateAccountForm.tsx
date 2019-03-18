@@ -17,13 +17,12 @@ type Props = FormikProps<CreateAccountFormValues>;
 
 type SubmitProps = {
 	onSubmit: (
-		email: string,
-		password: string,
+		values: CreateAccountFormValues,
 		formActions: FormikActions<CreateAccountFormValues>
 	) => void;
 };
 
-const formConfig: FormConfig = {
+const formConfig: FormConfig<CreateAccountFormValues> = {
 	fields: [Form.Presets.email, Form.Presets.password],
 };
 
@@ -54,6 +53,6 @@ export const CreateAccountFormFormik = withFormikFromConfig(formConfig, {
 		values: CreateAccountFormValues,
 		{ props, ...formActions }: FormikBag<SubmitProps, CreateAccountFormValues>
 	) => {
-		props.onSubmit(values.email, values.password, formActions);
+		props.onSubmit(values, formActions);
 	},
 })(CreateAccountForm);

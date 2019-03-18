@@ -18,15 +18,15 @@ export type ChangePasswordFormValues = {
 type Props = FormikProps<ChangePasswordFormValues>;
 
 type SubmitProps = {
+	email: string;
+	token: string;
 	onSubmit: (
-		email: string,
-		password: string,
-		token: string,
+		values: ChangePasswordFormValues,
 		formActions: FormikActions<ChangePasswordFormValues>
 	) => void;
 };
 
-const formConfig: FormConfig = {
+const formConfig: FormConfig<ChangePasswordFormValues> = {
 	fields: [
 		{
 			name: 'token',
@@ -76,6 +76,6 @@ export const ChangePasswordFormFormik = withFormikFromConfig(formConfig, {
 		values: ChangePasswordFormValues,
 		{ props, ...formActions }: FormikBag<SubmitProps, ChangePasswordFormValues>
 	) => {
-		props.onSubmit(values.email, values.password, values.token, formActions);
+		props.onSubmit(values, formActions);
 	},
 })(ChangePasswordForm);

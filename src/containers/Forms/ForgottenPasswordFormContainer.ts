@@ -1,30 +1,20 @@
-import { FormikActions } from 'formik';
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Dispatch } from 'src/types';
-import {
-	ForgottenPasswordFormFormik,
-	ForgottenPasswordFormValues,
-} from 'src/components/Forms';
+import { ForgottenPasswordFormFormik } from 'src/components/Forms';
 import { sendResetPasswordCode } from '@actions';
 
 type DispatchProps = {
-	onSubmit: (
-		email: string,
-		formActions: FormikActions<ForgottenPasswordFormValues>
-	) => void;
+	onSubmit: typeof sendResetPasswordCode;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-	return {
-		onSubmit: (
-			email: string,
-			formActions: FormikActions<ForgottenPasswordFormValues>
-		) => {
-			dispatch(sendResetPasswordCode(email, formActions));
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators(
+		{
+			onSubmit: sendResetPasswordCode,
 		},
-	};
-};
+		dispatch
+	);
 
 export default connect(
 	null,

@@ -1,9 +1,9 @@
+import { Dispatch, bindActionCreators } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import React, { ComponentType, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { Alert, Button, LoadingCard, Modal } from 'src/components';
-import { Dispatch } from 'src/types';
 import { hideOverallModal, showOverallModal } from '@actions';
 import NavigationActions from 'src/navigation/NavigationActions';
 
@@ -125,20 +125,13 @@ class PGModal extends React.Component<Props, State> {
 	}
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-	return {
-		showOverallModal: (Component: ReactNode) =>
-			dispatch(showOverallModal(Component)),
-		hideOverallModal: () => dispatch(hideOverallModal()),
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators({ showOverallModal, hideOverallModal }, dispatch);
 
-const connected: ComponentType<{}> = connect(
+export default connect(
 	null,
 	mapDispatchToProps
 )(PGModal);
-
-export default connected;
 
 const styles = StyleSheet.create({
 	container: {

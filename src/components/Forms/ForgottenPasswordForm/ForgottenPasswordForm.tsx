@@ -16,12 +16,12 @@ type Props = FormikProps<ForgottenPasswordFormValues>;
 
 type SubmitProps = {
 	onSubmit: (
-		email: string,
+		values: ForgottenPasswordFormValues,
 		formActions: FormikActions<ForgottenPasswordFormValues>
 	) => void;
 };
 
-const formConfig: FormConfig = {
+const formConfig: FormConfig<ForgottenPasswordFormValues> = {
 	fields: [Form.Presets.email],
 };
 
@@ -55,6 +55,6 @@ export const ForgottenPasswordFormFormik = withFormikFromConfig(formConfig, {
 			...formActions
 		}: FormikBag<SubmitProps, ForgottenPasswordFormValues>
 	) => {
-		props.onSubmit(values.email, formActions);
+		props.onSubmit(values, formActions);
 	},
 })(ForgottenPasswordForm);

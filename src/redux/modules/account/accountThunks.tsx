@@ -19,8 +19,7 @@ import {
 import i18n from 'src/i18n';
 
 export const loginWithEmailAndPassword = (
-	email: string,
-	password: string,
+	{ email, password }: LoginFormValues,
 	formActions: FormikActions<LoginFormValues>
 ): ActionCreator => async dispatch => {
 	dispatch(
@@ -47,7 +46,7 @@ export const loginWithEmailAndPassword = (
 };
 
 export const sendResetPasswordCode = (
-	email: string,
+	{ email }: ForgottenPasswordFormValues,
 	formActions: FormikActions<ForgottenPasswordFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
@@ -64,9 +63,7 @@ export const sendResetPasswordCode = (
 };
 
 export const changePassword = (
-	email: string,
-	password: string,
-	token: string,
+	{ email, password, token }: ChangePasswordFormValues,
 	formActions: FormikActions<ChangePasswordFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);
@@ -136,8 +133,7 @@ export const logOut = (): ActionCreator => async dispatch => {
 };
 
 export const createAccountWithEmailAndPassword = (
-	email: string,
-	password: string,
+	{ email, password }: CreateAccountFormValues,
 	formActions: FormikActions<CreateAccountFormValues>
 ): ActionCreator => async dispatch => {
 	formActions.setSubmitting(true);

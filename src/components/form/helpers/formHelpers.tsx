@@ -1,7 +1,13 @@
 // FIXME: fix types with <any>
 
 import * as yup from 'yup';
-import { Field, FormikProps, WithFormikConfig, withFormik } from 'formik';
+import {
+	Field,
+	FormikProps,
+	FormikValues,
+	WithFormikConfig,
+	withFormik,
+} from 'formik';
 import { TextInput } from 'react-native';
 import React from 'react';
 
@@ -11,8 +17,8 @@ import {
 	Style,
 } from 'src/types';
 
-export type ConfigField = {
-	name: string;
+export type ConfigField<V> = {
+	name: keyof V;
 	validate: yup.StringSchema; //
 	disabled?: boolean;
 	hidden?: boolean;
@@ -35,12 +41,12 @@ export type ConfigField = {
 	};
 };
 
-export type FormConfig = {
-	fields: Array<ConfigField>;
+export type FormConfig<V> = {
+	fields: Array<ConfigField<V>>;
 	style?: Style;
 };
 
-function extractOnlyFormikProps(formikProps: FormikProps<any>) {
+function extractOnlyFormikProps<P>(formikProps: FormikProps<P>) {
 	return {
 		isValid: formikProps.isValid,
 		isSubmitting: formikProps.isSubmitting,
@@ -48,13 +54,13 @@ function extractOnlyFormikProps(formikProps: FormikProps<any>) {
 	};
 }
 
-export function getInputsFromConfig(
-	formikProps: FormikProps<any>,
-	config: FormConfig
+export function getInputsFromConfig<P, V extends FormikValues>(
+	formikProps: FormikProps<P>,
+	config: FormConfig<V>
 ) {
 	const refs: any = {};
 
-	const focusNextInputOrSubmit = (nextField: ConfigField | null) => (
+	const focusNextInputOrSubmit = (nextField: ConfigField<V> | null) => (
 		ev: any
 	) => {
 		if (nextField) {
@@ -104,7 +110,9 @@ export function getInputsFromConfig(
 	);
 }
 
-export function getValidationSchema(config: FormConfig) {
+export function getValidationSchema<V extends FormikValues>(
+	config: FormConfig<V>
+) {
 	const shape = {} as { [key: string]: yup.StringSchema };
 	for (const k in config.fields) {
 		if (config.fields.hasOwnProperty(k)) {
@@ -115,8 +123,10 @@ export function getValidationSchema(config: FormConfig) {
 	return yup.object().shape(shape);
 }
 
-export function getValuesSchema(config: FormConfig) {
-	const values = {} as { [key: string]: string };
+export function getDefaultValues<V extends FormikValues>(
+	config: FormConfig<V>
+): V {
+	const values = {} as V;
 	for (const k in config.fields) {
 		if (config.fields.hasOwnProperty(k)) {
 			values[k] = config.fields[k].defaultValue || '';
@@ -125,15 +135,26 @@ export function getValuesSchema(config: FormConfig) {
 	return values;
 }
 
-export function withFormikFromConfig(
-	formConfig: FormConfig,
-	formikConfig: WithFormikConfig<any, any>
+export function withFormikFromConfig<P, V extends FormikValues>(
+	formConfig: FormConfig<V>,
+	formikConfig: WithFormikConfig<P, V>
 ) {
 	return function(Component: any) {
 		return withFormik({
-			mapPropsToValues: () => getValuesSchema(formConfig),
+			mapPropsToValues: () => getDefaultValues(formConfig),
 			validationSchema: getValidationSchema(formConfig),
 			...formikConfig,
 		})(Component);
+	};
+}
+
+export function configToWithFormik<P, V extends FormikValues>(
+	formConfig: FormConfig<V>,
+	otherFormikConfig: WithFormikConfig<P, V>
+): WithFormikConfig<P, V> {
+	return {
+		mapPropsToValues: () => getDefaultValues(formConfig),
+		validationSchema: getValidationSchema(formConfig),
+		...otherFormikConfig,
 	};
 }

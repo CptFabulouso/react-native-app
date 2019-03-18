@@ -18,6 +18,7 @@ export * from './UI/SafeAreaView/SafeAreaView';
 export * from './UI/Space/Space';
 export * from './UI/HorizontalLine/HorizontalLine';
 export * from './UI/TextInput/TextInput';
+export * from './UI/OverallModal/OverallModal';
 
 /* Form */
 export * from './Form/Fields/FloatingLabelTextInput/FloatingLabelTextInput';

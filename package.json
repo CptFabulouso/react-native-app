@@ -40,6 +40,7 @@
     "@babel/core": "^7.4.0",
     "@babel/runtime": "^7.4.2",
     "@react-native-community/eslint-config": "^0.0.3",
+    "utility-types": "^3.4.1",
     "@types/enzyme": "^3.9.0",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/i18n-js": "^3.0.1",

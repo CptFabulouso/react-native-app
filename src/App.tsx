@@ -8,7 +8,7 @@ import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
 import { persistor, store } from 'src/redux/store';
 // import { runStartupActions } from '@actions';
-// import DevMenuTrigger from 'src/lib/DevMenuTrigger';
+import DevMenuTrigger from 'src/lib/DevMenuTrigger';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 
 type Props = {};
@@ -27,32 +27,18 @@ export default class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={store}>
-				<OverallModal />
-				<PersistGate
-					onBeforeLift={this.loadAppAsync}
-					loading={null}
-					persistor={persistor}
-				>
-					<NavigationRouter />
-				</PersistGate>
-				<StatusBar backgroundColor={Colors.statusBar} />
+				<DevMenuTrigger style={{ flex: 1 }} persistor={persistor}>
+					<OverallModal />
+					<PersistGate
+						onBeforeLift={this.loadAppAsync}
+						loading={null}
+						persistor={persistor}
+					>
+						<NavigationRouter />
+					</PersistGate>
+					<StatusBar backgroundColor={Colors.statusBar} />
+				</DevMenuTrigger>
 			</Provider>
 		);
-
-		// return (
-		// 	<Provider store={store}>
-		// 		<DevMenuTrigger style={{ flex: 1 }} persistor={persistor}>
-		// 			<OverallModal />
-		// 			<PersistGate
-		// 				onBeforeLift={this.loadAppAsync}
-		// 				loading={null}
-		// 				persistor={persistor}
-		// 			>
-		// 				<NavigationRouter />
-		// 			</PersistGate>
-		// 			<StatusBar backgroundColor={Colors.statusBar} />
-		// 		</DevMenuTrigger>
-		// 	</Provider>
-		// );
 	}
 }
