@@ -21,7 +21,6 @@ export {
 
 // project exports
 export * from 'src/utils/api/apiTypes';
-export { FormConfig } from 'src/components/Form/helpers/formHelpers';
 export { SupportedLanguage } from '../i18n/I18n';
 
 /* React */

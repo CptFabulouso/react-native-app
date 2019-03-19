@@ -1,10 +1,14 @@
-import { FormikActions, FormikBag, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import { Form } from '../../Form/Form';
-import { FormConfig } from 'src/types';
-import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
+import {
+	FormConfig,
+	FormFormikBag,
+	FormPresets,
+	FormikFieldsFromConfig,
+	withFormikFromConfig,
+} from 'src/Lib/FormikHelper';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -14,15 +18,8 @@ export type ForgottenPasswordFormValues = {
 
 type Props = FormikProps<ForgottenPasswordFormValues>;
 
-type SubmitProps = {
-	onSubmit: (
-		values: ForgottenPasswordFormValues,
-		formActions: FormikActions<ForgottenPasswordFormValues>
-	) => void;
-};
-
 const formConfig: FormConfig<ForgottenPasswordFormValues> = {
-	fields: [Form.Presets.email],
+	fields: [FormPresets.email],
 };
 
 class ForgottenPasswordForm extends Component<Props> {
@@ -30,7 +27,7 @@ class ForgottenPasswordForm extends Component<Props> {
 		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
 			<React.Fragment>
-				{Form.getInputsFromConfig(this.props, formConfig)}
+				<FormikFieldsFromConfig config={formConfig} formikProps={this.props} />
 				<Button
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
@@ -50,10 +47,7 @@ export default ForgottenPasswordForm;
 export const ForgottenPasswordFormFormik = withFormikFromConfig(formConfig, {
 	handleSubmit: (
 		values: ForgottenPasswordFormValues,
-		{
-			props,
-			...formActions
-		}: FormikBag<SubmitProps, ForgottenPasswordFormValues>
+		{ props, ...formActions }: FormFormikBag<ForgottenPasswordFormValues>
 	) => {
 		props.onSubmit(values, formActions);
 	},

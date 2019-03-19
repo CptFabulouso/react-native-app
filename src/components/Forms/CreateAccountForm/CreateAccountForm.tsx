@@ -1,10 +1,14 @@
-import { FormikActions, FormikBag, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import { Form } from '../../Form/Form';
-import { FormConfig } from 'src/types';
-import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
+import {
+	FormConfig,
+	FormFormikBag,
+	FormPresets,
+	FormikFieldsFromConfig,
+	withFormikFromConfig,
+} from 'src/Lib/FormikHelper';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -15,15 +19,8 @@ export type CreateAccountFormValues = {
 
 type Props = FormikProps<CreateAccountFormValues>;
 
-type SubmitProps = {
-	onSubmit: (
-		values: CreateAccountFormValues,
-		formActions: FormikActions<CreateAccountFormValues>
-	) => void;
-};
-
 const formConfig: FormConfig<CreateAccountFormValues> = {
-	fields: [Form.Presets.email, Form.Presets.password],
+	fields: [FormPresets.email, FormPresets.password],
 };
 
 class CreateAccountForm extends Component<Props> {
@@ -31,7 +28,7 @@ class CreateAccountForm extends Component<Props> {
 		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
 			<React.Fragment>
-				{Form.getInputsFromConfig(this.props, formConfig)}
+				<FormikFieldsFromConfig config={formConfig} formikProps={this.props} />
 				<Button
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
@@ -51,7 +48,7 @@ export default CreateAccountForm;
 export const CreateAccountFormFormik = withFormikFromConfig(formConfig, {
 	handleSubmit: (
 		values: CreateAccountFormValues,
-		{ props, ...formActions }: FormikBag<SubmitProps, CreateAccountFormValues>
+		{ props, ...formActions }: FormFormikBag<CreateAccountFormValues>
 	) => {
 		props.onSubmit(values, formActions);
 	},

@@ -1,9 +1,10 @@
 import * as yup from 'yup';
-import { ConfigField } from './formHelpers';
+import { FloatingLabelTextInputType } from './FormikHelperTypes';
 
 import i18n from 'src/i18n';
 
-const password: ConfigField = {
+const password: FloatingLabelTextInputType<{ password: string }> = {
+	type: 'floatLabelTextInput',
 	name: 'password',
 	validate: yup
 		.string()
@@ -16,7 +17,8 @@ const password: ConfigField = {
 	},
 };
 
-const email: ConfigField = {
+const email: FloatingLabelTextInputType<{ email: string }> = {
+	type: 'floatLabelTextInput',
 	name: 'email',
 	validate: yup
 		.string()

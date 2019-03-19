@@ -1,10 +1,15 @@
-import { FormikActions, FormikBag, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import { Form } from '../../Form/Form';
-import { FormConfig } from 'src/types';
-import { withFormikFromConfig } from '../../Form/helpers/formHelpers';
+import {
+	FormConfig,
+	FormFormikBag,
+	FormPresets,
+	FormSubmitProps,
+	FormikFieldsFromConfig,
+	withFormikFromConfig,
+} from 'src/Lib/FormikHelper';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -13,19 +18,12 @@ export type LoginFormValues = {
 	password: string;
 };
 
-interface SubmitProps {
-	onSubmit: (
-		values: LoginFormValues,
-		formActions: FormikActions<LoginFormValues>
-	) => void;
-}
-
-type Props = FormikProps<LoginFormValues> & SubmitProps;
+type Props = FormikProps<LoginFormValues> & FormSubmitProps<LoginFormValues>;
 
 const formConfig: FormConfig<LoginFormValues> = {
 	fields: [
-		{ ...Form.Presets.email /* , defaultValue: 'pavelgric@gmail.com'  */ },
-		{ ...Form.Presets.password /* , defaultValue: 'password' */ },
+		{ ...FormPresets.email /* , defaultValue: 'pavelgric@gmail.com'  */ },
+		{ ...FormPresets.password /* , defaultValue: 'password' */ },
 	],
 };
 
@@ -34,7 +32,7 @@ class LogInForm extends Component<Props> {
 		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
 			<React.Fragment>
-				{Form.getInputsFromConfig(this.props, formConfig)}
+				<FormikFieldsFromConfig config={formConfig} formikProps={this.props} />
 				<Button
 					loading={isSubmitting}
 					disabled={!isValid || isSubmitting}
@@ -54,7 +52,7 @@ export default LogInForm;
 export const LoginFormFormik = withFormikFromConfig(formConfig, {
 	handleSubmit: (
 		values: LoginFormValues,
-		{ props, ...formActions }: FormikBag<SubmitProps, LoginFormValues>
+		{ props, ...formActions }: FormFormikBag<LoginFormValues>
 	) => {
 		props.onSubmit(values, formActions);
 	},
