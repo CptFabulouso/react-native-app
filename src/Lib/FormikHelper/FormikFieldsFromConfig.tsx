@@ -14,8 +14,8 @@ type Props<T> = {
 function getNextField<V extends FormikValues>(
 	config: FormConfig<V>,
 	index: number
-): ConfigField<V> | null {
-	let nextField: ConfigField<V> | null = null;
+): ConfigField<keyof V> | null {
+	let nextField: ConfigField<keyof V> | null = null;
 	if (config.fields.length !== index - 1) {
 		nextField = config.fields[index + 1];
 	}
@@ -25,7 +25,7 @@ function getNextField<V extends FormikValues>(
 // combine global style with field style
 function getStyle<V extends FormikValues>(
 	formConfig: FormConfig<V>,
-	fieldConfig: ConfigField<V>
+	fieldConfig: ConfigField<keyof V>
 ) {
 	if (fieldConfig.type === 'hidden') {
 		return;
@@ -38,7 +38,7 @@ function getStyle<V extends FormikValues>(
 }
 
 function getIsEditable<V extends FormikValues>(
-	fieldConfig: ConfigField<V>
+	fieldConfig: ConfigField<keyof V>
 ): boolean | undefined {
 	/*
 		used disabled prop in fieldConfig,
@@ -66,7 +66,7 @@ function FormikFieldsFromConfig<V extends FormikValues>({
 
 	const { formikProps, config } = props;
 
-	const focusNextInputOrSubmit = (nextField: ConfigField<V> | null) => (
+	const focusNextInputOrSubmit = (nextField: ConfigField<keyof V> | null) => (
 		ev: any
 	) => {
 		if (nextField) {
@@ -93,7 +93,10 @@ function FormikFieldsFromConfig<V extends FormikValues>({
 				let onSubmitEditing = undefined;
 				let returnKeyType = undefined;
 				if (autoFocusNextInputs) {
-					const nextField: ConfigField<V> | null = getNextField(config, index);
+					const nextField: ConfigField<keyof V> | null = getNextField(
+						config,
+						index
+					);
 					blurOnSubmit = nextField ? false : true;
 					onSubmitEditing = autoFocusNextInputs
 						? focusNextInputOrSubmit(nextField)

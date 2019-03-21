@@ -3,7 +3,7 @@ import { FloatingLabelTextInputType } from './FormikHelperTypes';
 
 import i18n from 'src/i18n';
 
-const password: FloatingLabelTextInputType<{ password: string }> = {
+const password: FloatingLabelTextInputType<'password'> = {
 	type: 'floatLabelTextInput',
 	name: 'password',
 	validate: yup
@@ -17,7 +17,7 @@ const password: FloatingLabelTextInputType<{ password: string }> = {
 	},
 };
 
-const email: FloatingLabelTextInputType<{ email: string }> = {
+const email: FloatingLabelTextInputType<'email'> = {
 	type: 'floatLabelTextInput',
 	name: 'email',
 	validate: yup

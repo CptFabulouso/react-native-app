@@ -12,22 +12,22 @@ export type FormFormikBag<Values extends FormikValues> = FormikBag<
 	Values
 >;
 
-export type FormConfig<V> = {
-	fields: Array<ConfigField<V>>;
+export type FormConfig<V extends FormikValues> = {
+	fields: Array<ConfigField<keyof V>>;
 	style?: any;
 };
 
 type FieldType = 'floatLabelTextInput' | 'textInput' | 'hidden';
 
-type CommonFieldValues<V> = {
-	name: string;
+type CommonFieldValues<K> = {
+	name: K;
 	validate: yup.StringSchema;
 	component?: any;
 	defaultValue?: string;
 	disabled?: boolean;
 };
 
-type CreateFieldType<V, TYPE extends FieldType> = CommonFieldValues<V> & {
+type CreateFieldType<K, TYPE extends FieldType> = CommonFieldValues<K> & {
 	type: TYPE;
 	componentProps: TextInputProps & {
 		label?: string;
@@ -37,18 +37,18 @@ type CreateFieldType<V, TYPE extends FieldType> = CommonFieldValues<V> & {
 	};
 };
 
-type HiddenType<V> = {
+type HiddenType<K> = {
 	type: 'hidden';
-	name: keyof V;
+	name: K;
 };
 
-export type FloatingLabelTextInputType<V> = CreateFieldType<
-	V,
+export type FloatingLabelTextInputType<K> = CreateFieldType<
+	K,
 	'floatLabelTextInput'
 >;
-export type SimpleTextInputType<V> = CreateFieldType<V, 'textInput'>;
+export type SimpleTextInputType<K> = CreateFieldType<K, 'textInput'>;
 
-export type ConfigField<V extends FormikValues> =
-	| FloatingLabelTextInputType<V>
-	| SimpleTextInputType<V>
-	| HiddenType<V>;
+export type ConfigField<K> =
+	| FloatingLabelTextInputType<K>
+	| SimpleTextInputType<K>
+	| HiddenType<K>;
