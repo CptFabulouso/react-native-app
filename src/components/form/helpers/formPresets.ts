@@ -1,9 +1,9 @@
 import * as yup from 'yup';
-import { FloatingLabelTextInputType } from './FormikHelperTypes';
+import { FormConfigField } from 'src/Lib/DynamicForm';
 
 import i18n from 'src/i18n';
 
-const password: FloatingLabelTextInputType<'password'> = {
+const password: FormConfigField<'password'> = {
 	type: 'floatLabelTextInput',
 	name: 'password',
 	validate: yup
@@ -17,7 +17,7 @@ const password: FloatingLabelTextInputType<'password'> = {
 	},
 };
 
-const email: FloatingLabelTextInputType<'email'> = {
+const email: FormConfigField<'email'> = {
 	type: 'floatLabelTextInput',
 	name: 'email',
 	validate: yup

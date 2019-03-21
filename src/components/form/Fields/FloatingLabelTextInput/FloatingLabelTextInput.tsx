@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { Style } from 'src/types';
 import { Text } from '../../../UI/Text/Text';
 import { TextInput } from '../../../UI/TextInput/TextInput';
-import formikToTextInput from '../../helpers/formikToTextInput';
+// import formikToTextInput from '../../helpers/formikToTextInput';
 import styles, { TITLE_WIDTH } from './styles';
 
 type Props = TextInputProps & {
@@ -155,6 +155,6 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	}
 }
 
-const FloatingLabelTextInputFormik = formikToTextInput(FloatingLabelTextInput);
+// const FloatingLabelTextInputFormik = formikToTextInput(FloatingLabelTextInput);
 
-export { FloatingLabelTextInput, FloatingLabelTextInputFormik };
+export { FloatingLabelTextInput /* , FloatingLabelTextInputFormik */ };

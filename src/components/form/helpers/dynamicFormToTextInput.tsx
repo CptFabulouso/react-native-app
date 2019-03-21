@@ -1,28 +1,18 @@
-import { FormikProps } from 'formik';
+import { CustomFieldProps } from 'src/Lib/DynamicForm';
 import { Subtract } from 'utility-types';
 import { TextInputProps } from 'react-native';
 import React, { Component, ComponentType } from 'react';
-
-//TODO: how to use FieldProps type from Formik?
-export interface FieldProps<V = any> {
-	field?: {
-		onChange: (name: string) => (val: string) => void;
-		onBlur: (name: string) => (e: any) => void;
-		value: any;
-		name: string;
-	};
-	form?: FormikProps<V>;
-}
 
 export default function formikToTextInput<P extends TextInputProps>(
 	WrappedComponent: ComponentType<P>
 ) {
 	return class Wrapper extends Component<
-		Subtract<P, TextInputProps> & FieldProps & TextInputProps
+		Subtract<P, TextInputProps> & CustomFieldProps & TextInputProps
 		> {
 		render() {
-			const { field, form, ...props } = this.props;
-			if (!field || !form) {
+			const { field, form, dynamic, ...props } = this.props;
+
+			if (!field || !form || !dynamic) {
 				return;
 			}
 			const handleBlur = props.onBlur
@@ -48,6 +38,12 @@ export default function formikToTextInput<P extends TextInputProps>(
 					onChangeText={handleTextChange}
 					error={form.errors[field.name]}
 					touched={form.touched[field.name]}
+					//
+					style={dynamic.style}
+					editable={dynamic.editable}
+					blurOnSubmit={dynamic.blurOnSubmit}
+					onSubmitEditing={dynamic.onSubmitEditing}
+					returnKeyType={dynamic.isLast ? 'done' : 'next'}
 				/>
 			);
 		}

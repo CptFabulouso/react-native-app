@@ -1,14 +1,8 @@
-import { FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import {
-	FormConfig,
-	FormFormikBag,
-	FormPresets,
-	FormikFieldsFromConfig,
-	withFormikFromConfig,
-} from 'src/Lib/FormikHelper';
+import { CustomFormConfig, DynamicForm, FormPresets } from '../../Form/Form';
+import { FormSubmitProps } from 'src/Lib/DynamicForm';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -18,9 +12,9 @@ export type ChangePasswordFormValues = {
 	password: string;
 };
 
-type Props = FormikProps<ChangePasswordFormValues>;
+type Props = FormSubmitProps<ChangePasswordFormValues>;
 
-const formConfig: FormConfig<ChangePasswordFormValues> = {
+const formConfig: CustomFormConfig<ChangePasswordFormValues> = {
 	fields: [
 		{
 			type: 'hidden',
@@ -35,38 +29,30 @@ const formConfig: FormConfig<ChangePasswordFormValues> = {
 	],
 };
 
+class Form extends DynamicForm<ChangePasswordFormValues> {}
+
 class ChangePasswordForm extends Component<Props> {
 	render() {
-		const { isSubmitting, isValid, handleSubmit } = this.props;
+		const { onSubmit } = this.props;
+
 		return (
-			<React.Fragment>
-				<FormikFieldsFromConfig config={formConfig} formikProps={this.props} />
-				<Button
-					loading={isSubmitting}
-					disabled={!isValid || isSubmitting}
-					onPress={handleSubmit}
-					label={i18n.t('auth.changePassword')}
-					block
-					shadow
-					style={styles.button}
-				/>
-			</React.Fragment>
+			<Form config={formConfig} onSubmit={onSubmit}>
+				{({ isSubmitting, isValid, handleSubmit }) => {
+					return (
+						<Button
+							loading={isSubmitting}
+							disabled={!isValid || isSubmitting}
+							onPress={handleSubmit}
+							label={i18n.t('auth.changePassword')}
+							block
+							shadow
+							style={styles.button}
+						/>
+					);
+				}}
+			</Form>
 		);
 	}
 }
 
 export default ChangePasswordForm;
-
-export const ChangePasswordFormFormik = withFormikFromConfig(formConfig, {
-	mapPropsToValues: props => ({
-		email: props.email,
-		token: props.token,
-		password: '',
-	}),
-	handleSubmit: (
-		values: ChangePasswordFormValues,
-		{ props, ...formActions }: FormFormikBag<ChangePasswordFormValues>
-	) => {
-		props.onSubmit(values, formActions);
-	},
-})(ChangePasswordForm);
