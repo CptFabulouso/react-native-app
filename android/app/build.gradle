@@ -145,6 +145,10 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_async-storage')
+    implementation project(':@react-native-community_netinfo')
+    implementation project(':@react-native-community_slider')
+    implementation project(':@react-native-community_viewpager')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-languages')

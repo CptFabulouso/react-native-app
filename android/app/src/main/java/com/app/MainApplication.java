@@ -3,6 +3,10 @@ package com.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.reactnativecommunity.netinfo.NetInfoPackage;
+import com.reactnativecommunity.slider.ReactSliderPackage;
+import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.reactcommunity.rnlanguages.RNLanguagesPackage;
@@ -28,6 +32,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
+            new NetInfoPackage(),
+            new ReactSliderPackage(),
+            new RNCViewPagerPackage(),
             new VectorIconsPackage(),
             new ReanimatedPackage(),
             new RNLanguagesPackage(),
