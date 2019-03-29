@@ -30,7 +30,7 @@ const basicProps: IconProps = {
 
 const createIcon = (
 	Comp,
-	name,
+	name: any,
 	props: IconProps,
 	defaultProps: IconProps = basicProps
 ) => {
