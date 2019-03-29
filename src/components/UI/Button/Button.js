@@ -14,7 +14,7 @@ export type Props = {|
 	style?: Style,
 	children?: ReactElement<any>,
 	labelStyle?: Style,
-	onPress: (e: SyntheticEvent<any>) => void,
+	onPress: (e: any) => void,
 	label?: string,
 	disabled?: boolean,
 	loading?: boolean,

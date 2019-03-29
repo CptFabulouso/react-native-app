@@ -18,7 +18,6 @@ const Alert = {
 		message?: string,
 		buttons?: Array<Button>,
 		options?: Options,
-		type?: any
 	) {
 		const now = Date.now();
 		const lastlyClosed = ModalController.getClosedTime();
@@ -27,16 +26,16 @@ const Alert = {
 			const timeout = 500 - (now - lastlyClosed);
 			setTimeout(() => {
 				AlertController.setShown(true);
-				showAlert(title, message, buttons, options, type);
+				showAlert(title, message, buttons, options);
 			}, timeout);
 		} else {
 			AlertController.setShown(true);
-			showAlert(title, message, buttons, options, type);
+			showAlert(title, message, buttons, options);
 		}
 	},
 };
 
-function showAlert(title, message, buttons, options, type) {
+function showAlert(title, message, buttons, options) {
 	RNAlert.alert(
 		title,
 		message,
@@ -57,7 +56,6 @@ function showAlert(title, message, buttons, options, type) {
 				options && options.onDismiss && options.onDismiss();
 			},
 		},
-		type
 	);
 }
 
