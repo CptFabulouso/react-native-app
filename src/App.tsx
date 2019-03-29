@@ -8,7 +8,7 @@ import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
 import { persistor, store } from 'src/redux/store';
 // import { runStartupActions } from '@actions';
-import DevMenuTrigger from 'src/lib/DevMenuTrigger';
+import DevMenuTrigger from 'src/Lib/DevMenuTrigger';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 
 type Props = {};
