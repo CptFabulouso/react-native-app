@@ -4,17 +4,17 @@ import {
 	TextInput as RNTextInput,
 	TextInputProps,
 	View,
+	ViewStyle,
 } from 'react-native';
 import React, { Component } from 'react';
 
-import { Style } from 'src/types';
 import { Text } from '../../../UI/Text/Text';
 import { TextInput } from '../../../UI/TextInput/TextInput';
-// import formikToTextInput from '../../helpers/formikToTextInput';
+import formikToTextInput from '../../helpers/formikToTextInput';
 import styles, { TITLE_WIDTH } from './styles';
 
 type Props = TextInputProps & {
-	style?: Style;
+	style?: ViewStyle;
 	// name?: string;
 	placeholder?: string;
 	label?: string;
@@ -44,9 +44,10 @@ class FloatingLabelTextInput extends Component<Props, State> {
 		};
 	}
 
-	componentDidUpdate(_prevProps: Props, prevState: State) {
+	componentDidUpdate(_: Props, prevState: State) {
 		const wasOpened = prevState.focused;
 		const isOpened = this.state.focused || this.props.value;
+
 		if (!wasOpened && isOpened) {
 			this.focus();
 		} else if (wasOpened && !isOpened) {
@@ -73,11 +74,10 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	render() {
 		const {
 			style,
-			// name,
-			label,
 			getRef,
 			error,
 			touched,
+			label,
 			...textInputProps
 		} = this.props;
 
@@ -100,8 +100,8 @@ class FloatingLabelTextInput extends Component<Props, State> {
 
 		const open = focused || textInputProps.value;
 
-		const disabledStyle = textInputProps.editable ? styles.disabled : {};
-		const inputContainer: Array<Style> = [styles.inputContainer];
+		const disabledStyle = textInputProps.editable ? {} : styles.disabled;
+		const inputContainer: Array<ViewStyle> = [styles.inputContainer];
 		if (error && touched) {
 			inputContainer.push(styles.inputContainerInvalid);
 		}
@@ -155,6 +155,6 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	}
 }
 
-// const FloatingLabelTextInputFormik = formikToTextInput(FloatingLabelTextInput);
+const FloatingLabelTextInputFormik = formikToTextInput(FloatingLabelTextInput);
 
-export { FloatingLabelTextInput /* , FloatingLabelTextInputFormik */ };
+export { FloatingLabelTextInput, FloatingLabelTextInputFormik };

@@ -1,15 +1,12 @@
-import { FormikProps } from 'formik';
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
 import {
+	DynamicForm,
 	FormConfig,
-	FormFormikBag,
 	FormPresets,
 	FormSubmitProps,
-	FormikFieldsFromConfig,
-	withFormikFromConfig,
-} from 'src/Lib/FormikHelper';
+} from '../../DynamicForm';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -18,7 +15,7 @@ export type LoginFormValues = {
 	password: string;
 };
 
-type Props = FormikProps<LoginFormValues> & FormSubmitProps<LoginFormValues>;
+type Props = FormSubmitProps<LoginFormValues>;
 
 const formConfig: FormConfig<LoginFormValues> = {
 	fields: [
@@ -29,32 +26,28 @@ const formConfig: FormConfig<LoginFormValues> = {
 
 class LogInForm extends Component<Props> {
 	render() {
-		const { isSubmitting, isValid, handleSubmit } = this.props;
 		return (
-			<React.Fragment>
-				<FormikFieldsFromConfig config={formConfig} formikProps={this.props} />
-				<Button
-					loading={isSubmitting}
-					disabled={!isValid || isSubmitting}
-					onPress={handleSubmit}
-					label={i18n.t('auth.login')}
-					block
-					shadow
-					style={styles.button}
-				/>
-			</React.Fragment>
+			<DynamicForm
+				config={formConfig}
+				onSubmit={this.props.onSubmit}
+				isInitialValid={true}
+			>
+				{({ isSubmitting, isValid, handleSubmit }) => {
+					return (
+						<Button
+							loading={isSubmitting}
+							disabled={!isValid || isSubmitting}
+							onPress={handleSubmit}
+							label={i18n.t('auth.login')}
+							block
+							shadow
+							style={styles.button}
+						/>
+					);
+				}}
+			</DynamicForm>
 		);
 	}
 }
 
 export default LogInForm;
-
-export const LoginFormFormik = withFormikFromConfig(formConfig, {
-	handleSubmit: (
-		values: LoginFormValues,
-		{ props, ...formActions }: FormFormikBag<LoginFormValues>
-	) => {
-		props.onSubmit(values, formActions);
-	},
-	// isInitialValid: true,
-})(LogInForm);

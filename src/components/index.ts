@@ -21,10 +21,10 @@ export * from './UI/TextInput/TextInput';
 export * from './UI/OverallModal/OverallModal';
 
 /* Form */
-export * from './Form/Fields/FloatingLabelTextInput/FloatingLabelTextInput';
-export * from './Form/Fields/SimpleTextInput/SimpleTextInput';
-export * from './Form/FormWrapper/FormWrapper';
-export * from './Form/Form';
+export * from './DynamicForm/Fields/FloatingLabelTextInput/FloatingLabelTextInput';
+export * from './DynamicForm/Fields/SimpleTextInput/SimpleTextInput';
+export * from './FormWrapper/FormWrapper';
+export * from './DynamicForm';
 
 /* Other */
 export * from './KeyboardDismissView/KeyboardDissmissView';

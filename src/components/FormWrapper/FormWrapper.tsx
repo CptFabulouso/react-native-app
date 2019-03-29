@@ -1,13 +1,11 @@
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import React, { ReactNode } from 'react';
-
-import { Style } from 'src/types';
 
 import styles from './styles';
 
 type Props = {
-	wrapperStyle?: Style;
-	containerStyle?: Style;
+	wrapperStyle?: ViewStyle;
+	containerStyle?: ViewStyle;
 	children: ReactNode;
 };
 

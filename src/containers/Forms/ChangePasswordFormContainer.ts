@@ -1,7 +1,7 @@
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { ChangePasswordFormFormik } from 'src/components/Forms';
+import { ChangePasswordForm } from 'src/components/Forms';
 import { changePassword } from '@actions';
 
 type DispatchProps = {
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
 export default connect(
 	null,
 	mapDispatchToProps
-)(ChangePasswordFormFormik);
+)(ChangePasswordForm);

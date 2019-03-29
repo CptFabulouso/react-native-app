@@ -1,13 +1,24 @@
-import { CustomFieldProps } from 'src/Lib/DynamicForm';
+import { FieldProps } from 'formik';
 import { Subtract } from 'utility-types';
 import { TextInputProps } from 'react-native';
 import React, { Component, ComponentType } from 'react';
 
-export default function formikToTextInput<P extends TextInputProps>(
+import { DynamicFieldProps } from '../DynamicFormTypes';
+
+export type InjectedProps = TextInputProps & {
+	error?: string | null;
+	touched?: boolean;
+};
+
+export type OwnProps = DynamicFieldProps<any> &
+	Partial<FieldProps<any>> &
+	TextInputProps;
+
+export default function formikToTextInput<P extends InjectedProps>(
 	WrappedComponent: ComponentType<P>
 ) {
 	return class Wrapper extends Component<
-		Subtract<P, TextInputProps> & CustomFieldProps & TextInputProps
+		Subtract<P, InjectedProps> & OwnProps
 		> {
 		render() {
 			const { field, form, dynamic, ...props } = this.props;
@@ -15,16 +26,17 @@ export default function formikToTextInput<P extends TextInputProps>(
 			if (!field || !form || !dynamic) {
 				return;
 			}
-			const handleBlur = props.onBlur
+			const { onBlur, onChangeText } = props;
+			const handleBlur = onBlur
 				? (event: any) => {
-					props.onBlur && props.onBlur(event);
+					onBlur && onBlur(event);
 					return field.onBlur(field.name)(event);
 				  }
 				: field.onBlur(field.name);
 
-			const handleTextChange = props.onChangeText
+			const handleTextChange = onChangeText
 				? (value: string) => {
-					props.onChangeText && props.onChangeText(value);
+					onChangeText && onChangeText(value);
 					field.onChange(field.name)(value);
 				  }
 				: field.onChange(field.name);
@@ -32,7 +44,6 @@ export default function formikToTextInput<P extends TextInputProps>(
 			return (
 				<WrappedComponent
 					{...props as P}
-					name={field.name}
 					value={field.value}
 					onBlur={handleBlur}
 					onChangeText={handleTextChange}
@@ -44,17 +55,9 @@ export default function formikToTextInput<P extends TextInputProps>(
 					blurOnSubmit={dynamic.blurOnSubmit}
 					onSubmitEditing={dynamic.onSubmitEditing}
 					returnKeyType={dynamic.isLast ? 'done' : 'next'}
+					getRef={dynamic.getRef}
 				/>
 			);
 		}
 	};
 }
-/*
-style?: Style;
-	name?: string;
-	placeholder?: string;
-	label?: string;
-	getRef?: (ref: TextInput | null) => void;
-	error?: string;
-	touched?: boolean;
-*/

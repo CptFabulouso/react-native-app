@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import { CustomFormConfig, DynamicForm, FormPresets } from '../../Form/Form';
-import { FormSubmitProps } from 'src/Lib/DynamicForm';
+import {
+	DynamicForm,
+	FormConfig,
+	FormPresets,
+	FormSubmitProps,
+} from '../../DynamicForm';
 import i18n from 'src/i18n';
 import styles from './styles';
 
@@ -12,9 +16,12 @@ export type ChangePasswordFormValues = {
 	password: string;
 };
 
-type Props = FormSubmitProps<ChangePasswordFormValues>;
+type Props = FormSubmitProps<ChangePasswordFormValues> & {
+	email: string;
+	token: string;
+};
 
-const formConfig: CustomFormConfig<ChangePasswordFormValues> = {
+const formConfig: FormConfig<ChangePasswordFormValues> = {
 	fields: [
 		{
 			type: 'hidden',
@@ -29,14 +36,18 @@ const formConfig: CustomFormConfig<ChangePasswordFormValues> = {
 	],
 };
 
-class Form extends DynamicForm<ChangePasswordFormValues> {}
-
 class ChangePasswordForm extends Component<Props> {
 	render() {
-		const { onSubmit } = this.props;
-
 		return (
-			<Form config={formConfig} onSubmit={onSubmit}>
+			<DynamicForm
+				config={formConfig}
+				onSubmit={this.props.onSubmit}
+				isInitialValid={true}
+				defaultValues={{
+					email: this.props.email,
+					token: this.props.token,
+				}}
+			>
 				{({ isSubmitting, isValid, handleSubmit }) => {
 					return (
 						<Button
@@ -50,7 +61,7 @@ class ChangePasswordForm extends Component<Props> {
 						/>
 					);
 				}}
-			</Form>
+			</DynamicForm>
 		);
 	}
 }

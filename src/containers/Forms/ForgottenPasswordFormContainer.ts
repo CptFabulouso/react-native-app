@@ -1,7 +1,7 @@
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { ForgottenPasswordFormFormik } from 'src/components/Forms';
+import { ForgottenPasswordForm } from 'src/components/Forms';
 import { sendResetPasswordCode } from '@actions';
 
 type DispatchProps = {
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
 export default connect(
 	null,
 	mapDispatchToProps
-)(ForgottenPasswordFormFormik);
+)(ForgottenPasswordForm);

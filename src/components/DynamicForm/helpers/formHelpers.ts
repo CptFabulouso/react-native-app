@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { FormikValues, WithFormikConfig, withFormik } from 'formik';
 
-import { FormConfig, FormConfigField } from './DynamicFormTypes';
+import { FormConfig, FormConfigField } from '../DynamicFormTypes';
 
 export function getNextField<V extends FormikValues>(
 	config: FormConfig<V>,
@@ -65,12 +65,17 @@ export function getValidationSchema<V extends FormikValues>(
 }
 
 export function getInitialValues<V extends FormikValues>(
-	config: FormConfig<V>
+	config: FormConfig<V>,
+	defaultValues?: Partial<V>
 ): V {
 	const values = {} as { [K in keyof V]: any };
 	config.fields.forEach(field => {
-		if (field.type !== 'hidden') {
-			values[field.name] = field.defaultValue || '';
+		if (defaultValues && defaultValues[field.name]) {
+			values[field.name] = defaultValues[field.name];
+		} else {
+			if (field.type !== 'hidden') {
+				values[field.name] = field.defaultValue || '';
+			}
 		}
 	});
 
