@@ -27,7 +27,11 @@ export type Props<V extends FormikValues> = {
 	config: FormConfig<V>;
 	onSubmit: (values: V, formActions: FormikActions<V>) => void;
 	autoFocusNextInputs?: boolean;
-	customFields?: CustomField<V>;
+	customFields?: (
+		injectedProps: FieldInjectedProps<V>,
+		field: FormConfigField<keyof V>
+	) => ReactNode;
+	// customFields?: CustomField<V>;
 	children?: (props: FormikProps<V>) => ReactNode;
 };
 
@@ -56,7 +60,7 @@ export type CustomField<V> = {
 	// ) => ReactNode;
 };
 
-type FieldInjectedProps<V> = {
+export type FieldInjectedProps<V> = {
 	index: number;
 	style: any;
 	editable: boolean | undefined;
@@ -85,9 +89,8 @@ class DynamicForm<V> extends Component<Props<V>> {
 	};
 
 	renderTextInput(
-		props: FormikProps<V>,
-		field: FormConfigField<keyof V>,
-		index: number
+		injectedProps: FieldInjectedProps<V>,
+		field: FormConfigField<keyof V>
 	) {
 		if (field.type === 'hidden') {
 			return null;
@@ -100,7 +103,7 @@ class DynamicForm<V> extends Component<Props<V>> {
 				name={field.name}
 				component={SimpleTextInputFormik}
 				// injected props
-				dynamic={this.getInjectedProps(props, field, index)}
+				dynamic={injectedProps}
 			/>
 		);
 	}
@@ -148,23 +151,36 @@ class DynamicForm<V> extends Component<Props<V>> {
 					if (fieldConfig.type === 'hidden') {
 						return null;
 					}
-					if (customFields && customFields[fieldConfig.type]) {
-						const CustomField = customFields[fieldConfig.type];
-						return (
-							<Field
-								// Formik Field props
-								key={fieldConfig.name}
-								name={fieldConfig.name}
-								component={CustomField}
-								// injected props
-								dynamic={this.getInjectedProps(props, fieldConfig, index)}
-							/>
-						);
+
+					const injectedProps = this.getInjectedProps(
+						props,
+						fieldConfig,
+						index
+					);
+
+					// if (customFields && customFields[fieldConfig.type]) {
+					// const CustomField = customFields[fieldConfig.type];
+					// return (
+					// 	<Field
+					// 		// Formik Field props
+					// 		key={fieldConfig.name}
+					// 		name={fieldConfig.name}
+					// 		component={CustomField}
+					// 		// injected props
+					// 		dynamic={injectedProps}
+					// 	/>
+					// );
+					// }
+					if (customFields) {
+						const customFieldRenderd = customFields(injectedProps, fieldConfig);
+						if (customFieldRenderd) {
+							return customFieldRenderd;
+						}
 					}
 
 					switch (fieldConfig.type) {
 						case 'textInput':
-							return this.renderTextInput(props, fieldConfig, index);
+							return this.renderTextInput(injectedProps, fieldConfig);
 						default:
 							console.warn('received unknown form type ' + fieldConfig.type);
 							return null;
@@ -182,15 +198,12 @@ class DynamicForm<V> extends Component<Props<V>> {
 		const validationSchema = getValidationSchema(config);
 
 		return (
-			<div className="app">
-				<h1>Dynamic International Form</h1>
-				<Formik
-					onSubmit={onSubmit}
-					validationSchema={validationSchema}
-					initialValues={initialValues}
-					render={this.renderForm}
-				/>
-			</div>
+			<Formik
+				onSubmit={onSubmit}
+				validationSchema={validationSchema}
+				initialValues={initialValues}
+				render={this.renderForm}
+			/>
 		);
 	}
 }
