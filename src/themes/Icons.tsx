@@ -17,34 +17,34 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Style } from '../types';
 
 interface IconProps {
-  size?: number;
-  color?: string;
-  style?: Style;
+	size?: number;
+	color?: string;
+	style?: Style;
 }
 
 const basicProps: IconProps = {
-  size: 30,
-  color: 'black',
+	size: 30,
+	color: 'black',
 };
 
 const createIcon = (
-  Comp: ComponentType<any>,
-  name: string,
-  props: IconProps,
-  defaultProps: IconProps = basicProps,
+	Comp: ComponentType<any>,
+	name: string,
+	props: IconProps,
+	defaultProps: IconProps = basicProps
 ) => {
-  return <Comp name={name} {...defaultProps} {...props} />;
+	return <Comp name={name} {...defaultProps} {...props} />;
 };
 
 const icons = {
-  Social: {
-    Facebook: (props: IconProps) => createIcon(EvilIcons, 'sc-facebook', props),
-    Twitter: (props: IconProps) => createIcon(EvilIcons, 'sc-twitter', props),
-    Google: (props: IconProps) =>
-      createIcon(EvilIcons, 'sc-google-plus', props),
-  },
-  Main: (props: IconProps) => createIcon(Ionicons, 'ios-thumbs-up', props),
-  Settings: (props: IconProps) => createIcon(Ionicons, 'ios-settings', props),
+	Social: {
+		Facebook: (props: IconProps) => createIcon(EvilIcons, 'sc-facebook', props),
+		Twitter: (props: IconProps) => createIcon(EvilIcons, 'sc-twitter', props),
+		Google: (props: IconProps) =>
+			createIcon(EvilIcons, 'sc-google-plus', props),
+	},
+	Main: (props: IconProps) => createIcon(Ionicons, 'ios-thumbs-up', props),
+	Settings: (props: IconProps) => createIcon(Ionicons, 'ios-settings', props),
 };
 
 export default icons;
