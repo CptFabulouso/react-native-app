@@ -19,7 +19,7 @@ type AnimationConfig =
 	| Object
 	| ((duration: number, easing: EasingOption) => void);
 
-interface OwnProps {
+interface Config {
 	animateOn?: 'ios' | 'android' | 'all' | 'none';
 	androidAdjustResize?: boolean;
 	onKeyboardShowDelay?: number | boolean;
@@ -79,9 +79,17 @@ const isSafeAreaSupported =
 
 export default function withKeyboardListener<
 P extends InjectedKeyboardListenerProps
->(WrappedComponent: ComponentType<P>) {
+>(
+	WrappedComponent: ComponentType<P>,
+	{
+		animateOn = 'all',
+		androidAdjustResize = true,
+		onKeyboardShowDelay = 0,
+		animationConfig = undefined,
+	}: Config
+) {
 	return class Wrapper extends Component<
-		Subtract<P, InjectedKeyboardListenerProps> & OwnProps,
+		Subtract<P, InjectedKeyboardListenerProps>,
 		OwnState
 		> {
 		static defaultProps = {
@@ -127,16 +135,12 @@ P extends InjectedKeyboardListenerProps
 
 			const keyboardHeight = Platform.select({
 				ios: keyboardEvent.endCoordinates.height,
-				android: this.props.androidAdjustResize
-					? 0
-					: keyboardEvent.endCoordinates.height,
+				android: androidAdjustResize ? 0 : keyboardEvent.endCoordinates.height,
 			});
 
 			const keyboardHeightAndroid = keyboardEvent.endCoordinates.height;
 
 			const keyboardAnimate = () => {
-				const { animationConfig, animateOn } = this.props;
-
 				if (animateOn === 'all' || Platform.OS === animateOn) {
 					LayoutAnimation.configureNext(
 						accessoryAnimation(
@@ -155,15 +159,12 @@ P extends InjectedKeyboardListenerProps
 				});
 			};
 
-			if (
-				Platform.OS === 'ios' ||
-				typeof this.props.onKeyboardShowDelay !== 'number'
-			) {
+			if (Platform.OS === 'ios' || typeof onKeyboardShowDelay !== 'number') {
 				keyboardAnimate();
 			} else {
 				setTimeout(() => {
 					keyboardAnimate();
-				}, this.props.onKeyboardShowDelay);
+				}, onKeyboardShowDelay);
 			}
 
 			this.setState({
@@ -175,8 +176,6 @@ P extends InjectedKeyboardListenerProps
 		};
 
 		handleKeyboardHide = (keyboardEvent: KeyboardEvent) => {
-			const { animateOn, animationConfig } = this.props;
-
 			if (animateOn === 'all' || Platform.OS === animateOn) {
 				LayoutAnimation.configureNext(
 					accessoryAnimation(
@@ -195,17 +194,9 @@ P extends InjectedKeyboardListenerProps
 		};
 
 		render() {
-			const {
-				animateOn,
-				androidAdjustResize,
-				onKeyboardShowDelay,
-				animationConfig,
-				...props
-			} = this.props;
-
 			return (
 				<WrappedComponent
-					{...props as P}
+					{...this.props as P}
 					{...this.state}
 					animateOn={animateOn}
 					androidAdjustResize={androidAdjustResize}

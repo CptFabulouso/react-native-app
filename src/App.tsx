@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
 import { persistor, store } from 'src/redux/store';
-// import { runStartupActions } from '@actions';
+import { runStartupActions } from '@actions';
 import DevMenuTrigger from 'src/Lib/DevMenuTrigger';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 
@@ -16,7 +16,8 @@ type Props = {};
 export default class App extends Component<Props> {
 	loadAppAsync() {
 		// SplashScreen.hide();
-		// store.dispatch(runStartupActions());
+		// @ts-ignore FIXME:
+		store.dispatch(runStartupActions());
 	}
 
 	shouldComponentUpdate() {

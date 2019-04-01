@@ -5,7 +5,7 @@ import {
 	// createMigrate
 } from 'redux-persist';
 // import createSagaMiddleware from 'redux-saga';
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import thunkMiddleware from 'redux-thunk'; // defaults to localStorage for web and AsyncStorage for react-native
 //FIXME: use saga
 
@@ -17,7 +17,7 @@ import reducers from '../reducers';
 const unAuthWhiteList: Array<keyof AppState> = ['device'];
 const persistConfig = {
 	key: 'root',
-	storage,
+	storage: AsyncStorage,
 	whitelist: ['account', 'common'],
 	version: 1,
 	// transforms: [myTransform],
