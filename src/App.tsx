@@ -2,7 +2,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
 import React, { Component } from 'react';
-// import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen';
 
 import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
@@ -15,7 +15,7 @@ type Props = {};
 
 export default class App extends Component<Props> {
 	loadAppAsync() {
-		// SplashScreen.hide();
+		SplashScreen.hide();
 		// @ts-ignore FIXME:
 		store.dispatch(runStartupActions());
 	}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--...other present resources -->
+
+    <!-- splash background color -->
+    <color name="splash_bg">#a4f442</color>
+    <!-- to also work with status bar color, put here this -->
+    <color name="status_bar_color">#47681e</color>
+</resources>

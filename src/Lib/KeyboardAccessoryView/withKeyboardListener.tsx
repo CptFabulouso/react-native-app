@@ -26,6 +26,13 @@ interface Config {
 	animationConfig?: AnimationConfig;
 }
 
+const defaultConfig: Config = {
+	animateOn: 'all',
+	androidAdjustResize: false,
+	onKeyboardShowDelay: false,
+	animationConfig: undefined,
+};
+
 interface OwnState {
 	visibleHeight: number;
 	keyboardHeight: number;
@@ -71,32 +78,19 @@ const accessoryAnimation = (
 };
 
 const { height, width } = Dimensions.get('window');
-const screenWidth = width < height ? width : height;
+// const screenWidth = width < height ? width : height;
 const screenHeight = width < height ? height : width;
 
-const isSafeAreaSupported =
-	Platform.OS === 'ios' && (screenWidth > 800 || screenHeight > 800);
+// const isSafeAreaSupported =
+// 	Platform.OS === 'ios' && (screenWidth > 800 || screenHeight > 800);
 
 export default function withKeyboardListener<
 P extends InjectedKeyboardListenerProps
->(
-	WrappedComponent: ComponentType<P>,
-	{
-		animateOn = 'all',
-		androidAdjustResize = true,
-		onKeyboardShowDelay = 0,
-		animationConfig = undefined,
-	}: Config
-) {
+>(WrappedComponent: ComponentType<P>, config: Config = defaultConfig) {
 	return class Wrapper extends Component<
 		Subtract<P, InjectedKeyboardListenerProps>,
 		OwnState
 		> {
-		static defaultProps = {
-			animateOn: 'ios',
-			androidAdjustResize: true,
-		};
-
 		state = {
 			visibleHeight: screenHeight,
 			keyboardHeight: 0,
@@ -135,18 +129,20 @@ P extends InjectedKeyboardListenerProps
 
 			const keyboardHeight = Platform.select({
 				ios: keyboardEvent.endCoordinates.height,
-				android: androidAdjustResize ? 0 : keyboardEvent.endCoordinates.height,
+				android: config.androidAdjustResize
+					? 0
+					: keyboardEvent.endCoordinates.height,
 			});
 
 			const keyboardHeightAndroid = keyboardEvent.endCoordinates.height;
 
 			const keyboardAnimate = () => {
-				if (animateOn === 'all' || Platform.OS === animateOn) {
+				if (config.animateOn === 'all' || Platform.OS === config.animateOn) {
 					LayoutAnimation.configureNext(
 						accessoryAnimation(
 							keyboardEvent.duration,
 							keyboardEvent.easing,
-							animationConfig
+							config.animationConfig
 						)
 					);
 				}
@@ -159,12 +155,15 @@ P extends InjectedKeyboardListenerProps
 				});
 			};
 
-			if (Platform.OS === 'ios' || typeof onKeyboardShowDelay !== 'number') {
+			if (
+				Platform.OS === 'ios' ||
+				typeof config.onKeyboardShowDelay !== 'number'
+			) {
 				keyboardAnimate();
 			} else {
 				setTimeout(() => {
 					keyboardAnimate();
-				}, onKeyboardShowDelay);
+				}, config.onKeyboardShowDelay);
 			}
 
 			this.setState({
@@ -176,12 +175,12 @@ P extends InjectedKeyboardListenerProps
 		};
 
 		handleKeyboardHide = (keyboardEvent: KeyboardEvent) => {
-			if (animateOn === 'all' || Platform.OS === animateOn) {
+			if (config.animateOn === 'all' || Platform.OS === config.animateOn) {
 				LayoutAnimation.configureNext(
 					accessoryAnimation(
 						keyboardEvent.duration,
 						keyboardEvent.easing,
-						animationConfig
+						config.animationConfig
 					)
 				);
 			}
@@ -194,17 +193,7 @@ P extends InjectedKeyboardListenerProps
 		};
 
 		render() {
-			return (
-				<WrappedComponent
-					{...this.props as P}
-					{...this.state}
-					animateOn={animateOn}
-					androidAdjustResize={androidAdjustResize}
-					onKeyboardShowDelay={onKeyboardShowDelay}
-					animationConfig={animationConfig}
-					isSafeAreaSupported={isSafeAreaSupported}
-				/>
-			);
+			return <WrappedComponent {...this.props as P} {...this.state} />;
 		}
 	};
 }

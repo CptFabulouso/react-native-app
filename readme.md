@@ -2,6 +2,41 @@
 
 - run `yarn` or `npm install`
 
+## postinstall setup
+
+### app name
+
+- Android: change app_name in `./android/app/src/main/res/values/strings.xml`
+- iOS: change Display name in xCode
+
+### Bundle id and package name
+
+#### Android
+
+- change every occurrence of `com.app` to your desired package name
+- change the folder structure to location of `MainActivity.java` and `MainApplication.java` according to your package name
+
+### setting up colors
+
+- modify color string in `./android/app/src/main/res/values/colors.xml`
+
+### setting up splash screen
+
+- example of logo files are in `./tempAssets/splashscreen`
+- replace logo.png files in `./android/app/src/main/res/mipmap-xxxx/`
+- logo will be shown in the center of screen
+- modify background color in `./android/app/src/main/res/values/colors.xml`
+
+#### more splash screen customization
+
+- if you want to show splash screen differently
+- modify the `res/drawable/splash.xml`, `res/layout/launch_screen.xml` files to your liking
+- look at `res/values/styles.xml`. When app starts, it's going to use the AppTheme, after that the react-native-splash-screen will kick in and show the exact same splash screen using SplashScreenTheme
+
+## post setting up
+
+- delete ./tempAssets folder
+
 ## debugging
 
 ### debugging redux
