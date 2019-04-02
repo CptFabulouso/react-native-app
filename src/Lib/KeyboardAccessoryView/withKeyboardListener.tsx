@@ -27,7 +27,7 @@ interface Config {
 }
 
 const defaultConfig: Config = {
-	animateOn: 'all',
+	animateOn: 'ios',
 	androidAdjustResize: false,
 	onKeyboardShowDelay: false,
 	animationConfig: undefined,
@@ -137,7 +137,10 @@ P extends InjectedKeyboardListenerProps
 			const keyboardHeightAndroid = keyboardEvent.endCoordinates.height;
 
 			const keyboardAnimate = () => {
-				if (config.animateOn === 'all' || Platform.OS === config.animateOn) {
+				if (
+					(keyboardEvent && config.animateOn === 'all') ||
+					Platform.OS === config.animateOn
+				) {
 					LayoutAnimation.configureNext(
 						accessoryAnimation(
 							keyboardEvent.duration,
@@ -175,14 +178,19 @@ P extends InjectedKeyboardListenerProps
 		};
 
 		handleKeyboardHide = (keyboardEvent: KeyboardEvent) => {
-			if (config.animateOn === 'all' || Platform.OS === config.animateOn) {
-				LayoutAnimation.configureNext(
-					accessoryAnimation(
-						keyboardEvent.duration,
-						keyboardEvent.easing,
-						config.animationConfig
-					)
-				);
+			if (
+				(keyboardEvent && config.animateOn === 'all') ||
+				Platform.OS === config.animateOn
+			) {
+				if (keyboardEvent.duration && keyboardEvent.easing) {
+					LayoutAnimation.configureNext(
+						accessoryAnimation(
+							keyboardEvent.duration,
+							keyboardEvent.easing,
+							config.animationConfig
+						)
+					);
+				}
 			}
 
 			this.setState({
