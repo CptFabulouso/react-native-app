@@ -44,6 +44,24 @@
 - modify the `res/drawable/splash.xml`, `res/layout/launch_screen.xml` files to your liking
 - look at `res/values/styles.xml`. When app starts, it's going to use the AppTheme, after that the react-native-splash-screen will kick in and show the exact same splash screen using SplashScreenTheme
 
+### Setting up screen orientation
+
+- by default, only portrait mode is allowed on phone devices, landscape is allowed for tablet
+
+#### Android
+
+- this is set using `res/values-xxx/bools.xml` and with these lines in MainActivity.java in `onCreate` method
+
+```java
+if (getResources().getBoolean(R.bool.portrait_only)) {
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+}
+```
+
+#### iOS
+
+- change it in xCode in `General` tab under `Deployment Info`
+
 ## Post setting up
 
 - delete ./tempAssets folder
