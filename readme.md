@@ -6,26 +6,27 @@
 
 ## postinstall setup
 
-### Change app name
+### Change app name, bundle id and package name
 
-#### Android
+#### Automatically (Recommended)
 
+- install globally and use [react-native-rename](https://github.com/junedomingo/react-native-rename) - `yarn global add react-native-rename`
+- create and checkout new branch
+- run `react-native-rename <newName> -b <bundleIdentifier>`
+
+#### Manually
+
+##### Android
+
+- change every occurrence of `com.rnapl.app` to your desired package name
+- change the folder structure to location of `MainActivity.java` and `MainApplication.java` according to your package name
 - change app_name in `./android/app/src/main/res/values/strings.xml`
 
-#### iOS
-
-- change Display name in xCode
-
-### Change bundle id and package name
-
-#### Android
-
-- change every occurrence of `com.app` to your desired package name
-- change the folder structure to location of `MainActivity.java` and `MainApplication.java` according to your package name
-
-#### iOS
+##### iOS
 
 - change bundle Identifier in xCode
+- change Display name in xCode
+- Note: this won't change files in xCode etc., use automatic approach for that
 
 ### Setting up colors
 
