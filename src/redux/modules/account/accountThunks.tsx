@@ -23,9 +23,9 @@ export const loginWithEmailAndPassword = (
 	formActions: FormikActions<LoginFormValues>
 ): ActionCreator => async dispatch => {
 	dispatch(
-		deviceActions.showOverallModal(() => (
+		deviceActions.showOverallModal(
 			<LoadingCard title={i18n.t('auth.loggingIn')} />
-		))
+		)
 	);
 
 	formActions.setSubmitting(true);
@@ -41,6 +41,7 @@ export const loginWithEmailAndPassword = (
 	} catch (er) {
 		dispatch(accountActions.loginWithEmailAndPasswordFailed(er.message));
 	} finally {
+		dispatch(deviceActions.hideOverallModal());
 		formActions.setSubmitting(false);
 	}
 };
@@ -115,9 +116,9 @@ export const reLogin = (): ActionCreator => async (dispatch, getState) => {
 
 export const logOut = (): ActionCreator => async dispatch => {
 	dispatch(
-		deviceActions.showOverallModal(() => (
+		deviceActions.showOverallModal(
 			<LoadingCard title={i18n.t('auth.loggingOut')} />
-		))
+		)
 	);
 	dispatch(accountActions.logOutRequested());
 
