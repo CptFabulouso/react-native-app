@@ -1,4 +1,4 @@
-package com.app;
+package com.rnapl.app;
 
 import android.os.Bundle;
 import android.content.pm.ActivityInfo;
@@ -16,7 +16,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "App";
+        return "RNApl";
     }
 
     @Override

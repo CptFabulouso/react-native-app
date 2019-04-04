@@ -1,4 +1,4 @@
-package com.app;
+package com.rnapl.app;
 
 import android.app.Application;
 
