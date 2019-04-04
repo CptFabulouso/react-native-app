@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { LoginForm } from 'src/components/Forms';
 
-import { loginWithEmailAndPassword } from '@actions';
+import { loginWithEmailAndPassword } from '@redux/actions';
 
 type DispatchProps = {
 	onSubmit: typeof loginWithEmailAndPassword;

@@ -7,8 +7,8 @@ import { OverallModal } from 'src/components';
 import {
 	getOverallModalComponent,
 	isOverallModalVisible,
-} from 'src/redux/selectors';
-import { hideOverallModal } from '@actions';
+} from '@redux/selectors';
+import { hideOverallModal } from '@redux/actions';
 
 interface StateProps {
 	overallModalContent: ReactNode;

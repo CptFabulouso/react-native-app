@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { Component, ComponentType } from 'react';
 
 import { Alert } from 'src/components';
-import { logOut } from '@actions';
+import { logOut } from '@redux/actions';
 import i18n from 'src/i18n';
 import styles from './styles';
 

@@ -6,8 +6,8 @@ import SplashScreen from 'react-native-splash-screen';
 
 import { Colors } from 'src/themes';
 import { OverallModal } from 'src/containers';
-import { persistor, store } from 'src/redux/store';
-import { runStartupActions } from '@actions';
+import { persistor, store } from '@redux/store';
+import { runStartupActions } from '@redux/actions';
 import DevMenuTrigger from 'src/Lib/DevMenuTrigger';
 import NavigationRouter from 'src/navigation/NavigationRouter';
 

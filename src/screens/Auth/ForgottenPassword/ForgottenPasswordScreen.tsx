@@ -16,8 +16,8 @@ import {
 	InjectedKeyboardListenerProps,
 	withKeyboardListener,
 } from 'src/Lib/KeyboardAccessoryView';
-import { getResetCodeState } from 'src/redux/selectors';
-import { resetResetPasswordState } from '@actions';
+import { getResetCodeState } from '@redux/selectors';
+import { resetResetPasswordState } from '@redux/actions';
 import i18n from 'src/i18n';
 import styles from './styles';
 

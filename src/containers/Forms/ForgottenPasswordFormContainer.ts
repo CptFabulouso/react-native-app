@@ -2,7 +2,7 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { ForgottenPasswordForm } from 'src/components/Forms';
-import { sendResetPasswordCode } from '@actions';
+import { sendResetPasswordCode } from '@redux/actions';
 
 type DispatchProps = {
 	onSubmit: typeof sendResetPasswordCode;

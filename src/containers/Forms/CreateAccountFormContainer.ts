@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { CreateAccountForm } from 'src/components/Forms';
 
-import { createAccountWithEmailAndPassword } from '@actions';
+import { createAccountWithEmailAndPassword } from '@redux/actions';
 
 type DispatchProps = {
 	onSubmit: typeof createAccountWithEmailAndPassword;

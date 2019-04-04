@@ -4,8 +4,8 @@ import { ComponentType, ReactNode } from 'react';
 import { ThunkAction as ReduxThunkAction } from 'redux-thunk';
 
 // project imports
-import { Action } from 'src/redux/modules/ActionTypes';
-import { AppState } from 'src/redux/reducers';
+import { Action } from '@redux/modules/ActionTypes';
+import { AppState } from '@redux/reducers';
 export { Action, AppState };
 
 // dependency exports

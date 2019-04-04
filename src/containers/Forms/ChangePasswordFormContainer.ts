@@ -2,7 +2,7 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { ChangePasswordForm } from 'src/components/Forms';
-import { changePassword } from '@actions';
+import { changePassword } from '@redux/actions';
 
 type DispatchProps = {
 	onSubmit: typeof changePassword;

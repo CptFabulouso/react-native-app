@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { ReactNode } from 'react';
 
 import { Alert, Button, LoadingCard, Modal } from 'src/components';
-import { hideOverallModal, showOverallModal } from '@actions';
+import { hideOverallModal, showOverallModal } from '@redux/actions';
 import NavigationActions from 'src/navigation/NavigationActions';
 
 type DispatchProps = {

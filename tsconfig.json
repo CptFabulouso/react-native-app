@@ -58,7 +58,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
-      "@actions": ["src/redux/actions"]
+      "@redux/*": ["src/redux/*"]
     }
   },
   "exclude": ["node_modules", "babel.config.js"]
