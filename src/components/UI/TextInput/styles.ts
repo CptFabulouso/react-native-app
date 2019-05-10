@@ -11,11 +11,22 @@ export default StyleSheet.create({
 
 	input: {
 		flex: 1,
-		height: Platform.OS == 'ios' ? 30 : 75,
 		fontSize: Fonts.size.input,
-		bottom: Platform.OS == 'ios' ? 0 : 7,
-		paddingBottom: Platform.OS == 'ios' ? 10 : 0,
-		marginBottom: Platform.OS == 'ios' ? 0 : 5,
-		left: Platform.OS == 'ios' ? 0 : -4,
+		...Platform.select({
+			ios: {
+				height: 30,
+				bottom: 0,
+				paddingBottom: 10,
+				marginBottom: 0,
+				left: 0,
+			},
+			android: {
+				height: 75,
+				bottom: 7,
+				paddingBottom: 0,
+				marginBottom: 5,
+				left: -4,
+			},
+		}),
 	},
 });

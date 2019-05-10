@@ -1,4 +1,9 @@
-import { TextInput as RNTextInput, TextInputProps, View } from 'react-native';
+import {
+	Platform,
+	TextInput as RNTextInput,
+	TextInputProps,
+	View,
+} from 'react-native';
 import React from 'react';
 
 import { Style } from 'src/types';
@@ -14,13 +19,24 @@ type Ref = RNTextInput;
 const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
 	const { containerStyle, ...textInputProps } = props;
 
+	const style: Array<Style> = [styles.container];
+	const inputStyle: Array<Style> = [styles.input];
+	if (textInputProps.multiline) {
+		const numberOfLines = textInputProps.numberOfLines || 1;
+		const height = Math.max(45, numberOfLines * 30);
+		style.push({ height });
+		inputStyle.push({
+			height: Platform.OS === 'ios' ? height - 15 : height + 30,
+		});
+	}
+
 	return (
-		<View style={[styles.container, containerStyle]}>
+		<View style={[style, containerStyle]}>
 			<RNTextInput
 				underlineColorAndroid="transparent"
 				{...textInputProps}
 				ref={ref}
-				style={[styles.input, props.style]}
+				style={[inputStyle, props.style]}
 			/>
 		</View>
 	);

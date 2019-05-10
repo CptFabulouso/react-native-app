@@ -60,6 +60,7 @@ class FloatingLabelTextInput extends Component<Props, State> {
 			toValue: 1,
 			duration: ANIMATION_TIME,
 			easing: Easing.linear,
+			useNativeDriver: true,
 		}).start();
 	}
 
@@ -68,6 +69,7 @@ class FloatingLabelTextInput extends Component<Props, State> {
 			toValue: 0,
 			duration: ANIMATION_TIME,
 			easing: Easing.linear,
+			useNativeDriver: true,
 		}).start();
 	}
 
