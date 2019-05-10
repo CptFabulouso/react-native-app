@@ -15,8 +15,9 @@ import AuthStack from './navigators/AuthStack';
 import PlaygroundStack from './navigators/PlaygroundStack';
 import UnAuthStack from './navigators/UnAuthStack';
 
-import { AppState, SupportedLanguage } from 'src/types';
+import { AppState, Dispatch, SupportedLanguage } from 'src/types';
 import { getDeviceLanguage } from 'src/redux/selectors';
+import { runStartupActions } from '@redux/actions';
 import LoadingScreen from 'src/screens/Loading/LoadingScreen';
 import OverallModal from 'src/containers/OverallModal/OverallModal';
 
@@ -76,9 +77,17 @@ type StateProps = {
 	language: SupportedLanguage;
 };
 
-type Props = StateProps;
+type DispatchProps = {
+	runStartupActions: () => void;
+};
+
+type Props = StateProps & DispatchProps;
 
 class App extends Component<Props> {
+	componentDidMount() {
+		this.props.runStartupActions();
+	}
+
 	render() {
 		return (
 			<AppRouter
@@ -98,4 +107,13 @@ const mapStateToProps = (state: AppState): StateProps => {
 	};
 };
 
-export default connect<StateProps, {}, {}, AppState>(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
+	return {
+		runStartupActions: () => dispatch(runStartupActions()),
+	};
+};
+
+export default connect<StateProps, {}, {}, AppState>(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
