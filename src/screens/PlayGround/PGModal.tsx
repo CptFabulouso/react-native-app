@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 
 import { Alert, Button, LoadingCard, Modal } from 'src/components';
 import { hideOverallModal, showOverallModal } from '@redux/actions';
-import NavigationActions from 'src/navigation/NavigationActions';
+import { sleep } from 'src/utils/common';
 
 type DispatchProps = {
 	showOverallModal: (Component: ReactNode) => void;
@@ -39,21 +39,28 @@ class PGModal extends React.Component<Props, State> {
 				<Button
 					label="Open Overall modal - redux"
 					onPress={() => {
-						this.props.showOverallModal(<LoadingCard title="logging out" />);
+						this.props.showOverallModal(
+							<ModalContent
+								onDismissModal={() => {
+									this.props.hideOverallModal();
+								}}
+							/>
+						);
 					}}
 				/>
-
+				<Button
+					label="Open Overall modal - redux and dismiss"
+					onPress={async () => {
+						this.props.showOverallModal(<LoadingCard title={'testing...'} />);
+						await sleep(2000);
+						this.props.hideOverallModal();
+						showAlert();
+					}}
+				/>
 				<Button
 					label="Open RN modal"
 					onPress={() => {
 						this.setState({ visible: true });
-					}}
-				/>
-
-				<Button
-					label="Open navigation modal"
-					onPress={() => {
-						NavigationActions.push('overallModal');
 					}}
 				/>
 
@@ -65,66 +72,74 @@ class PGModal extends React.Component<Props, State> {
 					animationIn={'fadeIn'}
 					animationOut={'fadeOut'}
 				>
-					<View style={styles.modalContainer}>
-						<Button
-							label="Close modal container - OK"
-							onPress={() => {
-								this.setState({ visible: false });
-							}}
-						/>
-						<Button
-							label="show alert - OK"
-							onPress={() => {
-								showAlert();
-							}}
-						/>
-						<Button
-							label="close and show alert - Breaks"
-							onPress={() => {
-								this.setState({ visible: false });
-								showAlert();
-							}}
-						/>
-						<Button
-							label="close and time alert 500ms - OK"
-							onPress={() => {
-								this.setState({ visible: false });
-								setTimeout(() => {
-									showAlert();
-								}, 500);
-							}}
-						/>
-						<Button
-							label="show alert and close - Breaks"
-							onPress={() => {
-								showAlert();
-								this.setState({ visible: false });
-							}}
-						/>
-						<Button
-							label="show alert and time close - Breaks"
-							onPress={() => {
-								showAlert();
-								setTimeout(() => {
-									this.setState({ visible: false });
-								}, 500);
-							}}
-						/>
-						<Button
-							label="show alert and ok close - OK"
-							onPress={() => {
-								showAlert(() => {
-									this.setState({ visible: false });
-								});
-							}}
-						/>
-					</View>
+					<ModalContent
+						onDismissModal={() => {
+							this.setState({ visible: false });
+						}}
+					/>
 				</Modal>
 			</View>
 		);
 	}
 }
 
+type ModalProps = {
+	onDismissModal: () => void;
+};
+
+const ModalContent = ({ onDismissModal }: ModalProps) => {
+	return (
+		<View style={styles.modalContainer}>
+			<Button label="Close modal container - OK" onPress={onDismissModal} />
+			<Button
+				label="show alert - OK"
+				onPress={() => {
+					showAlert();
+				}}
+			/>
+			<Button
+				label="close and show alert - Breaks"
+				onPress={() => {
+					onDismissModal();
+					showAlert();
+				}}
+			/>
+			<Button
+				label="close and time alert 500ms - OK"
+				onPress={() => {
+					onDismissModal();
+					setTimeout(() => {
+						showAlert();
+					}, 500);
+				}}
+			/>
+			<Button
+				label="show alert and close - Breaks"
+				onPress={() => {
+					showAlert();
+					onDismissModal();
+				}}
+			/>
+			<Button
+				label="show alert and time close - Breaks"
+				onPress={() => {
+					showAlert();
+					setTimeout(() => {
+						onDismissModal();
+					}, 500);
+				}}
+			/>
+			<Button
+				label="show alert and ok close - OK"
+				onPress={() => {
+					showAlert(() => {
+						onDismissModal();
+					});
+				}}
+			/>
+		</View>
+	);
+};
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
 	bindActionCreators({ showOverallModal, hideOverallModal }, dispatch);
 

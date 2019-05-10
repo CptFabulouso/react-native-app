@@ -389,6 +389,9 @@ class Modal extends React.Component<Props, State> {
 		if (AlertController.isShown()) {
 			await AlertController.onClose();
 		}
+		ModalController.setIsOpened(false);
+		ModalController.setClosedTime(Date.now());
+		
 		if (this.transitionLock) {
 			return;
 		}
@@ -421,9 +424,6 @@ class Modal extends React.Component<Props, State> {
 				if (this.props.isVisible) {
 					this.open();
 				} else {
-					ModalController.setIsOpened(false);
-					ModalController.setClosedTime(Date.now());
-
 					this.setState(
 						{
 							showContent: false,
