@@ -8,6 +8,7 @@ import styles from './styles';
 type Props = {
 	style?: Style;
 	children?: ReactNode;
+	forceOneLine?: boolean,
 };
 
 const Text = (props: Props) => {
@@ -20,8 +21,17 @@ const Text = (props: Props) => {
 		);
 	}
 
+	let additionalProps = {};
+
+	if (props.forceOneLine) {
+		additionalProps = {
+			numberOfLines: 1,
+			ellipsizeMode: 'tail',
+		};
+	}
+
 	return (
-		<RNText {...props} style={[styles.text, props.style, fontStyle]}>
+		<RNText {...props} style={[styles.text, props.style, fontStyle]} {...additionalProps}>
 			{props.children}
 		</RNText>
 	);
