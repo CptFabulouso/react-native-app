@@ -1,3 +1,4 @@
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
 	createAppContainer,
@@ -15,7 +16,7 @@ import AuthStack from './navigators/AuthStack';
 import PlaygroundStack from './navigators/PlaygroundStack';
 import UnAuthStack from './navigators/UnAuthStack';
 
-import { AppState, Dispatch, SupportedLanguage } from 'src/types';
+import { AppState, SupportedLanguage } from 'src/types';
 import { getDeviceLanguage } from 'src/redux/selectors';
 import { runStartupActions } from '@redux/actions';
 import LoadingScreen from 'src/screens/Loading/LoadingScreen';
@@ -81,7 +82,10 @@ type DispatchProps = {
 	runStartupActions: () => void;
 };
 
-type Props = StateProps & DispatchProps;
+type Props = {
+	language: SupportedLanguage;
+	runStartupActions: () => void;
+};
 
 class App extends Component<Props> {
 	componentDidMount() {
@@ -94,7 +98,9 @@ class App extends Component<Props> {
 				ref={navigatorRef => {
 					NavigationActions.setTopLevelNavigator(navigatorRef);
 				}}
-				screenProps={this.props.language}
+				screenProps={{
+					language: this.props.language,
+				}}
 				uriPrefix={`${callbackPathPrefix}://`}
 			/>
 		);
@@ -107,13 +113,10 @@ const mapStateToProps = (state: AppState): StateProps => {
 	};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-	return {
-		runStartupActions: () => dispatch(runStartupActions()),
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+	bindActionCreators({ runStartupActions }, dispatch);
 
-export default connect<StateProps, {}, {}, AppState>(
+export default connect<StateProps, DispatchProps, {}, AppState>(
 	mapStateToProps,
 	mapDispatchToProps
 )(App);
