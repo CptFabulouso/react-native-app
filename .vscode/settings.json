@@ -1,0 +1,6 @@
+{
+  "javascript.validate.enable": false,
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "problems.decorations.enabled": true,
+  "eslint.provideLintTask": true
+}
