@@ -7,7 +7,7 @@ import {
 } from 'react-navigation';
 import React, { Component } from 'react';
 // @ts-ignore
-import StackViewStyleInterpolator from 'react-navigation-stack/dist/views/StackView/StackViewStyleInterpolator';
+import StackViewStyleInterpolator from 'react-navigation-stack/lib/module/views/StackView/StackViewStyleInterpolator';
 
 import { callbackPathPrefix } from 'src/utils/constants';
 import NavigationActions from './NavigationActions';
