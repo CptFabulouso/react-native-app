@@ -136,6 +136,7 @@ class DynamicForm<V extends FormikValues> extends Component<Props<V>> {
 							label={fieldConfig.label}
 							placeholder={fieldConfig.placeholder}
 							{...injectedProps}
+							{...fieldConfig.componentProps}
 						/>
 					);
 				})}

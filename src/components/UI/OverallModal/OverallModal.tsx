@@ -20,7 +20,10 @@ class OverallModal extends Component<Props> {
 	}
 
 	handleBackPress = () => {
-		return true;
+		if (this.props.visible) {
+			return true;
+		}
+		return false;
 	};
 
 	render() {
