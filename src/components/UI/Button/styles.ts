@@ -20,15 +20,6 @@ export default {
 			height: 25,
 		},
 
-		rounded: {
-			borderRadius: 7,
-		},
-
-		bordered: {
-			borderWidth: 1,
-			borderColor: Colors.black,
-		},
-
 		block: {
 			width: '100%',
 		},
@@ -39,13 +30,6 @@ export default {
 
 		disabled: {
 			opacity: 0.5,
-		},
-
-		shadow: {
-			shadowOffset: { width: 0, height: 14 },
-			shadowOpacity: 0.3,
-			shadowRadius: 10,
-			elevation: 5,
 		},
 	}),
 
@@ -80,16 +64,16 @@ export default {
 			fontSize: Fonts.size.small,
 		},
 	}),
+
+	other: StyleSheet.create({
+		fill: {
+			overflow: 'hidden',
+			...StyleSheet.flatten(StyleSheet.absoluteFill),
+		},
+
+		center: {
+			justifyContent: 'center',
+			alignItems: 'center',
+		},
+	}),
 };
-
-export const otherStyles = StyleSheet.create({
-	fill: {
-		overflow: 'hidden',
-		...StyleSheet.flatten(StyleSheet.absoluteFill),
-	},
-
-	center: {
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-});

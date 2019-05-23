@@ -6,6 +6,7 @@ import Modal from 'src/Lib/ModalContainer/ModalContainer';
 export { Alert, Modal, Fragment };
 
 /* UI */
+export * from './UI/Card/Card';
 export * from './UI/Text/Text';
 export * from './UI/Title/Title';
 export * from './UI/Button/Button';

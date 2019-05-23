@@ -1,12 +1,14 @@
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import React, { Component, ReactNode, SyntheticEvent } from 'react';
+import styleCreator from '../styleCreator';
 
 import { Style } from 'src/types';
 import { Text } from '../Text/Text';
-import styles, { otherStyles } from './styles';
+import styles from './styles';
 
 const containerStyles = styles.container;
 const labelStyles = styles.label;
+const otherStyles = styles.other;
 
 export type Props = {
 	style?: Style;
@@ -54,14 +56,6 @@ class Button extends Component<Props> {
 		return { backgroundColor: color };
 	}
 
-	getContainerBorder() {
-		const { bordered } = this.props;
-		if (bordered) {
-			return containerStyles.bordered;
-		}
-		return;
-	}
-
 	getContainerSize() {
 		const { block, small } = this.props;
 
@@ -87,28 +81,12 @@ class Button extends Component<Props> {
 		return;
 	}
 
-	getContainerRoundness() {
-		const { rounded } = this.props;
-		if (rounded) {
-			return containerStyles.rounded;
-		}
-		return;
-	}
-
 	getContainerPadding() {
 		const { transparent, bordered } = this.props;
 		if (transparent && !bordered) {
 			return containerStyles.noPadding;
 		}
 		return;
-	}
-
-	getContainerShadow() {
-		const { shadow, color } = this.props;
-		if (shadow) {
-			return [containerStyles.shadow, { shadowColor: color }];
-		}
-		return [];
 	}
 
 	getLabelPadding() {
@@ -193,12 +171,14 @@ class Button extends Component<Props> {
 	render() {
 		const containerStyle: Array<Style | undefined> = [containerStyles.default];
 		containerStyle.push(this.getContainerColor());
-		containerStyle.push(this.getContainerBorder());
+		containerStyle.push(styleCreator.getContainerBorder(this.props));
 		containerStyle.push(...this.getContainerSize());
 		containerStyle.push(this.getContainerOpacity());
-		containerStyle.push(this.getContainerRoundness());
+		containerStyle.push(styleCreator.getContainerRoundness(this.props));
 		containerStyle.push(this.getContainerPadding());
-		containerStyle.push(...this.getContainerShadow());
+		containerStyle.push(
+			styleCreator.getContainerShadow(this.props, this.props.color)
+		);
 
 		return (
 			<TouchableOpacity
