@@ -13,11 +13,15 @@ type Props = {
 	children: ReactNode;
 	opacityBackground?: boolean | number;
 	bordered?: boolean;
-	rounded?: boolean;
+	rounded: boolean;
 	shadow?: boolean;
 };
 
 class Card extends Component<Props> {
+	static defaultProps = {
+		rounded: true,
+	};
+
 	render() {
 		const { opacityBackground } = this.props;
 		const containerStyle = [styles.container, this.props.style];
