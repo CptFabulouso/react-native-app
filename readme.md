@@ -87,4 +87,5 @@ project is using [redux-devtools-extension](https://github.com/zalmoxisus/redux-
 
 ## Git hooks
 
-if git hooks are not installed, run `./node_modules/git-hooks/bin/git-hooks install`
+- if git hooks are not installed, run `./node_modules/git-hooks/bin/git-hooks install`
+- if you change path to your project folder (eg. you renamed it or moved it), delete folder `.git/hooks` and run run `./node_modules/git-hooks/bin/git-hooks install`
