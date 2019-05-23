@@ -1,7 +1,8 @@
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import React, { Component } from 'react';
 
 import { Style } from 'src/types';
+import { Text } from '../Text/Text';
 import styles from './styles';
 
 type Props = {

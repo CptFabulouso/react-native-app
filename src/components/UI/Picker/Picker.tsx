@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Style } from 'src/types';
+import { Text } from '../Text/Text';
 
 import styles from './styles';
 

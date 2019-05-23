@@ -1,9 +1,9 @@
 import { Dispatch, bindActionCreators } from 'redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import React, { ReactNode } from 'react';
 
-import { Alert, Button, LoadingCard, Modal } from 'src/components';
+import { Alert, Button, LoadingCard, Modal, Text } from 'src/components';
 import { hideOverallModal, showOverallModal } from '@redux/actions';
 import { sleep } from 'src/utils/common';
 

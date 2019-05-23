@@ -1,9 +1,9 @@
 import { Dispatch, bindActionCreators } from 'redux';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import React, { Component, ComponentType } from 'react';
 
-import { Alert } from 'src/components';
+import { Alert, Text } from 'src/components';
 import { logOut } from '@redux/actions';
 import i18n from 'src/i18n';
 import styles from './styles';
