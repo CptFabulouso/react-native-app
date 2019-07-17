@@ -6,7 +6,7 @@ import NavigationActions from 'src/navigation/NavigationActions';
 
 type Props = {};
 
-const PGPaths = ['PGModal'];
+const PGPaths = ['PGModal', 'PGInputs'];
 
 class Menu extends Component<Props> {
 	render() {

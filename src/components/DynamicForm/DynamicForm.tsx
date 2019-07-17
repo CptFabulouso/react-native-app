@@ -21,7 +21,7 @@ import {
 	FormConfig,
 	FormConfigField,
 } from './DynamicFormTypes';
-import { FloatingLabelTextInputFormik } from './Fields/FloatingLabelTextInput/FloatingLabelTextInput';
+import { LabelTextInputFormik } from './Fields/LabelTextInput/LabelTextInput';
 import { SimpleTextInputFormik } from './Fields/SimpleTextInput/SimpleTextInput';
 
 type Props<V extends FormikValues> = {
@@ -97,7 +97,7 @@ class DynamicForm<V extends FormikValues> extends Component<Props<V>> {
 	getComponent(type: FieldType) {
 		switch (type) {
 			case 'floatLabelTextInput':
-				return FloatingLabelTextInputFormik;
+				return LabelTextInputFormik;
 			case 'textInput':
 				return SimpleTextInputFormik;
 		}

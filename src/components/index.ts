@@ -22,7 +22,7 @@ export * from './UI/TextInput/TextInput';
 export * from './UI/OverallModal/OverallModal';
 
 /* Form */
-export * from './DynamicForm/Fields/FloatingLabelTextInput/FloatingLabelTextInput';
+export * from './DynamicForm/Fields/LabelTextInput/LabelTextInput';
 export * from './DynamicForm/Fields/SimpleTextInput/SimpleTextInput';
 export * from './FormWrapper/FormWrapper';
 export * from './DynamicForm';

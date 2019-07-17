@@ -14,7 +14,11 @@ import styles from './styles';
 
 type Props = InjectedKeyboardListenerProps;
 
-class LoginScreen extends Component<Props> {
+class LoginScreen extends Component<Props, { val: string; floatVal: string }> {
+	state = {
+		val: 'Test',
+		floatVal: '',
+	};
 	renderPlaygroundBtn() {
 		if (__DEV__) {
 			return (

@@ -1,43 +1,48 @@
 import { StyleSheet } from 'react-native';
 
-import { Colors, Fonts, Metrics } from 'src/themes';
+import { Colors, Fonts } from 'src/themes';
 export const TITLE_WIDTH = 300;
 
 export default StyleSheet.create({
 	container: {
-		height: 75,
+		minHeight: 75,
 	},
 
-	background: {
-		...StyleSheet.flatten(StyleSheet.absoluteFill),
+	inputLabelContainer: {
 		backgroundColor: 'white',
-		opacity: 0.7,
-	},
-
-	inputContainer: {
 		height: 50,
 		borderWidth: 1.5,
 		borderRadius: 7,
 		borderColor: Colors.border,
-		justifyContent: 'center',
-		paddingLeft: 15,
+		alignItems: 'center',
 		overflow: 'hidden',
+		flexDirection: 'row',
+	},
+
+	inputWrapper: {
+		paddingTop: 17,
+		marginLeft: 15,
+		flex: 1,
 	},
 
 	inputContainerInvalid: {
 		borderColor: Colors.red,
 	},
 
-	input: {
-		paddingVertical: Metrics.spacing.tiny,
+	label: {
+		fontSize: Fonts.size.input,
+		width: TITLE_WIDTH,
 	},
 
-	label: {
-		fontSize: Fonts.size.h6,
+	description: {
+		marginBottom: 5,
 	},
 
 	labelContainer: {
-		width: TITLE_WIDTH,
+		...StyleSheet.absoluteFillObject,
+		left: 15,
+		justifyContent: 'center',
+		alignItems: 'flex-start',
 	},
 
 	disabled: {

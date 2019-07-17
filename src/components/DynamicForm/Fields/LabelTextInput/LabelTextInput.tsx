@@ -6,7 +6,7 @@ import {
 	View,
 	ViewStyle,
 } from 'react-native';
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 
 import { Text } from '../../../UI/Text/Text';
 import { TextInput } from '../../../UI/TextInput/TextInput';
@@ -14,13 +14,17 @@ import formikToTextInput from '../../helpers/formikToTextInput';
 import styles, { TITLE_WIDTH } from './styles';
 
 type Props = TextInputProps & {
-	style?: ViewStyle;
+	containerStyle?: ViewStyle;
+	inputContainerStyle?: ViewStyle;
 	// name?: string;
 	placeholder?: string;
 	label?: string;
+	description?: string;
 	getRef?: (ref: RNTextInput | null) => void;
 	error?: string;
 	touched?: boolean;
+	floatingLabel: boolean;
+	renderRight?: () => ReactNode;
 };
 
 type State = {
@@ -29,15 +33,21 @@ type State = {
 
 const ANIMATION_TIME = 300;
 
-class FloatingLabelTextInput extends Component<Props, State> {
+class LabelTextInput extends Component<Props, State> {
 	animValue: Animated.Value;
+
+	static defaultProps = {
+		floatingLabel: true,
+	};
 
 	constructor(props: Props) {
 		super(props);
 
 		const focused = !!this.props.value;
 
-		this.animValue = new Animated.Value(focused ? 1 : 0);
+		this.animValue = new Animated.Value(
+			props.floatingLabel ? (focused ? 1 : 0) : 1
+		);
 
 		this.state = {
 			focused,
@@ -56,6 +66,9 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	}
 
 	focus() {
+		if (!this.props.floatingLabel) {
+			return;
+		}
 		Animated.timing(this.animValue, {
 			toValue: 1,
 			duration: ANIMATION_TIME,
@@ -65,6 +78,9 @@ class FloatingLabelTextInput extends Component<Props, State> {
 	}
 
 	unFocus() {
+		if (!this.props.floatingLabel) {
+			return;
+		}
 		Animated.timing(this.animValue, {
 			toValue: 0,
 			duration: ANIMATION_TIME,
@@ -75,11 +91,15 @@ class FloatingLabelTextInput extends Component<Props, State> {
 
 	render() {
 		const {
-			style,
+			containerStyle,
+			inputContainerStyle,
 			getRef,
 			error,
 			touched,
 			label,
+			floatingLabel,
+			renderRight,
+			description,
 			...textInputProps
 		} = this.props;
 
@@ -87,54 +107,50 @@ class FloatingLabelTextInput extends Component<Props, State> {
 
 		const textScale = this.animValue.interpolate({
 			inputRange: [0, 1],
-			outputRange: [1, 0.9],
+			outputRange: [1, 0.8],
 		});
 
 		const textTranslationX = this.animValue.interpolate({
 			inputRange: [0, 1],
-			outputRange: [0, -TITLE_WIDTH * 0.05],
+			outputRange: [0, -TITLE_WIDTH * 0.1],
 		});
 
 		const textTranslationY = this.animValue.interpolate({
 			inputRange: [0, 1],
-			outputRange: [22, 10],
+			outputRange: [0, -13],
 		});
 
 		const open = focused || textInputProps.value;
 
-		const disabledStyle = textInputProps.editable ? {} : styles.disabled;
-		const inputContainer: Array<ViewStyle> = [styles.inputContainer];
+		const disabledStyle =
+			textInputProps.editable !== false ? {} : styles.disabled;
+		const inputLabelContainer: Array<ViewStyle> = [styles.inputLabelContainer];
 		if (error && touched) {
-			inputContainer.push(styles.inputContainerInvalid);
+			inputLabelContainer.push(styles.inputContainerInvalid);
 		}
 
 		return (
-			<View style={[styles.container, style, disabledStyle]}>
-				<View style={inputContainer}>
-					<View style={styles.background} />
-					<Animated.View
-						style={[
-							styles.labelContainer,
-							{
-								transform: [{ translateX: textTranslationX }],
-							},
-						]}
-					>
-						<Animated.View
+			<View style={[styles.container, containerStyle]}>
+				<View style={[inputLabelContainer, inputContainerStyle, disabledStyle]}>
+					<View style={styles.labelContainer}>
+						<Animated.Text
+							numberOfLines={1}
+							ellipsizeMode="tail"
 							style={[
-								styles.labelContainer,
+								styles.label,
 								{
 									transform: [
-										{ scale: textScale },
+										{ translateX: textTranslationX },
 										{ translateY: textTranslationY },
+										{ scale: textScale },
 									],
 								},
 							]}
 						>
-							<Text>{label}</Text>
-						</Animated.View>
-					</Animated.View>
-					<View style={{ opacity: open ? 1 : 0 }}>
+							{label}
+						</Animated.Text>
+					</View>
+					<View style={styles.inputWrapper}>
 						<TextInput
 							{...textInputProps}
 							ref={ref => {
@@ -148,15 +164,20 @@ class FloatingLabelTextInput extends Component<Props, State> {
 								this.setState({ focused: false });
 								textInputProps.onBlur && textInputProps.onBlur(ev);
 							}}
+							style={{ opacity: floatingLabel ? (open ? 1 : 0) : 1 }}
 						/>
 					</View>
+					{renderRight && renderRight()}
 				</View>
-				{error && touched && <Text style={styles.error}>{error}</Text>}
+				{error !== '' && touched && <Text style={styles.error}>{error}</Text>}
+				{description !== '' && (
+					<Text style={styles.description}>{description}</Text>
+				)}
 			</View>
 		);
 	}
 }
 
-const FloatingLabelTextInputFormik = formikToTextInput(FloatingLabelTextInput);
+const LabelTextInputFormik = formikToTextInput(LabelTextInput);
 
-export { FloatingLabelTextInput, FloatingLabelTextInputFormik };
+export { LabelTextInput, LabelTextInputFormik };
