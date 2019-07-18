@@ -23,24 +23,27 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
 
 	return (
 		<RNTextInput
-			style={{
-				height,
-				...Platform.select({
-					ios: {
-						borderBottomWidth: underlineColor ? 1 : 0,
-						borderColor: underlineColor,
-					},
-					android: {
-						left: -4,
-						paddingTop: props.multiline ? 4 : 0,
-						paddingBottom: 0,
-						borderBottomWidth:
-							props.underlineColorAndroid || underlineColor ? 1 : 0,
-						borderColor: underlineColor || props.underlineColorAndroid,
-					},
-				}),
-			}}
 			{...props}
+			style={[
+				props.style,
+				{
+					height,
+					...Platform.select({
+						ios: {
+							borderBottomWidth: underlineColor ? 1 : 0,
+							borderColor: underlineColor,
+						},
+						android: {
+							left: -4,
+							paddingTop: props.multiline ? 4 : 0,
+							paddingBottom: 0,
+							borderBottomWidth:
+								props.underlineColorAndroid || underlineColor ? 1 : 0,
+							borderColor: underlineColor || props.underlineColorAndroid,
+						},
+					}),
+				},
+			]}
 			textAlignVertical={props.multiline ? 'top' : 'center'}
 			underlineColorAndroid="transparent"
 			ref={ref}

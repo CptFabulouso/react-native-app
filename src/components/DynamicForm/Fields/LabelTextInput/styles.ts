@@ -20,7 +20,7 @@ export default StyleSheet.create({
 	},
 
 	inputWrapper: {
-		paddingTop: 17,
+		marginTop: 17,
 		marginLeft: 15,
 		flex: 1,
 	},
