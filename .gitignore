@@ -60,5 +60,8 @@ coverage/
 # Bundle artifact
 *.jsbundle
 
+# CocoaPods
+/ios/Pods/
+
 # Ignore global gitignore
 !.vscode/*

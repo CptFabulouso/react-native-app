@@ -1,13 +1,12 @@
-import RNLanguages from 'react-native-languages';
-
 import { Action, SupportedLanguage } from 'src/types';
+import { getDefaultLocaleCode } from 'src/i18n';
 
 export type SettingsState = {
 	language: SupportedLanguage;
 };
 
 const INITIAL_STATE: SettingsState = {
-	language: RNLanguages.language,
+	language: getDefaultLocaleCode(),
 };
 
 const settings = (state = INITIAL_STATE, action: Action): SettingsState => {

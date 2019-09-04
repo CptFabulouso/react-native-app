@@ -6,8 +6,8 @@ import {
 	SettingsKey,
 } from './settingsActionTypes';
 import { getDeviceLanguage } from '../../selectors';
-import RNLanguages from 'react-native-languages';
-import i18n from 'src/i18n';
+import i18n, { getDefaultLocaleCode } from 'src/i18n';
+
 
 export const changeAppLanguage = (language: SupportedLanguage): Action => {
 	i18n.locale = language;
@@ -22,7 +22,7 @@ export const loadLanguage = (): ActionCreator => (dispatch, getState) => {
 	if (savedLanguage) {
 		dispatch(changeAppLanguage(savedLanguage));
 	} else {
-		dispatch(changeAppLanguage(RNLanguages.language));
+		dispatch(changeAppLanguage(getDefaultLocaleCode()));
 	}
 };
 

@@ -8,7 +8,7 @@ import styles from './styles';
 type Props = {
 	style?: Style;
 	children?: ReactNode;
-	forceOneLine?: boolean,
+	forceOneLine?: boolean;
 };
 
 const Text = (props: Props) => {
@@ -17,7 +17,7 @@ const Text = (props: Props) => {
 	if (flatStyle) {
 		fontStyle = getFontStyleForWeight(
 			flatStyle.fontFamily,
-			flatStyle.fontWeight
+			flatStyle.fontWeight,
 		);
 	}
 
@@ -31,7 +31,10 @@ const Text = (props: Props) => {
 	}
 
 	return (
-		<RNText {...props} style={[styles.text, props.style, fontStyle]} {...additionalProps}>
+		<RNText
+			{...props}
+			style={[styles.text, props.style, fontStyle]}
+			{...additionalProps}>
 			{props.children}
 		</RNText>
 	);
