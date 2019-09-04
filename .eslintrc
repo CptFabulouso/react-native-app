@@ -1,107 +1,107 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "env": {
-    "browser": true,
-    "es6": true,
-    "amd": true
-  },
-  "globals": {
-    "Request": false,
-    "Response": false,
-    "Headers": false,
-    "React": true,
-    "ReactElement": false,
-    "ReactClass": false,
-    "Class": false,
-    "__DEV__": true,
-    "$Diff": false,
-    "$Keys": false,
-    "$Values": false,
-    "$ObjMap": false,
-    "$ReadOnly": false,
-    "$Shape": false,
-    "SyntheticEvent": false
-  },
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "import",
-    "sort-imports-es6-autofix",
-    "jest"
-  ],
-  "extends": [
-    // "plugin:@typescript-eslint/recommended",
-    // "plugin:prettier/recommended",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:jest/recommended"
-  ],
-  "settings": {
-    "react": {
-      "version": "16.4.1"
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".ts", ".tsx"]
-      }
-    },
-    "import/ignore": ["node_modules"]
-  },
-  "parserOptions": {
-    "sourceType": "module",
-    "project": "./tsconfig.json"
-  },
-  "rules": {
-    "no-prototype-builtins": "off",
-    "@typescript-eslint/no-unused-vars": 2,
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".tsx"]
-      }
-    ],
-    "react/prop-types": 0,
-    "no-unused-vars": 1,
-    "no-console": 0,
-    "no-debugger": 1,
-    "curly": 2,
-    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
-    "prefer-const": [
-      "error",
-      {
-        "destructuring": "any",
-        "ignoreReadBeforeAssign": false
-      }
-    ],
-    "react/jsx-indent": [2, "tab"],
-    "no-inner-declarations": 2,
-    "import/imports-first": 2,
-    "import/named": 0,
-    "import/no-amd": 2,
-    "sort-imports-es6-autofix/sort-imports-es6": [
-      2,
-      {
-        "ignoreCase": false,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-      }
-    ],
-    "import/no-unresolved": 0,
-    "import/no-named-as-default-member": 0,
-    "import/no-commonjs": "error",
-    "comma-dangle": ["error", "always-multiline"],
-    "indent": [
-      "error",
-      "tab",
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "jest/valid-expect": 0
-  }
+	"parser": "@typescript-eslint/parser",
+	"env": {
+		"browser": true,
+		"es6": true,
+		"amd": true
+	},
+	"globals": {
+		"Request": false,
+		"Response": false,
+		"Headers": false,
+		"React": true,
+		"ReactElement": false,
+		"ReactClass": false,
+		"Class": false,
+		"__DEV__": true,
+		"$Diff": false,
+		"$Keys": false,
+		"$Values": false,
+		"$ObjMap": false,
+		"$ReadOnly": false,
+		"$Shape": false,
+		"SyntheticEvent": false
+	},
+	"plugins": [
+		"@typescript-eslint",
+		"react",
+		"import",
+		"sort-imports-es6-autofix",
+		"jest"
+	],
+	"extends": [
+		// "plugin:@typescript-eslint/recommended",
+		// "plugin:prettier/recommended",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"plugin:jest/recommended"
+	],
+	"settings": {
+		"react": {
+			"version": "16.4.1"
+		},
+		"import/resolver": {
+			"node": {
+				"extensions": [".ts", ".tsx"]
+			}
+		},
+		"import/ignore": ["node_modules"]
+	},
+	"parserOptions": {
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"rules": {
+		"no-prototype-builtins": "off",
+		"@typescript-eslint/no-unused-vars": 2,
+		"react/jsx-filename-extension": [
+			"error",
+			{
+				"extensions": [".tsx"]
+			}
+		],
+		"react/prop-types": 0,
+		"no-unused-vars": 1,
+		"no-console": 0,
+		"no-debugger": 1,
+		"curly": 2,
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
+		"prefer-const": [
+			"error",
+			{
+				"destructuring": "any",
+				"ignoreReadBeforeAssign": false
+			}
+		],
+		"react/jsx-indent": [2, "tab"],
+		"no-inner-declarations": 2,
+		"import/imports-first": 2,
+		"import/named": 0,
+		"import/no-amd": 2,
+		"sort-imports-es6-autofix/sort-imports-es6": [
+			2,
+			{
+				"ignoreCase": false,
+				"ignoreMemberSort": false,
+				"memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+			}
+		],
+		"import/no-unresolved": 0,
+		"import/no-named-as-default-member": 0,
+		"import/no-commonjs": "error",
+		"comma-dangle": ["error", "always-multiline"],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
+		"jest/valid-expect": 0
+	}
 }
