@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import PGInputs from 'src/screens/PlayGround/PGInputs';
 import PGMenu from 'src/screens/PlayGround/Menu';

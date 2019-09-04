@@ -1,7 +1,5 @@
-import {
-	createBottomTabNavigator,
-	createStackNavigator,
-} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import React from 'react';
 
 import { Colors, Icons } from 'src/themes';

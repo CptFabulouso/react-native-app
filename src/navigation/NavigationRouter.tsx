@@ -2,9 +2,9 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
 	createAppContainer,
-	createStackNavigator,
 	createSwitchNavigator,
 } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import React, { Component } from 'react';
 // @ts-ignore
 import StackViewStyleInterpolator from 'react-navigation-stack/lib/module/views/StackView/StackViewStyleInterpolator';

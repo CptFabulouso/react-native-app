@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import ChangePasswordScreen from 'src/screens/Auth/ChangePassword/ChangePasswordScreen';
 import CreateAccountScreen from 'src/screens/Auth/CreateAccount/CreateAccountScreen';
